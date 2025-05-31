@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniMatch - Compare Universities</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo span {
+            color: #FFD166;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            color: #FFD166;
+        }
+        
+        .nav a.active {
+            color: #FFD166;
+            border-bottom: 2px solid #FFD166;
+        }
+        
+        .main {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .page-title {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .universities-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 1400px;
+        }
+        
+        .university-card {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            width: calc(25% - 1.5rem);
+            min-width: 280px;
+            cursor: pointer;
+            height: 550px;
+        }
+        
+        .university-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .university-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .university-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .university-location {
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        .university-logo {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .university-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            flex: 1;
+        }
+        
+        .university-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .stat {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #FFD166;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .university-description {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        
+        .university-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: #FFD166;
+            color: #333;
+        }
+        
+        .btn-primary:hover {
+            background-color: #ffc233;
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .top-programs {
+            margin-top: 0.5rem;
+        }
+        
+        .top-programs h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .programs-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .program-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .university-card.bac {
+            border-top: 5px solid #FF6B6B;
+        }
+        
+        .university-card.ub {
+            border-top: 5px solid #4ECDC4;
+        }
+        
+        .university-card.buist {
+            border-top: 5px solid #FFD166;
+        }
+        
+        .university-card.botho {
+            border-top: 5px solid #9381FF;
+        }
+        
+        .university-card.buan {
+            border-top: 5px solid #6AB04C;
+        }
+        
+        .university-card.boitekanelo {
+            border-top: 5px solid #EB4D4B;
+        }
+        
+        .university-card.ihs {
+            border-top: 5px solid #22A6B3;
+        }
+        
+        .university-card.baisago {
+            border-top: 5px solid #F0932B;
+        }
+        
+        .university-card.gulps {
+            border-top: 5px solid #BE2EDD;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 1200px) {
+            .university-card {
+                width: calc(50% - 1rem);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .university-card {
+                width: 100%;
+                height: auto;
+            }
+            
+            .university-actions {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main {
+                padding: 1rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .university-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Uni<span>Match</span></div>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#" class="active">Universities</a>
+            <a href="#">Compare</a>
+            <a href="#">Resources</a>
+            <a href="#">About Us</a>
+        </nav>
+    </header>
+    
+    <main class="main">
+        <h1 class="page-title">Explore Top Universities</h1>
+        
+        <div class="universities-container">
+            <!-- BAC University Card -->
+            <div class="university-card bac">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">BAC</h2>
+                        <p class="university-location">Botswana Accountancy College</p>
+                    </div>
+                    <div class="university-logo">BAC</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.2/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">3,500+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">92%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        BAC is known for its excellence in accounting, finance, and business education. With strong industry connections and professional accreditations, BAC prepares students for successful careers in the financial sector.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Accountancy</span>
+                            <span class="program-tag">Business</span>
+                            <span class="program-tag">Finance</span>
+                            <span class="program-tag">Computing</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <button class="action-btn btn-primary">View Details</button>
+                        <button class="action-btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- UB University Card -->
+            <div class="university-card ub">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">UB</h2>
+                        <p class="university-location">University of Botswana</p>
+                    </div>
+                    <div class="university-logo">UB</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.5/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">15,000+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">88%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        The University of Botswana is the first institution of higher education in Botswana. It has a wide range of programs across multiple disciplines, with particularly strong offerings in social sciences, humanities, and natural sciences.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Medicine</span>
+                            <span class="program-tag">Law</span>
+                            <span class="program-tag">Engineering</span>
+                            <span class="program-tag">Sciences</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <button class="action-btn btn-primary">View Details</button>
+                        <button class="action-btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BUIST University Card -->
+            <div class="university-card buist">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">BUIST</h2>
+                        <p class="university-location">Botswana Uni. of Innovation & Science</p>
+                    </div>
+                    <div class="university-logo">BUIST</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.3/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">5,000+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">90%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        BUIST focuses on innovation, science, and technology education. With state-of-the-art laboratories and research facilities, it's at the forefront of technological advancement in Botswana.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Computer Engineering</span>
+                            <span class="program-tag">Biotechnology</span>
+                            <span class="program-tag">IT Systems</span>
+                            <span class="program-tag">Energy</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <button class="action-btn btn-primary">View Details</button>
+                        <button class="action-btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BOTHO University Card -->
+            <div class="university-card botho">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">BOTHO</h2>
+                        <p class="university-location">Botho University</p>
+                    </div>
+                    <div class="university-logo">BOTHO</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.1/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">6,000+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">85%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        Botho University is known for its practical, industry-focused approach to education. With campuses across Southern Africa, it emphasizes entrepreneurship and innovation.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Business Admin</span>
+                            <span class="program-tag">Computing</span>
+                            <span class="program-tag">Health Info Management</span>
+                            <span class="program-tag">Hospitality</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <button class="action-btn btn-primary">View Details</button>
+                        <button class="action-btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BUAN University Card -->
+            <div class="university-card buan">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">BUAN</h2>
+                        <p class="university-location">Botswana Uni. of Agriculture & Natural Resources</p>
+                    </div>
+                    <div class="university-logo">BUAN</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.3/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">2,000+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">87%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        BUAN specializes in agricultural sciences and natural resource management. With extensive research facilities and demonstration farms, it prepares students for careers in sustainable agriculture and environmental management.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Crop Science</span>
+                            <span class="program-tag">Animal Science</span>
+                            <span class="program-tag">Agricultural Economics</span>
+                            <span class="program-tag">Natural Resources</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <button class="action-btn btn-primary">View Details</button>
+                        <button class="action-btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Boitekanelo College Card -->
+            <div class="university-card boitekanelo">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">Boitekanelo</h2>
+                        <p class="university-location">Boitekanelo College</p>
+                    </div>
+                    <div class="university-logo">BC</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.0/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">1,800+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">89%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        Boitekanelo College is dedicated to training health professionals. With a focus on practical skills and community health, the college produces graduates ready to address Botswana's healthcare challenges.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Public Health</span>
+                            <span class="program-tag">Pharmacy</span>
+                            <span class="program-tag">Environmental Health</span>
+                            <span class="program-tag">Medical Laboratory</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <button class="action-btn btn-primary">View Details</button>
+                        <button class="action-btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- IHS University Card -->
+            <div class="university-card ihs">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">IHS</h2>
+                        <p class="university-location">Institute of Health Sciences</p>
+                    </div>
+                    <div class="university-logo">IHS</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.2/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">2,500+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">93%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        The Institute of Health Sciences operates across multiple campuses in Botswana, providing essential education for nursing and allied health professionals. It partners closely with the Ministry of Health to meet national healthcare workforce needs.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Nursing</span>
+                            <span class="program-tag">Midwifery</span>
+                            <span class="program-tag">Dental Therapy</span>
+                            <span class="program-tag">Health Education</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <button class="action-btn btn-primary">View Details</button>
+                        <button class="action-btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Baisago University Card -->
+            <div class="university-card baisago">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">Baisago</h2>
+                        <p class="university-location">Baisago University</p>
+                    </div>
+                    <div class="university-logo">BU</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">3.9/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">3,200+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">82%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        Baisago University offers programs across multiple disciplines with an emphasis on business and IT. With campuses in Gaborone and Francistown, it provides accessible higher education with flexible study options.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Business Management</span>
+                            <span class="program-tag">IT</span>
+                            <span class="program-tag">Public Administration</span>
+                            <span class="program-tag">Human Resources</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <button class="action-btn btn-primary">View Details</button>
+                        <button class="action-btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- GULPS University Card -->
+            <div class="university-card gulps">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">GULPS</h2>
+                        <p class="university-location">Gaborone Uni. College of Law & Prof. Studies</p>
+                    </div>
+                    <div class="university-logo">GULPS</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.1/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">1,500+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">86%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        Gaborone University College of Law and Professional Studies specializes in legal education and professional development. It offers practical training alongside academic learning to prepare graduates for the legal profession and related fields.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Law</span>
+                            <span class="program-tag">Paralegal Studies</span>
+                            <span class="program-tag">Legal Administration</span>
+                            <span class="program-tag">Criminology</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <button class="action-btn btn-primary">View Details</button>
+                        <button class="action-btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p> 2025 UniMatch - Helping students find their academic home</p>
+    </footer>
+    
+    <script>
+        // Add interaction for university cards
+        document.querySelectorAll('.university-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Prevent click if clicking on buttons
+                if (e.target.classList.contains('action-btn')) {
+                    return;
+                }
+                
+                // Here you would normally redirect to university detail page
+                const universityName = this.querySelector('.university-name').textContent;
+                alert(`You selected ${universityName}. In a complete application, this would take you to the detailed page for this university.`);
+            });
+        });
+        
+        // Button click handlers
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const universityName = this.closest('.university-card').querySelector('.university-name').textContent;
+                alert(`Viewing details for ${universityName}`);
+            });
+        });
+        
+        document.querySelectorAll('.btn-secondary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const universityName = this.closest('.university-card').querySelector('.university-name').textContent;
+                alert(`Added ${universityName} to comparison list`);
+            });
+        });
+        
+        // Check if viewing on mobile device
+        function checkMobile() {
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('.university-card').forEach(card => {
+                    card.style.height = 'auto';
+                });
+            } else {
+                document.querySelectorAll('.university-card').forEach(card => {
+                    card.style.height = '550px';
+                });
+            }
+        }
+        
+        // Run on page load and window resize
+        window.addEventListener('load', checkMobile);
+        window.addEventListener('resize', checkMobile);
+    </script>
+</body>
+</html>
