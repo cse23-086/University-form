@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boitekanelo College | UniMatch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a3a3a 0%, #2d6a4f 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                #d8b15d 0%, #d8b15d 20%, 
+                #c27c38 20%, #c27c38 40%, 
+                #1a3a3a 40%, #1a3a3a 60%, 
+                #2d6a4f 60%, #2d6a4f 80%, 
+                #d8b15d 80%, #d8b15d 100%);
+            z-index: 100;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.2), 
+                rgba(0,0,0,0.2)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23d8b15d" opacity="0.1" d="M50 0L100 50L50 100L0 50Z"/></svg>');
+            background-size: 80px;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo span {
+            color: #d8b15d;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            color: #d8b15d;
+        }
+        
+        .nav a.active {
+            color: #d8b15d;
+            border-bottom: 2px solid #d8b15d;
+        }
+        
+        .main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .college-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 5px solid #c27c38;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .college-header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path fill="%231a3a3a" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"/><path fill="%231a3a3a" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"/><path fill="%231a3a3a" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"/></svg>');
+            background-size: cover;
+            z-index: 1;
+        }
+        
+        .college-logo-container {
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .college-logo {
+            width: 120px;
+            height: 120px;
+            background-color: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: #2d6a4f;
+        }
+        
+        .college-details {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .college-name {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .college-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+        
+        .college-quick-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .quick-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .quick-stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d8b15d;
+        }
+        
+        .quick-stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .content-area {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .program-section {
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.15), 
+                rgba(0,0,0,0.15)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23d8b15d" width="2" height="2" x="0" y="0" opacity="0.05"/><rect fill="%23d8b15d" width="2" height="2" x="4" y="4" opacity="0.05"/></svg>');
+            border-radius: 15px;
+            padding: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::before {
+            content: "◈";
+            color: #d8b15d;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: #c27c38;
+        }
+        
+        .programs-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .program-card {
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.15), 
+                rgba(0,0,0,0.15)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23d8b15d" width="2" height="2" x="0" y="0" opacity="0.05"/><rect fill="%23d8b15d" width="2" height="2" x="4" y="4" opacity="0.05"/></svg>');
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 3px solid #c27c38;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(0, 0, 0, 0.25);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .program-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #d8b15d;
+        }
+        
+        .program-duration {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .program-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+        
+        .program-highlights {
+            margin-top: 1rem;
+        }
+        
+        .highlight-list {
+            list-style-type: none;
+        }
+        
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .highlight-icon {
+            color: #d8b15d;
+            font-size: 1rem;
+        }
+        
+        .apply-btn {
+            margin-top: 1rem;
+            padding: 0.7rem 1.5rem;
+            background-color: #c27c38;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .apply-btn:hover {
+            background-color: #b36f32;
+            transform: translateY(-2px);
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .sidebar-section {
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.15), 
+                rgba(0,0,0,0.15)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23d8b15d" width="2" height="2" x="0" y="0" opacity="0.05"/><rect fill="%23d8b15d" width="2" height="2" x="4" y="4" opacity="0.05"/></svg>');
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+        
+        .sidebar-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .sidebar-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #c27c38;
+        }
+        
+        .contact-list, .facilities-list {
+            list-style-type: none;
+        }
+        
+        .contact-item, .facility-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .contact-icon, .facility-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            color: #d8b15d;
+            font-size: 1rem;
+        }
+        
+        .location-map {
+            width: 100%;
+            height: 200px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 1rem;
+            position: relative;
+        }
+        
+        .location-map::before {
+            content: "Map of Botswana";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .virtual-tour-section {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 3rem 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .virtual-tour-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23d8b15d" opacity="0.03" d="M20,20L80,20L80,80L20,80Z" stroke="%23d8b15d" stroke-width="2" stroke-opacity="0.1"/></svg>');
+            z-index: -1;
+        }
+        
+        .tour-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .tour-description {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+        
+        .tour-btn {
+            padding: 1rem 2.5rem;
+            background-color: #d8b15d;
+            color: #1a3a3a;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .tour-btn:hover {
+            background-color: #d1a74f;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tour-btn-icon {
+            font-size: 1.3rem;
+        }
+        
+        .testimonials-section {
+            margin-top: 2rem;
+        }
+        
+        .testimonials-container {
+            position: relative;
+            padding: 0 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            border-left: 3px solid #d8b15d;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .testimonial-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .author-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: bold;
+            color: white;
+        }
+        
+        .author-title {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d8b15d, transparent);
+        }
+        
+        .admission-cta {
+            background: linear-gradient(135deg, #c27c38 0%, #d89a5e 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .admission-cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23ffffff" opacity="0.05" d="M30,30Q50,20,70,30T90,50Q80,70,70,70T30,50Q20,30,30,30Z"/></svg>');
+            z-index: 0;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-btn-primary {
+            background-color: white;
+            color: #c27c38;
+            border: none;
+        }
+        
+        .cta-btn-primary:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        
+        .cta-btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .cta-btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .success-rate-chart {
+            background-color: rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            height: 250px;
+            position: relative;
+        }
+        
+        .chart-bars {
+            display: flex;
+            height: 180px;
+            align-items: flex-end;
+            gap: 0.8rem;
+            padding-top: 20px;
+        }
+        
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, #c27c38, #d89a5e);
+            border-radius: 6px 6px 0 0;
+            position: relative;
+        }
+        
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            color: #d8b15d;
+        }
+        
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            width: 100%;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #c27c38;
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .program-tag {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .botswana-landscape {
+            width: 100%;
+            height: 200px;
+            background: 
+                linear-gradient(to bottom, rgba(26,58,58,0.3), rgba(26,58,58,0.7)), 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><path fill="%232d6a4f" d="M0,256L48,261.3C96,267,192,277,288,250.7C384,224,480,160,576,160C672,160,768,224,864,218.7C960,213,1056,139,1152,117.3C1248,96,1344,128,1392,144L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>'),
+                linear-gradient(to bottom, #1a3a3a, #2d6a4f);
+            background-size: cover;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 1200px) {
+            .content-area {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .college-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            
+            .college-quick-stats {
+                justify-content: center;
+            }
+            
+            .programs-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main {
+                padding: 1rem;
+            }
+            
+            .section-title, .tour-title, .cta-title {
+                font-size: 1.5rem;
+            }
+            
+            .college-name {
+                font-size: 2rem;
+            }
+            
+            .botswana-landscape {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Uni<span>Match</span></div>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#">Universities</a>
+            <a href="#" class="active">Boitekanelo College</a>
+            <a href="#">Compare</a>
+            <a href="#">Resources</a>
+            <a href="#">About Us</a>
+        </nav>
+    </header>
+    
+    <main class="main">
+        <div class="botswana-landscape"></div>
+        
+        <section class="college-header">
+            <div class="college-logo-container">
+                <div class="college-logo">BC</div>
+            </div>
+            <div class="college-details">
+                <h1 class="college-name">Boitekanelo College</h1>
+                <p class="college-subtitle">Transforming Healthcare Education in Botswana Since 1997</p>
+                <p>Boitekanelo College is dedicated to training healthcare professionals through its comprehensive programs focusing on public health, pharmacy, environmental health, and medical laboratory sciences. With state-of-the-art facilities and hands-on training, the college equips students with the knowledge and skills needed to address Botswana's healthcare challenges.</p>
+                <div class="college-quick-stats">
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">4.0/5</div>
+                        <div class="quick-stat-label">Student Rating</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">1,800+</div>
+                        <div class="quick-stat-label">Students</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">89%</div>
+                        <div class="quick-stat-label">Employment Rate</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-value">25+</div>
+                        <div class="quick-stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="content-area">
+            <div class="main-content">
+                <section class="program-section">
+                    <h2 class="section-title">Undergraduate Programs</h2>
+                    <div class="programs-list">
+                        <!-- Program 1 -->
+                        <div class="program-card">
+                            <h3 class="program-title">Bachelor of Public Health</h3>
+                            <div class="program-duration">
+                                <i class="highlight-icon">⏱</i> 4 Years Full-Time
+                            </div>
+                            <div class="program-tags">
+                                <span class="program-tag">Healthcare</span>
+                                <span class="program-tag">Policy</span>
+                                <span class="program-tag">Popular</span>
+                            </div>
+                            <p class="program-description">
+                                Develop expertise in public health practice, research, and policy. This program equips students with the skills to address population health challenges through evidence-based interventions.
+                            </p>
+                            <div class="program-highlights">
+                                <ul class="highlight-list">
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Community health assessments
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Epidemiology fundamentals
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> 6-month internship
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="apply-btn">Apply Now</button>
+                        </div>
+                        
+                        <!-- Program 2 -->
+                        <div class="program-card">
+                            <h3 class="program-title">Bachelor of Pharmacy</h3>
+                            <div class="program-duration">
+                                <i class="highlight-icon">⏱</i> 5 Years Full-Time
+                            </div>
+                            <div class="program-tags">
+                                <span class="program-tag">Medicine</span>
+                                <span class="program-tag">Clinical</span>
+                                <span class="program-tag">High Demand</span>
+                            </div>
+                            <p class="program-description">
+                                Become a qualified pharmacist with comprehensive knowledge of pharmaceutical sciences, drug development, and patient care. Includes clinical rotations in various healthcare settings.
+                            </p>
+                            <div class="program-highlights">
+                                <ul class="highlight-list">
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Pharmaceutical chemistry
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Clinical pharmacy practice
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Hospital rotations
+                                    </li>
+                                </ul>
+                            </div>
+                            <span class="notification-badge">Limited Seats</span>
+                            <button class="apply-btn">Apply Now</button>
+                        </div>
+                        
+                        <!-- Program 3 -->
+                        <div class="program-card">
+                            <h3 class="program-title">Bachelor of Environmental Health</h3>
+                            <div class="program-duration">
+                                <i class="highlight-icon">⏱</i> 4 Years Full-Time
+                            </div>
+                            <div class="program-tags">
+                                <span class="program-tag">Environment</span>
+                                <span class="program-tag">Health</span>
+                                <span class="program-tag">Safety</span>
+                            </div>
+                            <p class="program-description">
+                                Study the relationship between environmental factors and human health. Learn to identify, assess, and manage environmental health risks in various settings.
+                            </p>
+                            <div class="program-highlights">
+                                <ul class="highlight-list">
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Food safety management
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Environmental impact assessment
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Field research projects
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="apply-btn">Apply Now</button>
+                        </div>
+                        
+                        <!-- Program 4 -->
+                        <div class="program-card">
+                            <h3 class="program-title">Bachelor of Medical Laboratory Sciences</h3>
+                            <div class="program-duration">
+                                <i class="highlight-icon">⏱</i> 4 Years Full-Time
+                            </div>
+                            <div class="program-tags">
+                                <span class="program-tag">Diagnostics</span>
+                                <span class="program-tag">Clinical</span>
+                                <span class="program-tag">New</span>
+                            </div>
+                            <p class="program-description">
+                                Train to become a medical laboratory scientist with skills in performing laboratory tests critical for diagnosis, treatment, and prevention of disease.
+                            </p>
+                            <div class="program-highlights">
+                                <ul class="highlight-list">
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Clinical biochemistry
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Hematology techniques
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Microbiology laboratory practice
+                                    </li>
+                                </ul>
+                            </div>
+                            <span class="notification-badge">New Program</span>
+                            <button class="apply-btn">Apply Now</button>
+                        </div>
+                        
+                        <!-- Program 5 -->
+                        <div class="program-card">
+                            <h3 class="program-title">Bachelor of Nursing Science</h3>
+                            <div class="program-duration">
+                                <i class="highlight-icon">⏱</i> 4 Years Full-Time
+                            </div>
+                            <div class="program-tags">
+                                <span class="program-tag">Healthcare</span>
+                                <span class="program-tag">Clinical</span>
+                                <span class="program-tag">Patient Care</span>
+                            </div>
+                            <p class="program-description">
+                                Develop comprehensive nursing skills combining theoretical knowledge with clinical practice. Prepare for a career in various healthcare settings as a registered nurse.
+                            </p>
+                            <div class="program-highlights">
+                                <ul class="highlight-list">
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Clinical rotations
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Advanced care techniques
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Community health nursing
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="apply-btn">Apply Now</button>
+                        </div>
+                        
+                        <!-- Program 6 -->
+                        <div class="program-card">
+                            <h3 class="program-title">Bachelor of Health Information Management</h3>
+                            <div class="program-duration">
+                                <i class="highlight-icon">⏱</i> 4 Years Full-Time
+                            </div>
+                            <div class="program-tags">
+                                <span class="program-tag">Healthcare</span>
+                                <span class="program-tag">Technology</span>
+                                <span class="program-tag">Management</span>
+                            </div>
+                            <p class="program-description">
+                                Learn to manage health data and information resources. Develop skills in health informatics, electronic health records management, and healthcare data analytics.
+                            </p>
+                            <div class="program-highlights">
+                                <ul class="highlight-list">
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Health data analytics
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Medical coding & classification
+                                    </li>
+                                    <li class="highlight-item">
+                                        <i class="highlight-icon">✓</i> Healthcare IT systems
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="apply-btn">Apply Now</button>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="success-rate-chart">
+                    <h3 class="sidebar-title">Graduate Employment Rates by Program</h3>
+                    <div class="chart-bars">
+                        <div class="chart-bar" style="height: 92%;">
+                            <span class="bar-value">92%</span>
+                            <span class="bar-label">Pharmacy</span>
+                        </div>
+                        <div class="chart-bar" style="height: 89%;">
+                            <span class="bar-value">89%</span>
+                            <span class="bar-label">Public Health</span>
+                        </div>
+                        <div class="chart-bar" style="height: 87%;">
+                            <span class="bar-value">87%</span>
+                            <span class="bar-label">Medical Lab</span>
+                        </div>
+                        <div class="chart-bar" style="height: 90%;">
+                            <span class="bar-value">90%</span>
+                            <span class="bar-label">Nursing</span>
+                        </div>
+                        <div class="chart-bar" style="height: 85%;">
+                            <span class="bar-value">85%</span>
+                            <span class="bar-label">Env. Health</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="testimonials-section">
+                    <h2 class="section-title">Student Testimonials</h2>
+                    <div class="testimonials-container">
+                        <div class="testimonial-card">
+                            <p class="testimonial-content">
+                                "Boitekanelo College provided me with the perfect balance of theoretical knowledge and practical experience. The hands-on training in the medical laboratory program prepared me exceptionally well for my current role at Princess Marina Hospital."
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">TM</div>
+                                <div class="author-details">
+                                    <div class="author-name">Tshepo Mothibi</div>
+                                    <div class="author-title">Medical Laboratory Scientist, Class of 2020</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card">
+                            <p class="testimonial-content">
+                                "The public health program at Boitekanelo gave me the tools to make a real difference in my community. The faculty's expertise and the internship opportunities were invaluable in shaping my career path in health policy."
+                            </p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">AM</div>
+                                <div class="author-details">
+                                    <div class="author-name">Amantle Moeng</div>
+                                    <div class="author-title">Public Health Officer, Class of 2019</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="virtual-tour-section">
+                    <h2 class="tour-title">Explore Our Campus Virtually</h2>
+                    <p class="tour-description">
+                        Can't visit in person? Take our interactive virtual tour to explore state-of-the-art laboratories, lecture halls, and student facilities from anywhere in the world.
+                    </p>
+                    <button class="tour-btn">
+                        <i class="tour-btn-icon">▶</i> Start Virtual Tour
+                    </button>
+                </section>
+            </div>
+            
+            <div class="sidebar">
+                <section class="sidebar-section">
+                    <h3 class="sidebar-title">Contact Information</h3>
+                    <ul class="contact-list">
+                        <li class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>+267 395 7632</div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon">✉</div>
+                            <div>admissions@boitekanelo.edu.bw</div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon">🏠</div>
+                            <div>Plot 54321, Block 7, Gaborone</div>
+                        </li>
+                        <li class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div>Mon-Fri: 8:00 AM - 5:00 PM</div>
+                        </li>
+                    </ul>
+                    <div class="location-map">
+                        <!-- Map placeholder -->
+                    </div>
+                </section>
+                
+                <section class="sidebar-section">
+                    <h3 class="sidebar-title">Key Facilities</h3>
+                    <ul class="facilities-list">
+                        <li class="facility-item">
+                            <div class="facility-icon">🏥</div>
+                            <div>Modern Teaching Hospital</div>
+                        </li>
+                        <li class="facility-item">
+                            <div class="facility-icon">🔬</div>
+                            <div>Advanced Science Labs</div>
+                        </li>
+                        <li class="facility-item">
+                            <div class="facility-icon">📚</div>
+                            <div>Health Sciences Library</div>
+                        </li>
+                        <li class="facility-item">
+                            <div class="facility-icon">🏋️</div>
+                            <div>Student Wellness Center</div>
+                        </li>
+                        <li class="facility-item">
+                            <div class="facility-icon">🍽</div>
+                            <div>Cafeteria & Dining Hall</div>
+                        </li>
+                    </ul>
+                </section>
+                
+                <section class="sidebar-section">
+                    <h3 class="sidebar-title">Upcoming Events</h3>
+                    <ul class="facilities-list">
+                        <li class="facility-item">
+                            <div class="facility-icon">🗓</div>
+                            <div>
+                                <strong>Open Day:</strong> June 15, 2023
+                            </div>
+                        </li>
+                        <li class="facility-item">
+                            <div class="facility-icon">🗓</div>
+                            <div>
+                                <strong>Application Deadline:</strong> July 31, 2023
+                            </div>
+                        </li>
+                        <li class="facility-item">
+                            <div class="facility-icon">🗓</div>
+                            <div>
+                                <strong>Health Symposium:</strong> August 12, 2023
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+        
+        <section class="admission-cta">
+            <h2 class="cta-title">Ready to Start Your Healthcare Journey?</h2>
+            <p class="cta-text">
+                Boitekanelo College is accepting applications for the 2023/2024 academic year. Join Botswana's premier healthcare education institution and become part of the next generation of healthcare professionals.
+            </p>
+            <div class="cta-buttons">
+                <button class="cta-btn cta-btn-primary">Apply Now</button>
+                <button class="cta-btn cta-btn-secondary">Request Info</button>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <p>&copy; 2023 UniMatch. All rights reserved. | Boitekanelo College information provided for demonstration purposes.</p>
+    </footer>
+</body>
+</html>
