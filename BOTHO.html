@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botho University | UniMatch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #6247AA;
+            --secondary: #A06CD5;
+            --accent: #FF8484;
+            --background: #F5F5FF;
+            --text: #333;
+            --light-text: #777;
+            --white: #fff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--background);
+            min-height: 100vh;
+            display: flex;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: var(--primary);
+            position: fixed;
+            left: 0;
+            top: 0;
+            transform: translateX(-250px);
+            transition: var(--transition);
+            z-index: 1000;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+        }
+        
+        .sidebar.active {
+            transform: translateX(0);
+        }
+        
+        .sidebar-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-logo {
+            color: var(--white);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .sidebar-logo span {
+            color: var(--accent);
+        }
+        
+        .close-btn {
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-btn:hover {
+            color: var(--accent);
+        }
+        
+        .menu-section {
+            padding: 1rem 0;
+        }
+        
+        .section-title {
+            padding: 0.5rem 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .menu-items {
+            list-style: none;
+        }
+        
+        .menu-item {
+            transition: var(--transition);
+        }
+        
+        .menu-item a {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .menu-item a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent);
+        }
+        
+        .menu-item i {
+            margin-right: 0.8rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .menu-item.active a {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+        
+        .submenu {
+            list-style: none;
+            margin-left: 2rem;
+            display: none;
+        }
+        
+        .submenu-item a {
+            padding: 0.6rem 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+        
+        .menu-item.open .submenu {
+            display: block;
+        }
+        
+        .toggle-submenu {
+            margin-left: auto;
+            transition: var(--transition);
+        }
+        
+        .menu-item.open .toggle-submenu {
+            transform: rotate(90deg);
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex-grow: 1;
+            margin-left: 0;
+            transition: var(--transition);
+        }
+        
+        .main-content.shifted {
+            margin-left: 250px;
+        }
+        
+        .top-bar {
+            background: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .toggle-sidebar {
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 1rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .toggle-sidebar:hover {
+            color: var(--secondary);
+        }
+        
+        .university-title {
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+        
+        .university-title span {
+            color: var(--accent);
+        }
+        
+        .search-bar {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            background: var(--background);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+        }
+        
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 200px;
+            padding: 0.3rem;
+        }
+        
+        .search-bar i {
+            color: var(--light-text);
+        }
+        
+        .profile-section {
+            display: flex;
+            align-items: center;
+            margin-left: 1.5rem;
+        }
+        
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #ff6b6b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: -3rem;
+            padding: 0 2rem;
+        }
+        
+        .stat-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            flex: 1;
+            max-width: 250px;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stat-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 4rem 2rem;
+        }
+        
+        .section-heading {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-heading h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-heading p {
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .feature-desc {
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+        
+        /* Programs Section */
+        .programs-section {
+            padding: 4rem 2rem;
+            background-color: rgba(160, 108, 213, 0.05);
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .program-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .program-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 1.5rem;
+        }
+        
+        .program-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .program-meta {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .program-meta span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .program-meta i {
+            margin-right: 0.3rem;
+        }
+        
+        .program-content {
+            padding: 1.5rem;
+        }
+        
+        .program-desc {
+            margin-bottom: 1.5rem;
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+        
+        .program-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .program-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+        }
+        
+        .program-features i {
+            color: var(--accent);
+            margin-right: 0.8rem;
+        }
+        
+        .program-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .program-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--primary);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo span {
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .stats-section {
+                flex-wrap: wrap;
+            }
+            
+            .stat-card {
+                min-width: 200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content.shifted {
+                margin-left: 0;
+            }
+            
+            .top-bar {
+                padding: 1rem;
+            }
+            
+            .university-title {
+                font-size: 1.2rem;
+            }
+            
+            .search-bar input {
+                width: 150px;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .stats-section {
+                margin-top: -2rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-card {
+                max-width: 100%;
+                width: 100%;
+            }
+            
+            .features-section, .programs-section {
+                padding: 3rem 1rem;
+            }
+            
+            .program-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .profile-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">Botho<span>Uni</span></div>
+            <div class="close-btn">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        
+        <div class="menu-section">
+            <div class="section-title">Menu</div>
+            <ul class="menu-items">
+                <li class="menu-item active">
+                    <a href="#">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About Us</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">
+                        <i class="fas fa-newspaper"></i>
+                        <span>News & Events</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">
+                        <i class="fas fa-images"></i>
+                        <span>Gallery</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="menu-section">
+            <div class="section-title">Courses</div>
+            <ul class="menu-items">
+                <li class="menu-item">
+                    <a href="#" class="submenu-toggle">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Computing</span>
+                        <i class="fas fa-chevron-right toggle-submenu"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item">
+                            <a href="#">BSc Computing</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="#">BSc Computer Systems Engineering</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="#">BSc Network Security & Computer Forensics</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="submenu-toggle">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Business</span>
+                        <i class="fas fa-chevron-right toggle-submenu"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item">
+                            <a href="#">BA Business Management</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="#">BSc Accounting & Finance</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="#">BSc Entrepreneurship & Business Leadership</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="submenu-toggle">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Health</span>
+                        <i class="fas fa-chevron-right toggle-submenu"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item">
+                            <a href="#">BSc Health Information Management</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="#">BSc Health & Wellness</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="submenu-toggle">
+                        <i class="fas fa-glass-cheers"></i>
+                        <span>Hospitality</span>
+                        <i class="fas fa-chevron-right toggle-submenu"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item">
+                            <a href="#">BA Hospitality Management</a>
+                        </li>
+                        <li class="submenu-item">
+                            <a href="#">BA Tourism & Event Management</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>All Programs</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="toggle-sidebar">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="university-title">Botho <span>University</span></div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="profile-section">
+                <div class="profile-pic">S</div>
+                <div class="profile-name">Student</div>
+            </div>
+        </div>
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Welcome to Botho University</h1>
+            <p>Your pathway to a successful career through quality education, innovation, and excellence.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">Apply Now</a>
+                <a href="#" class="btn btn-secondary">Virtual Tour</a>
+            </div>
+        </section>
+        
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="stat-value">6,000+</div>
+                <div class="stat-label">Students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="stat-value">250+</div>
+                <div class="stat-label">Qualified Faculty</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div class="stat-value">85%</div>
+                <div class="stat-label">Employment Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-globe-africa"></i>
+                </div>
+                <div class="stat-value">4</div>
+                <div class="stat-label">Campus Locations</div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="section-heading">
+                <h2>Why Choose Botho University?</h2>
+                <p>We are committed to offering a transformative educational experience that prepares students for the demands of the global workplace.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3 class="feature-title">Quality Education</h3>
+                    <p class="feature-desc">Internationally recognized programs that meet the highest academic standards and are accredited by professional bodies.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3 class="feature-title">Innovative Learning</h3>
+                    <p class="feature-desc">State-of-the-art technology and innovative teaching methods that adapt to the changing needs of industries.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="feature-title">Industry Partnerships</h3>
+                    <p class="feature-desc">Strong relationships with industry leaders providing internships, job opportunities, and real-world experience.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Diverse Community</h3>
+                    <p class="feature-desc">A vibrant community of students and faculty from diverse backgrounds fostering cultural exchange and global perspectives.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="feature-title">Modern Facilities</h3>
+                    <p class="feature-desc">Purpose-built campuses with modern classrooms, labs, libraries, and recreational spaces to enhance student experience.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="feature-title">Entrepreneurship Focus</h3>
+                    <p class="feature-desc">Programs designed to foster entrepreneurial skills and innovation, preparing students to create their own opportunities.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Programs Section -->
+        <section class="programs-section">
+            <div class="section-heading">
+                <h2>Featured Programs</h2>
+                <p>Discover our diverse range of innovative programs designed to meet the needs of industries and prepare you for a successful career.</p>
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3 class="program-title">BSc in Computing</h3>
+                        <div class="program-meta">
+                            <span><i class="far fa-clock"></i> 4 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> Level 7</span>
+                        </div>
+                    </div>
+                    <div class="program-content">
+                        <p class="program-desc">
+                            A comprehensive program that prepares students for careers in software development, systems analysis, and IT management with a focus on practical skills and industry relevance.
+                        </p>
+                        <ul class="program-features">
+                            <li><i class="fas fa-check"></i> Industry-standard programming languages</li>
+                            <li><i class="fas fa-check"></i> Software development methodologies</li>
+                            <li><i class="fas fa-check"></i> Database systems and administration</li>
+                            <li><i class="fas fa-check"></i> Web and mobile application development</li>
+                        </ul>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">P8,500/semester</div>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3 class="program-title">BA in Business Management</h3>
+                        <div class="program-meta">
+                            <span><i class="far fa-clock"></i> 4 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> Level 7</span>
+                        </div>
+                    </div>
+                    <div class="program-content">
+                        <p class="program-desc">
+                            Develop key management and leadership skills necessary for success in various business environments, with emphasis on strategic thinking and decision-making.
+                        </p>
+                        <ul class="program-features">
+                            <li><i class="fas fa-check"></i> Strategic management principles</li>
+                            <li><i class="fas fa-check"></i> Human resource management</li>
+                            <li><i class="fas fa-check"></i> Marketing strategies and analysis</li>
+                            <li><i class="fas fa-check"></i> Financial management and accounting</li>
+                        </ul>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">P7,800/semester</div>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3 class="program-title">BSc in Health Information Management</h3>
+                        <div class="program-meta">
+                            <span><i class="far fa-clock"></i> 4 Years</span>
+                            <span><i class="fas fa-graduation-cap"></i> Level 7</span>
+                        </div>
+                    </div>
+                    <div class="program-content">
+                
