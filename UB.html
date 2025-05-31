@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniMatch - University of Botswana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo span {
+            color: #FFD166;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            color: #FFD166;
+        }
+        
+        .nav a.active {
+            color: #FFD166;
+            border-bottom: 2px solid #FFD166;
+        }
+        
+        .main {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .university-hero {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('/api/placeholder/1200/400') center/cover;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .university-badge {
+            background-color: #4ECDC4;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            border: 4px solid white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .quick-stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .stat-pill {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+        
+        .content-container {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+        }
+        
+        .sticky-nav {
+            position: sticky;
+            top: 100px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        
+        .sticky-nav h3 {
+            margin-bottom: 1rem;
+            color: #FFD166;
+            font-size: 1.3rem;
+        }
+        
+        .page-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .page-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .page-links a:hover, .page-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .take-action {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .action-btn {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: #FFD166;
+            color: #333;
+        }
+        
+        .btn-primary:hover {
+            background-color: #ffc233;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .content-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .content-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-icon {
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #FFD166;
+        }
+        
+        .content-text {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .highlight-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #4ECDC4;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .program-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .program-card:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .program-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #FFD166;
+        }
+        
+        .program-card p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .program-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .gallery-item {
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .testimonials {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* For Firefox */
+        }
+        
+        .testimonials::-webkit-scrollbar {
+            display: none; /* For Chrome, Safari, and Opera */
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 1.5rem;
+            min-width: 300px;
+            scroll-snap-align: start;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+        }
+        
+        .testimonial-program {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            line-height: 1.6;
+        }
+        
+        .testimonial-rating {
+            margin-top: 1rem;
+            color: #FFD166;
+        }
+        
+        /* Interactive 3D Campus Map */
+        .campus-map {
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+        }
+        
+        .map-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .map-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .map-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .map-btn.active {
+            background-color: #4ECDC4;
+        }
+        
+        .map-placeholder {
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Program Finder Tool */
+        .program-finder {
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            margin: 1.5rem 0;
+        }
+        
+        .finder-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .finder-input {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        select option {
+            background-color: #2575fc;
+            color: white;
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .finder-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        /* Compare Tool */
+        .comparison-tool {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .comparison-selectors {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .comparison-selector {
+            flex: 1;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison-table th {
+            color: #FFD166;
+            font-size: 1.1rem;
+        }
+        
+        .comparison-uni {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .comparison-logo {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .highlight {
+            background-color: rgba(78, 205, 196, 0.2);
+        }
+        
+        /* Interactive Timeline */
+        .timeline-container {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .timeline-event {
+            position: relative;
+            margin-bottom: 2rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .timeline-event:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #4ECDC4;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            transform: translateY(5px);
+        }
+        
+        .timeline-event:hover {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #FFD166;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+        
+        /* Notification Badge */
+        .notification-badge {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #FFD166;
+            color: #333;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateY(200%);
+            animation: slideUp 0.5s ease forwards 2s;
+            z-index: 100;
+            max-width: 300px;
+        }
+        
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        .notification-close {
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .content-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sticky-nav {
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .university-hero {
+                height: 300px;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .quick-stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-selectors {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main {
+                padding: 1rem;
+            }
+            
+            .university-badge {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Uni<span>Match</span></div>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#" class="active">Universities</a>
+            <a href="#">Compare</a>
+            <a href="#">Resources</a>
+            <a href="#">About Us</a>
+        </nav>
+    </header>
+    
+    <main class="main">
+        <section class="university-hero">
+            <div class="hero-overlay">
+                <div class="university-badge">UB</div>
+                <h1 class="hero-title">University of Botswana</h1>
+                <p class="hero-subtitle">Botswana's Premier Institution of Higher Learning</p>
+                <div class="quick-stats">
+                    <div class="stat-pill">Est. 1982</div>
+                    <div class="stat-pill">15,000+ Students</div>
+                    <div class="stat-pill">7 Faculties</div>
+                    <div class="stat-pill">4.5/5 Rating</div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="content-container">
+            <div class="main-content">
+                <section id="overview" class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">📚</div>
+                        <h2 class="section-title">Overview</h2>
+                    </div>
+                    
+                    <p class="content-text">
+                        The University of Botswana (UB) is the first institution of higher education in Botswana, established in 1982. Located in the capital city of Gaborone, UB has grown to become the nation's leading educational institution, with additional campuses in Francistown and Maun.
+                    </p>
+                    
+                    <p class="content-text">
+                        With a student population of over 15,000 and a diverse academic staff drawn from across the globe, UB offers a comprehensive range of undergraduate and postgraduate programs across seven faculties. The university is committed to academic excellence, research that addresses national and global challenges, and community engagement.
+                    </p>
+                    
+                    <div class="highlight-box">
+                        <strong>Mission:</strong> To improve economic and social conditions for the nation while advancing itself as a distinctively African university with a regional and international outlook.
+                    </div>
+                    
+                    <p class="content-text">
+                        UB consistently ranks among the top universities in Africa and has established partnerships with leading institutions worldwide, offering students opportunities for international exchange and collaborative research projects.
+                    </p>
+                </section>
+                
+                <section id="academics" class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">🎓</div>
+                        <h2 class="section-title">Academic Programs</h2>
+                    </div>
+                    
+                    <p class="content-text">
+                        The University of Botswana offers over 60 undergraduate and 120 postgraduate programs across seven faculties, catering to diverse academic interests and career aspirations.
+                    </p>
+                    
+                    <div class="programs-grid">
+                        <div class="program-card">
+                            <h4>Faculty of Medicine</h4>
+                            <p>Training future healthcare professionals with state-of-the-art facilities and clinical partnerships.</p>
+                            <div class="program-details">
+                                <span>5 Years</span>
+                                <span>MBBS, MSc, PhD</span>
+                            </div>
+                        </div>
+                        
+                        <div class="program-card">
+                            <h4>Faculty of Law</h4>
+                            <p>Producing legal experts who shape Botswana's judicial system and contribute to justice globally.</p>
+                            <div class="program-details">
+                                <span>4 Years</span>
+                                <span>LLB, LLM, PhD</span>
+                            </div>
+                        </div>
+                        
+                        <div class="program-card">
+                            <h4>Faculty of Engineering</h4>
+                            <p>Building technical expertise to drive innovation and infrastructure development.</p>
+                            <div class="program-details">
+                                <span>4-5 Years</span>
+                                <span>BEng, MEng, PhD</span>
+                            </div>
+                        </div>
+                        
+                        <div class="program-card">
+                            <h4>Faculty of Science</h4>
+                            <p>Advancing scientific knowledge with research-intensive programs and modern laboratories.</p>
+                            <div class="program-details">
+                                <span>4 Years</span>
+                                <span>BSc, MSc, PhD</span>
+                            </div>
+                        </div>
+                        
+                        <div class="program-card">
+                            <h4>Faculty of Business</h4>
+                            <p>Developing business leaders and entrepreneurs who drive economic growth in Africa.</p>
+                            <div class="program-details">
+                                <span>4 Years</span>
+                                <span>BBA, MBA, PhD</span>
+                            </div>
+                        </div>
+                        
+                        <div class="program-card">
+                            <h4>Faculty of Humanities</h4>
+                            <p>Exploring cultural heritage, social dynamics, and human expressions through diverse disciplines.</p>
+                            <div class="program-details">
+                                <span>4 Years</span>
+                                <span>BA, MA, PhD</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="interactive-map" class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">🗺️</div>
+                        <h2 class="section-title">Interactive Campus Map</h2>
+                    </div>
+                    
+                    <p class="content-text">
+                        Explore the University of Botswana's sprawling campus with our interactive map. Get a feel for the layout, discover key facilities, and find your way around with ease.
+                    </p>
+                    
+                    <div class="map-controls">
+                        <button class="map-btn active" data-view="main">Main Campus</button>
+                        <button class="map-btn" data-view="academic">Academic Buildings</button>
+                        <button class="map-btn" data-view="housing">Student Housing</button>
+                        <button class="map-btn" data-view="facilities">Facilities</button>
+                    </div>
+                    
+                    <div class="campus-map">
+                        <div class="map-placeholder">
+                            [Interactive 3D Campus Map would be implemented here with WebGL/Three.js]
+                        </div>
+                    </div>
+                    
+                    <p class="content-text">
+                        The UB campus spans over 600 acres and features modern academic buildings, research facilities, student residences, sports complexes, and beautiful open spaces. The campus is designed to create an environment conducive to learning, research, and personal development.
+                    </p>
+                </section>
+                
+                <section id="facilities" class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">🏛️</div>
+                        <h2 class="section-title">Facilities</h2>
+                    </div>
+                    
+                    <p class="content-text">
+                        UB boasts world-class facilities designed to enhance the learning experience and support students' academic and personal development.
+                    </p>
+                    
+                    <div class="gallery">
+                        <div class="gallery-item">
+                            <img src="/api/placeholder/400/300" alt="UB Library">
+                            <div class="gallery-caption">The state-of-the-art UB Library houses over 500,000 volumes and digital resources.</div>
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <img src="/api/placeholder/400/300" alt="Science Labs">
+                            <div class="gallery-caption">Modern science laboratories equipped with the latest research technology.</div>
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <img src="/api/placeholder/400/300" alt="Sports Complex">
+                            <div class="gallery-caption">The UB Sports Complex includes an Olympic-sized swimming pool and multiple courts.</div>
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <img src="/api/placeholder/400/300" alt="Student Center">
+                            <div class="gallery-caption">The vibrant Student Center is the hub of campus social life and activities.</div>
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <img src="/api/placeholder/400/300" alt="Medical School">
+                            <div class="gallery-caption">The Faculty of Medicine features simulation labs and clinical training facilities.</div>
+                        </div>
+                        
+                        <div class="gallery-item">
+                            <img src="/api/placeholder/400/300" alt="Auditorium">
+                            <div class="gallery-caption">The main auditorium hosts academic conferences, cultural performances, and ceremonies.</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="program-finder" class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">🔍</div>
+                        <h2 class="section-title">Program Finder</h2>
+                    </div>
+                    
+                    <p class="content-text">
+                        Find the perfect academic program that matches your interests, career goals, and qualifications using our interactive Program Finder tool.
+                    </p>
+                    
+                    <div class="program-finder">
+                        <div class="finder-controls">
+                            <div class="finder-input">
+                                <select id="faculty-select">
+                                    <option value="">Select Faculty</option>
+                                    <option value="medicine">Medicine</option>
+                                    <option value="law">Law</option>
+                                    <option value="engineering
