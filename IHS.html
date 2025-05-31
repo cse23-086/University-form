@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniMatch - Institute of Health Sciences</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo span {
+            color: #FFD166;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            color: #FFD166;
+        }
+        
+        .nav a.active {
+            color: #FFD166;
+            border-bottom: 2px solid #FFD166;
+        }
+        
+        .main {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .university-header {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-top: 5px solid #22A6B3;
+        }
+        
+        .university-logo-large {
+            width: 120px;
+            height: 120px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: white;
+            margin-right: 2rem;
+        }
+        
+        .university-title {
+            flex: 1;
+        }
+        
+        .university-name-large {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .university-location-large {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+        }
+        
+        .university-rating {
+            background-color: #22A6B3;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .university-rating span {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .content-container {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .main-content {
+            flex: 2;
+        }
+        
+        .sidebar {
+            flex: 1;
+        }
+        
+        .section {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-content {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .gallery-img {
+            height: 160px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .stat-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FFD166;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .program-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .program-card:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .program-name {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .program-details {
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+        
+        .program-duration, .program-level {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .cta-button {
+            display: block;
+            background-color: #22A6B3;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-button:hover {
+            background-color: #1a8a94;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .secondary-button {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .secondary-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .icon {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+        }
+        
+        .faculty-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .faculty-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            width: calc(50% - 0.5rem);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .faculty-avatar {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+        
+        .faculty-info {
+            flex: 1;
+        }
+        
+        .faculty-name {
+            color: white;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .faculty-position {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .tab-container {
+            margin-bottom: 1rem;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tab {
+            padding: 0.8rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            background-color: #22A6B3;
+        }
+        
+        .tab:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .admission-steps {
+            margin-top: 1rem;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #22A6B3;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            color: white;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+        
+        .featured-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: rgba(34, 166, 179, 0.2);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #22A6B3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .info-content {
+            flex: 1;
+            color: white;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 1200px) {
+            .content-container {
+                flex-direction: column;
+            }
+            
+            .faculty-item {
+                width: 100%;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .university-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .university-logo-large {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .university-rating {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main {
+                padding: 1rem;
+            }
+            
+            .university-name-large {
+                font-size: 2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Uni<span>Match</span></div>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#" class="active">Universities</a>
+            <a href="#">Compare</a>
+            <a href="#">Resources</a>
+            <a href="#">About Us</a>
+        </nav>
+    </header>
+    
+    <main class="main">
+        <div class="university-header">
+            <div class="university-logo-large">IHS</div>
+            <div class="university-title">
+                <h1 class="university-name-large">Institute of Health Sciences</h1>
+                <p class="university-location-large">Gaborone, Botswana with Multiple Campuses</p>
+            </div>
+            <div class="university-rating">4.2/5 <span>Student Rating</span></div>
+        </div>
+        
+        <div class="content-container">
+            <div class="main-content">
+                <div class="section">
+                    <h2 class="section-title">About IHS</h2>
+                    <div class="section-content">
+                        <p>The Institute of Health Sciences (IHS) is Botswana's premier health education institution, dedicated to training healthcare professionals who will strengthen the country's health system. Established in 1967, IHS operates multiple campuses across Botswana, providing essential education and training for nursing and allied health professionals.</p>
+                        <p>Working in close partnership with the Ministry of Health, IHS programs are designed to meet national healthcare workforce needs while adhering to international standards of health education. The institute's practical approach to learning combines classroom instruction with extensive clinical experience in hospitals and community settings.</p>
+                        <p>With a commitment to producing competent, compassionate healthcare providers, IHS graduates are highly sought after and make significant contributions to improving health outcomes throughout Botswana and the region.</p>
+                        
+                        <div class="image-gallery">
+                            <div class="gallery-img"></div>
+                            <div class="gallery-img"></div>
+                            <div class="gallery-img"></div>
+                            <div class="gallery-img"></div>
+                            <div class="gallery-img"></div>
+                            <div class="gallery-img"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Programs</h2>
+                    <div class="section-content">
+                        <div class="program-card">
+                            <div class="program-name">Bachelor of Nursing Science</div>
+                            <p>This comprehensive program prepares students for professional nursing practice in various healthcare settings, with an emphasis on evidence-based care and clinical reasoning.</p>
+                            <div class="program-details">
+                                <div class="program-duration">4 Years</div>
+                                <div class="program-level">Undergraduate</div>
+                            </div>
+                        </div>
+                        
+                        <div class="program-card">
+                            <div class="program-name">Bachelor of Midwifery</div>
+                            <p>Focused on maternal and infant healthcare, this program trains students in all aspects of pregnancy, childbirth, and postpartum care with clinical placements in various settings.</p>
+                            <div class="program-details">
+                                <div class="program-duration">4 Years</div>
+                                <div class="program-level">Undergraduate</div>
+                            </div>
+                        </div>
+                        
+                        <div class="program-card">
+                            <div class="program-name">Bachelor of Dental Therapy</div>
+                            <p>This program trains students in preventive and basic dental care procedures, preparing them to meet the oral health needs of communities across Botswana.</p>
+                            <div class="program-details">
+                                <div class="program-duration">3 Years</div>
+                                <div class="program-level">Undergraduate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Facilities</h2>
+                    <div class="section-content">
+                        <p>IHS boasts modern facilities designed to provide students with an optimal learning environment. These include:</p>
+                        <ul style="margin-left: 20px; margin-top: 10px; color: rgba(255, 255, 255, 0.9);">
+                            <li>State-of-the-art simulation laboratories that replicate real healthcare environments</li>
+                            <li>Well-equipped skills laboratories for hands-on practice of clinical procedures</li>
+                            <li>Modern lecture halls with audiovisual equipment</li>
+                            <li>Computer laboratories with access to digital learning resources</li>
+                            <li>Well-stocked library with extensive healthcare literature and online databases</li>
+                            <li>Student residential facilities at all campuses</li>
+                            <li>Recreation centers for student well-being</li>
+                            <li>Clinical training sites at major hospitals and health facilities across Botswana</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Faculty & Leadership</h2>
+                    <div class="section-content">
+                        <p>The Institute of Health Sciences is staffed by qualified healthcare educators with extensive clinical and academic experience. Our faculty members are committed to excellence in teaching, research, and community service.</p>
+                        
+                        <div class="faculty-list">
+                            <div class="faculty-item">
+                                <div class="faculty-avatar"></div>
+                                <div class="faculty-info">
+                                    <div class="faculty-name">Dr. Katlego Molapo</div>
+                                    <div class="faculty-position">Principal, IHS Gaborone</div>
+                                </div>
+                            </div>
+                            <div class="faculty-item">
+                                <div class="faculty-avatar"></div>
+                                <div class="faculty-info">
+                                    <div class="faculty-name">Prof. Tumelo Setlhabi</div>
+                                    <div class="faculty-position">Head of Nursing Department</div>
+                                </div>
+                            </div>
+                            <div class="faculty-item">
+                                <div class="faculty-avatar"></div>
+                                <div class="faculty-info">
+                                    <div class="faculty-name">Dr. Mpho Dikgang</div>
+                                    <div class="faculty-position">Head of Midwifery Department</div>
+                                </div>
+                            </div>
+                            <div class="faculty-item">
+                                <div class="faculty-avatar"></div>
+                                <div class="faculty-info">
+                                    <div class="faculty-name">Dr. Bontle Kgathi</div>
+                                    <div class="faculty-position">Director of Research</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="section">
+                    <h2 class="section-title">Key Statistics</h2>
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-value">2,500+</div>
+                            <div class="stat-label">Students</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">93%</div>
+                            <div class="stat-label">Employment Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">4.2/5</div>
+                            <div class="stat-label">Student Rating</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Campuses</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Admissions</h2>
+                    <div class="featured-info">
+                        <div class="info-icon">!</div>
+                        <div class="info-content">
+                            <strong>Application Deadline:</strong> March 31, 2026 for the upcoming academic year
+                        </div>
+                    </div>
+                    
+                    <div class="admission-steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Check Eligibility</div>
+                                <div class="step-description">Review program requirements and ensure you meet the minimum academic qualifications.</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Submit Application</div>
+                                <div class="step-description">Complete the online application form and submit all required documents.</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Entrance Examination</div>
+                                <div class="step-description">Qualified applicants will be invited to take an entrance examination.</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-title">Interview</div>
+                                <div class="step-description">Shortlisted candidates will attend an interview with the admissions committee.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="cta-button">Apply Now</button>
+                    <button class="cta-button secondary-button">Download Prospectus</button>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Contact Information</h2>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <div class="icon"></div>
+                        </div>
+                        <div>
+                            <strong>Email:</strong> admissions@ihs.gov.bw
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <div class="icon"></div>
+                        </div>
+                        <div>
+                            <strong>Phone:</strong> +267 395 4000
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <div class="icon"></div>
+                        </div>
+                        <div>
+                            <strong>Address:</strong> Plot 5353, Notwane Road, Gaborone, Botswana
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <div class="icon"></div>
+                        </div>
+                        <div>
+                            <strong>Website:</strong> www.ihs.gov.bw
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025 UniMatch - Helping students find their academic home since 2023</p>
+    </footer>
+    
+    <script>
+        // Button interactions
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent === 'Apply Now') {
+                    alert('Application system would open in a complete application. You selected the Apply Now button.');
+                } else if (this.textContent === 'Download Prospectus') {
+                    alert('Prospectus download would start in a complete application. You selected the Download Prospectus button.');
+                }
+            });
+        });
+        
+        // Program card interactions
+        document.querySelectorAll('.program-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const programName = this.querySelector('.program-name').textContent;
+                alert(`You selected the ${programName} program. In a complete application, this would take you to detailed program information.`);
+            });
+        });
+        
+        // Gallery image interactions
+        document.querySelectorAll('.gallery-img').forEach(img => {
+            img.addEventListener('click', function() {
+                alert('In a complete application, this would open a lightbox gallery view.');
+            });
+        });
+    </script>
+</body>
+</html>
