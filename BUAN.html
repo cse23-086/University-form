@@ -1,0 +1,774 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUAN - Botswana University of Agriculture & Natural Resources | UniMatch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo span {
+            color: #FFD166;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            color: #FFD166;
+        }
+        
+        .nav a.active {
+            color: #FFD166;
+            border-bottom: 2px solid #FFD166;
+        }
+        
+        .main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            padding: 0.8rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+        
+        .university-hero {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border-top: 5px solid #6AB04C;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-info h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-info .full-name {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-info .location {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            background-color: #6AB04C;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(106, 176, 76, 0.3);
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #6AB04C;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .content-card {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content-card h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #6AB04C;
+            padding-bottom: 0.5rem;
+        }
+        
+        .content-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .content-card p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .program-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #6AB04C;
+        }
+        
+        .program-card h4 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .program-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .quick-facts {
+            background-color: rgba(106, 176, 76, 0.2);
+            border: 1px solid rgba(106, 176, 76, 0.3);
+        }
+        
+        .fact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .fact-item:last-child {
+            border-bottom: none;
+        }
+        
+        .fact-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+        
+        .fact-value {
+            color: white;
+            font-weight: bold;
+        }
+        
+        .facilities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .facility-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .facility-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #6AB04C;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: #6AB04C;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #5a9641;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .achievements-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .achievement-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid #FFD166;
+        }
+        
+        .achievement-item h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .achievement-item p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+        .contact-info {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #6AB04C;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .main {
+                padding: 1rem;
+            }
+            
+            .university-hero {
+                padding: 2rem;
+            }
+            
+            .hero-info h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-info h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Uni<span>Match</span></div>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#" class="active">Universities</a>
+            <a href="#">Compare</a>
+            <a href="#">Resources</a>
+            <a href="#">About Us</a>
+        </nav>
+    </header>
+    
+    <main class="main">
+        <a href="#" class="back-button">
+            ← Back to Universities
+        </a>
+        
+        <div class="university-hero">
+            <div class="hero-header">
+                <div class="hero-info">
+                    <h1>BUAN</h1>
+                    <p class="full-name">Botswana University of Agriculture & Natural Resources</p>
+                    <p class="location">📍 Sebele, Gaborone, Botswana</p>
+                </div>
+                <div class="hero-logo">BUAN</div>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-value">4.3</div>
+                    <div class="stat-label">Student Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2,000+</div>
+                    <div class="stat-label">Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">87%</div>
+                    <div class="stat-label">Employment Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">15:1</div>
+                    <div class="stat-label">Student-Faculty Ratio</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="main-content">
+                <div class="content-card">
+                    <h2>About BUAN</h2>
+                    <p>
+                        The Botswana University of Agriculture and Natural Resources (BUAN) is a specialized institution dedicated to advancing agricultural sciences and natural resource management in Botswana and the region. Established to address the critical need for skilled professionals in agriculture and environmental sectors, BUAN has become a leading center for agricultural education, research, and innovation.
+                    </p>
+                    <p>
+                        With state-of-the-art research facilities, demonstration farms, and extensive field stations, BUAN provides students with hands-on experience in modern agricultural practices, sustainable farming techniques, and natural resource conservation. The university's strong focus on practical learning ensures graduates are well-prepared to tackle real-world challenges in food security, environmental sustainability, and rural development.
+                    </p>
+                    <p>
+                        BUAN's commitment to research excellence has made it a key contributor to agricultural innovation in Southern Africa, with ongoing projects in climate-smart agriculture, livestock management, and water resource conservation.
+                    </p>
+                </div>
+                
+                <div class="content-card">
+                    <h2>Academic Programs</h2>
+                    <p>BUAN offers comprehensive programs designed to meet the evolving needs of the agricultural and natural resources sectors:</p>
+                    
+                    <div class="programs-grid">
+                        <div class="program-card">
+                            <h4>Crop Science</h4>
+                            <p>Focus on crop production, plant breeding, soil fertility, and sustainable farming systems for food security.</p>
+                        </div>
+                        <div class="program-card">
+                            <h4>Animal Science</h4>
+                            <p>Comprehensive livestock management, animal nutrition, breeding, and veterinary care programs.</p>
+                        </div>
+                        <div class="program-card">
+                            <h4>Agricultural Economics</h4>
+                            <p>Business aspects of agriculture, market analysis, policy development, and rural development economics.</p>
+                        </div>
+                        <div class="program-card">
+                            <h4>Natural Resources Management</h4>
+                            <p>Conservation, sustainable use of natural resources, wildlife management, and environmental protection.</p>
+                        </div>
+                        <div class="program-card">
+                            <h4>Agricultural Engineering</h4>
+                            <p>Farm mechanization, irrigation systems, post-harvest technology, and agricultural infrastructure.</p>
+                        </div>
+                        <div class="program-card">
+                            <h4>Food Science & Technology</h4>
+                            <p>Food processing, preservation, quality control, and value addition in agricultural products.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h2>Research & Innovation</h2>
+                    <p>BUAN is at the forefront of agricultural research in Botswana, conducting cutting-edge studies that directly impact food security and environmental sustainability:</p>
+                    
+                    <h3>Key Research Areas</h3>
+                    <ul style="color: rgba(255, 255, 255, 0.9); line-height: 1.8; margin-left: 1.5rem;">
+                        <li>Climate-Smart Agriculture and Drought-Resistant Crops</li>
+                        <li>Sustainable Livestock Production Systems</li>
+                        <li>Water Resource Management and Irrigation Technology</li>
+                        <li>Soil Health and Fertility Management</li>
+                        <li>Agricultural Value Chain Development</li>
+                        <li>Wildlife Conservation and Human-Wildlife Conflict Management</li>
+                    </ul>
+                    
+                    <p>The university operates several research stations across different agro-ecological zones, providing diverse environments for field research and technology testing.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h2>Campus Facilities</h2>
+                    <div class="facilities-list">
+                        <div class="facility-item">
+                            <div class="facility-icon">🔬</div>
+                            <span>Modern Research Labs</span>
+                        </div>
+                        <div class="facility-item">
+                            <div class="facility-icon">🚜</div>
+                            <span>Demonstration Farms</span>
+                        </div>
+                        <div class="facility-item">
+                            <div class="facility-icon">🐄</div>
+                            <span>Livestock Units</span>
+                        </div>
+                        <div class="facility-item">
+                            <div class="facility-icon">🌱</div>
+                            <span>Greenhouses & Nurseries</span>
+                        </div>
+                        <div class="facility-item">
+                            <div class="facility-icon">📚</div>
+                            <span>Agricultural Library</span>
+                        </div>
+                        <div class="facility-item">
+                            <div class="facility-icon">💻</div>
+                            <span>Computer Labs</span>
+                        </div>
+                        <div class="facility-item">
+                            <div class="facility-icon">🏠</div>
+                            <span>Student Residences</span>
+                        </div>
+                        <div class="facility-item">
+                            <div class="facility-icon">🍽️</div>
+                            <span>Dining Facilities</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="content-card quick-facts">
+                    <h2>Quick Facts</h2>
+                    <div class="fact-item">
+                        <span class="fact-label">Founded</span>
+                        <span class="fact-value">2011</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Type</span>
+                        <span class="fact-value">Public University</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Campus Size</span>
+                        <span class="fact-value">1,200 hectares</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Faculties</span>
+                        <span class="fact-value">3</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Research Stations</span>
+                        <span class="fact-value">5</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Language</span>
+                        <span class="fact-value">English</span>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h2>Key Achievements</h2>
+                    <div class="achievements-list">
+                        <div class="achievement-item">
+                            <h4>Research Excellence</h4>
+                            <p>Leading contributor to agricultural research in Southern Africa with over 200 published studies.</p>
+                        </div>
+                        <div class="achievement-item">
+                            <h4>Industry Partnerships</h4>
+                            <p>Strong collaborations with government agencies, NGOs, and private sector organizations.</p>
+                        </div>
+                        <div class="achievement-item">
+                            <h4>Graduate Success</h4>
+                            <p>87% employment rate with graduates working in agriculture, government, and research institutions.</p>
+                        </div>
+                        <div class="achievement-item">
+                            <h4>Community Impact</h4>
+                            <p>Outreach programs reaching over 10,000 farmers annually through extension services.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h2>Contact Information</h2>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <strong>Phone:</strong><br>
+                                +267 365 0000
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <strong>Email:</strong><br>
+                                info@buan.ac.bw
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🌐</div>
+                            <div>
+                                <strong>Website:</strong><br>
+                                www.buan.ac.bw
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Address:</strong><br>
+                                Private Bag 0027<br>
+                                Sebele, Gaborone
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-primary">Apply Now</button>
+            <button class="btn btn-secondary">Add to Compare</button>
+            <button class="btn btn-secondary">Download Brochure</button>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025 UniMatch - Helping students find their academic home since 2023</p>
+    </footer>
+    
+    <script>
+        // Button interactions
+        document.querySelector('.btn-primary').addEventListener('click', function() {
+            alert('Application process would begin here. In a complete system, this would redirect to the BUAN application portal.');
+        });
+        
+        document.querySelectorAll('.btn-secondary')[0].addEventListener('click', function() {
+            alert('BUAN has been added to your comparison list!');
+        });
+        
+        document.querySelectorAll('.btn-secondary')[1].addEventListener('click', function() {
+            alert('Downloading BUAN brochure... In a complete system, this would trigger a PDF download.');
+        });
+        
+        // Back button functionality
+        document.querySelector('.back-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('In a complete application, this would take you back to the universities listing page.');
+        });
+        
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation on scroll for content cards
+        function animateOnScroll() {
+            const cards = document.querySelectorAll('.content-card, .stat-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                card.style.transform = 'translateY(20px)';
+                card.style.opacity = '0';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        }
+        
+        // Initialize animations when page loads
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
