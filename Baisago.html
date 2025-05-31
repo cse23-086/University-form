@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baisago University - Your Gateway to Success</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo span {
+            color: #F0932B;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+        
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #F0932B;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .hero-section {
+            padding: 4rem 1rem;
+            text-align: center;
+            background: linear-gradient(45deg, rgba(240, 147, 43, 0.1), rgba(255, 255, 255, 0.1));
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .university-logo-large {
+            width: 120px;
+            height: 120px;
+            background: #F0932B;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #F0932B;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #e8841a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(240, 147, 43, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #F0932B;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .content-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            color: #F0932B;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        .card-content {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .program-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #F0932B;
+            transition: all 0.3s ease;
+        }
+        
+        .program-card:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .program-title {
+            color: white;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .program-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .facility-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .facility-item:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .facility-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .facility-name {
+            color: white;
+            font-weight: 600;
+        }
+        
+        .contact-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .contact-info h3 {
+            color: #F0932B;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem 1rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 3rem;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                padding: 1rem;
+                border-radius: 0 0 10px 10px;
+            }
+            
+            .nav.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .header-content {
+                position: relative;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .stat-card {
+                padding: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .facilities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-section {
+                padding: 2rem 1rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+            
+            .university-logo-large {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .facilities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Baisago <span>University</span></div>
+            <nav class="nav" id="nav">
+                <a href="#about">About</a>
+                <a href="#programs">Programs</a>
+                <a href="#facilities">Facilities</a>
+                <a href="#admissions">Admissions</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+    
+    <section class="hero-section">
+        <div class="hero-content fade-in">
+            <div class="university-logo-large">BU</div>
+            <h1 class="hero-title">Baisago University</h1>
+            <p class="hero-subtitle">Empowering minds, shaping futures. Join thousands of students who have chosen excellence in education with flexible learning options across Botswana.</p>
+            <div class="cta-buttons">
+                <a href="#programs" class="cta-btn btn-primary">Explore Programs</a>
+                <a href="#contact" class="cta-btn btn-secondary">Apply Now</a>
+            </div>
+        </div>
+    </section>
+    
+    <main class="main-content">
+        <section class="stats-section fade-in">
+            <div class="stat-card">
+                <div class="stat-number">3,200+</div>
+                <div class="stat-label">Active Students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">82%</div>
+                <div class="stat-label">Employment Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Programs Offered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4.2</div>
+                <div class="stat-label">Student Rating</div>
+            </div>
+        </section>
+        
+        <section class="section fade-in" id="about">
+            <h2 class="section-title">About Baisago University</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3 class="card-title">Our Mission</h3>
+                    <p class="card-content">To provide accessible, quality higher education that prepares students for successful careers in a rapidly evolving global economy. We focus on practical skills, innovative thinking, and ethical leadership.</p>
+                </div>
+                <div class="content-card">
+                    <h3 class="card-title">Our Vision</h3>
+                    <p class="card-content">To be the leading institution for business and technology education in Southern Africa, recognized for academic excellence, industry partnerships, and graduate success.</p>
+                </div>
+                <div class="content-card">
+                    <h3 class="card-title">Why Choose Us?</h3>
+                    <p class="card-content">With campuses in Gaborone and Francistown, we offer flexible study options, experienced faculty, modern facilities, and strong industry connections that ensure our graduates are job-ready.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section fade-in" id="programs">
+            <h2 class="section-title">Academic Programs</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3 class="program-title">Business Management</h3>
+                    <p class="program-description">Comprehensive business education covering management principles, strategic planning, and entrepreneurship with real-world applications.</p>
+                </div>
+                <div class="program-card">
+                    <h3 class="program-title">Information Technology</h3>
+                    <p class="program-description">Cutting-edge IT programs including software development, network administration, cybersecurity, and digital innovation.</p>
+                </div>
+                <div class="program-card">
+                    <h3 class="program-title">Public Administration</h3>
+                    <p class="program-description">Prepare for careers in government and public service with courses in policy analysis, public finance, and governance.</p>
+                </div>
+                <div class="program-card">
+                    <h3 class="program-title">Human Resources</h3>
+                    <p class="program-description">Learn modern HR practices including talent management, organizational behavior, and strategic human capital development.</p>
+                </div>
+                <div class="program-card">
+                    <h3 class="program-title">Marketing</h3>
+                    <p class="program-description">Digital marketing, brand management, consumer behavior, and market research in the modern business landscape.</p>
+                </div>
+                <div class="program-card">
+                    <h3 class="program-title">Accounting & Finance</h3>
+                    <p class="program-description">Professional accounting education with focus on financial analysis, auditing, and corporate finance management.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section fade-in" id="facilities">
+            <h2 class="section-title">Campus Facilities</h2>
+            <div class="facilities-grid">
+                <div class="facility-item">
+                    <div class="facility-icon">💻</div>
+                    <div class="facility-name">Computer Labs</div>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">📚</div>
+                    <div class="facility-name">Modern Library</div>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">🏢</div>
+                    <div class="facility-name">Business Center</div>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">🌐</div>
+                    <div class="facility-name">WiFi Campus</div>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">🍽️</div>
+                    <div class="facility-name">Cafeteria</div>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">🚌</div>
+                    <div class="facility-name">Transport</div>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">🎓</div>
+                    <div class="facility-name">Study Halls</div>
+                </div>
+                <div class="facility-item">
+                    <div class="facility-icon">⚽</div>
+                    <div class="facility-name">Sports Facilities</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section fade-in" id="admissions">
+            <h2 class="section-title">Admissions Information</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3 class="card-title">Entry Requirements</h3>
+                    <p class="card-content">Minimum BGCSE with Grade C or better in English and Mathematics. Specific programs may have additional requirements. Mature students and international applicants welcome.</p>
+                </div>
+                <div class="content-card">
+                    <h3 class="card-title">Application Process</h3>
+                    <p class="card-content">Submit completed application form with certified copies of certificates, ID, and passport photos. Applications accepted throughout the year with multiple intake periods.</p>
+                </div>
+                <div class="content-card">
+                    <h3 class="card-title">Financial Aid</h3>
+                    <p class="card-content">Various payment plans available including installment options. Government loan schemes accepted. Merit-based scholarships for outstanding students.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="contact-section fade-in" id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Gaborone Campus</h3>
+                    <div class="contact-item">📍 Plot 20485, Gaborone International Commerce Park</div>
+                    <div class="contact-item">📞 +267 390 7317</div>
+                    <div class="contact-item">✉️ info@baisago.ac.bw</div>
+                </div>
+                <div class="contact-info">
+                    <h3>Francistown Campus</h3>
+                    <div class="contact-item">📍 Plot 2781, Blue Jacket Street</div>
+                    <div class="contact-item">📞 +267 241 7137</div>
+                    <div class="contact-item">✉️ francistown@baisago.ac.bw</div>
+                </div>
+                <div class="contact-info">
+                    <h3>Office Hours</h3>
+                    <div class="contact-item">🕒 Monday - Friday: 8:00 AM - 5:00 PM</div>
+                    <div class="contact-item">🕒 Saturday: 8:00 AM - 1:00 PM</div>
+                    <div class="contact-item">🌐 www.baisago.ac.bw</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025 Baisago University - Excellence in Education | All Rights Reserved</p>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('nav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.1s';
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections for animation
+        document.querySelectorAll('.section, .stats-section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // CTA button interactions
+        document.querySelectorAll('.cta-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.textContent === 'Apply Now') {
+                    e.preventDefault();
+                    alert('Application portal opening soon! Please contact us directly for immediate assistance.');
+                }
+            });
+        });
+        
+        // Add interactive hover effects for cards
+        document.querySelectorAll('.content-card, .program-card, .stat-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Contact form simulation (for demonstration)
+        const contactItems = document.querySelectorAll('.contact-item');
+        contactItems.forEach(item => {
+            if (item.textContent.includes('info@') || item.textContent.includes('francistown@')) {
+                item.style.cursor = 'pointer';
+                item.addEventListener('click', () => {
+                    const email = item.textContent.split(' ')[1];
+                    window.location.href = `mailto:${email}`;
+                });
+            }
+            
+            if (item.textContent.includes('+267')) {
+                item.style.cursor = 'pointer';
+                item.addEventListener('click', () => {
+                    const phone = item.textContent.split(' ')[1];
+                    window.location.href = `tel:${phone}`;
+                });
+            }
+        });
+        
+        // Dynamic year update
+        document.querySelector('.footer p').innerHTML = 
+            `© ${new Date().getFullYear()} Baisago University - Excellence in Education | All Rights Reserved`;
+        
+        // Performance optimization: Lazy load images if any were added
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
+</body>
+</html>
