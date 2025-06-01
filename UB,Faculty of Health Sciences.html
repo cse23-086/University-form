@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty of Health Sciences - University of Botswana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1a5276 0%, #154360 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+        .program-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+        .program-code {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .program-summary {
+            color: #34495e;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .requirements {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .requirements h4 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        .requirement-item {
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.95rem;
+            padding-left: 15px;
+            position: relative;
+        }
+        .requirement-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-size: 1.2rem;
+        }
+        .points-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .health-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            opacity: 0.1;
+        }
+        .special-note {
+            background: #e8f4fc;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+        @media (max-width: 768px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Faculty of Health Sciences</h1>
+            <div class="subtitle">University of Botswana</div>
+        </div>
+
+        <div class="programs-grid">
+            <!-- Medicine -->
+            <div class="program-card">
+                <div class="health-icon">🩺</div>
+                <div class="program-code">MBBS</div>
+                <h3 class="program-title">Bachelor of Medicine and Bachelor of Surgery</h3>
+                <div class="points-badge">Minimum 40 Points</div>
+                <p class="program-summary">
+                    Comprehensive medical training program covering all aspects of human health, disease 
+                    management, and clinical practice. Includes hospital rotations and community health.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum B)</div>
+                    <div class="requirement-item">Mathematics (Minimum B)</div>
+                    <div class="requirement-item">Biology (Minimum A)</div>
+                    <div class="requirement-item">Chemistry (Minimum A)</div>
+                    <div class="requirement-item">Physics (Minimum B)</div>
+                    <div class="requirement-item">40 points in best 6 subjects</div>
+                </div>
+                <div class="special-note">
+                    Note: Additional entrance examination and interview required
+                </div>
+            </div>
+
+            <!-- Nursing -->
+            <div class="program-card">
+                <div class="health-icon">💉</div>
+                <div class="program-code">BNSc</div>
+                <h3 class="program-title">Bachelor of Nursing Science</h3>
+                <div class="points-badge">Minimum 36 Points</div>
+                <p class="program-summary">
+                    Professional nursing program combining theoretical knowledge with clinical practice. 
+                    Covers medical-surgical nursing, community health, and nursing leadership.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum C)</div>
+                    <div class="requirement-item">Biology (Minimum B)</div>
+                    <div class="requirement-item">Chemistry/Physics (Minimum C)</div>
+                    <div class="requirement-item">36 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Pharmacy -->
+            <div class="program-card">
+                <div class="health-icon">💊</div>
+                <div class="program-code">BPharm</div>
+                <h3 class="program-title">Bachelor of Pharmacy</h3>
+                <div class="points-badge">Minimum 38 Points</div>
+                <p class="program-summary">
+                    Study of drug development, pharmacology, and pharmaceutical care. Prepares students 
+                    for careers in clinical pharmacy, research, and pharmaceutical industry.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum B)</div>
+                    <div class="requirement-item">Chemistry (Minimum A)</div>
+                    <div class="requirement-item">Biology/Physics (Minimum B)</div>
+                    <div class="requirement-item">38 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Public Health -->
+            <div class="program-card">
+                <div class="health-icon">🌡️</div>
+                <div class="program-code">BPH</div>
+                <h3 class="program-title">Bachelor of Public Health</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Focuses on disease prevention, health promotion, and health policy. Covers epidemiology, 
+                    biostatistics, environmental health, and health systems management.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum C)</div>
+                    <div class="requirement-item">Biology (Minimum C)</div>
+                    <div class="requirement-item">Any science/social science subject</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Physiotherapy -->
+            <div class="program-card">
+                <div class="health-icon">🦵</div>
+                <div class="program-code">BSc PT</div>
+                <h3 class="program-title">Bachelor of Science in Physiotherapy</h3>
+                <div class="points-badge">Minimum 36 Points</div>
+                <p class="program-summary">
+                    Professional program in physical rehabilitation. Covers musculoskeletal, neurological, 
+                    and cardiopulmonary rehabilitation techniques.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum C)</div>
+                    <div class="requirement-item">Biology (Minimum B)</div>
+                    <div class="requirement-item">Physics/Chemistry (Minimum C)</div>
+                    <div class="requirement-item">36 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Medical Laboratory Sciences -->
+            <div class="program-card">
+                <div class="health-icon">🧪</div>
+                <div class="program-code">BSc MLS</div>
+                <h3 class="program-title">Bachelor of Science in Medical Laboratory Sciences</h3>
+                <div class="points-badge">Minimum 36 Points</div>
+                <p class="program-summary">
+                    Training in diagnostic laboratory techniques including hematology, microbiology, 
+                    clinical chemistry, and histopathology.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum C)</div>
+                    <div class="requirement-item">Chemistry (Minimum B)</div>
+                    <div class="requirement-item">Biology (Minimum B)</div>
+                    <div class="requirement-item">36 points in best 6 subjects</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
