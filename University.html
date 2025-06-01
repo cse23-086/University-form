@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,6 +105,9 @@
         .university-header {
             padding: 1.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .university-name {
@@ -188,15 +191,13 @@
             font-weight: 500;
             transition: all 0.3s ease;
             text-align: center;
+            text-decoration: none;
+            display: block;
         }
         
         .btn-primary {
             background-color: #FFD166;
             color: #333;
-            text-decoration: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         
         .btn-primary:hover {
@@ -342,8 +343,8 @@
         
         <div class="universities-container">
             <!-- BAC University Card -->
-            <div class="university-card bac">
-                <div class="university-header" onclick="window.location.href='bac.html'">
+            <div class="university-card bac" onclick="window.open('bac.html', '_blank')">
+                <div class="university-header">
                     <div>
                         <h2 class="university-name">BAC</h2>
                         <p class="university-location">Botswana Accountancy College</p>
@@ -351,7 +352,7 @@
                     <div class="university-logo">BAC</div>
                 </div>
                 
-                <div class="university-content" onclick="window.location.href='bac.html'">
+                <div class="university-content">
                     <div class="university-stats">
                         <div class="stat">
                             <div class="stat-label">Student Rating</div>
@@ -382,14 +383,14 @@
                     </div>
                     
                     <div class="university-actions">
-                        <a href="bac.html" class="action-btn btn-primary">View Details</a>
-                        <button class="action-btn btn-secondary">Compare</button>
+                        <a href="bac.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BAC')">Compare</button>
                     </div>
                 </div>
             </div>
             
             <!-- UB University Card -->
-            <div class="university-card ub">
+            <div class="university-card ub" onclick="window.open('ub.html', '_blank')">
                 <div class="university-header">
                     <div>
                         <h2 class="university-name">UB</h2>
@@ -429,14 +430,14 @@
                     </div>
                     
                     <div class="university-actions">
-                        <button class="action-btn btn-primary">View Details</button>
-                        <button class="action-btn btn-secondary">Compare</button>
+                        <a href="ub.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('UB')">Compare</button>
                     </div>
                 </div>
             </div>
             
             <!-- BUIST University Card -->
-            <div class="university-card buist">
+            <div class="university-card buist" onclick="window.open('buist.html', '_blank')">
                 <div class="university-header">
                     <div>
                         <h2 class="university-name">BUIST</h2>
@@ -476,14 +477,14 @@
                     </div>
                     
                     <div class="university-actions">
-                        <button class="action-btn btn-primary">View Details</button>
-                        <button class="action-btn btn-secondary">Compare</button>
+                        <a href="buist.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BUIST')">Compare</button>
                     </div>
                 </div>
             </div>
             
             <!-- BOTHO University Card -->
-            <div class="university-card botho">
+            <div class="university-card botho" onclick="window.open('botho.html', '_blank')">
                 <div class="university-header">
                     <div>
                         <h2 class="university-name">BOTHO</h2>
@@ -523,14 +524,14 @@
                     </div>
                     
                     <div class="university-actions">
-                        <button class="action-btn btn-primary">View Details</button>
-                        <button class="action-btn btn-secondary">Compare</button>
+                        <a href="botho.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BOTHO')">Compare</button>
                     </div>
                 </div>
             </div>
             
             <!-- BUAN University Card -->
-            <div class="university-card buan">
+            <div class="university-card buan" onclick="window.open('buan.html', '_blank')">
                 <div class="university-header">
                     <div>
                         <h2 class="university-name">BUAN</h2>
@@ -570,14 +571,14 @@
                     </div>
                     
                     <div class="university-actions">
-                        <button class="action-btn btn-primary">View Details</button>
-                        <button class="action-btn btn-secondary">Compare</button>
+                        <a href="buan.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BUAN')">Compare</button>
                     </div>
                 </div>
             </div>
             
             <!-- Boitekanelo College Card -->
-            <div class="university-card boitekanelo">
+            <div class="university-card boitekanelo" onclick="window.open('boitekanelo.html', '_blank')">
                 <div class="university-header">
                     <div>
                         <h2 class="university-name">Boitekanelo</h2>
@@ -617,14 +618,14 @@
                     </div>
                     
                     <div class="university-actions">
-                        <button class="action-btn btn-primary">View Details</button>
-                        <button class="action-btn btn-secondary">Compare</button>
+                        <a href="boitekanelo.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('Boitekanelo')">Compare</button>
                     </div>
                 </div>
             </div>
             
             <!-- IHS University Card -->
-            <div class="university-card ihs">
+            <div class="university-card ihs" onclick="window.locationn.href='ihs.html', '">
                 <div class="university-header">
                     <div>
                         <h2 class="university-name">IHS</h2>
@@ -664,14 +665,14 @@
                     </div>
                     
                     <div class="university-actions">
-                        <button class="action-btn btn-primary">View Details</button>
+                        <a href="ihs.html" class="action-btn btn-primary">View Details</a>
                         <button class="action-btn btn-secondary">Compare</button>
                     </div>
                 </div>
             </div>
             
             <!-- Baisago University Card -->
-            <div class="university-card baisago">
+            <div class="university-card baisago" onclick="window.open('baisago.html', '_blank')">
                 <div class="university-header">
                     <div>
                         <h2 class="university-name">Baisago</h2>
@@ -711,14 +712,14 @@
                     </div>
                     
                     <div class="university-actions">
-                        <button class="action-btn btn-primary">View Details</button>
-                        <button class="action-btn btn-secondary">Compare</button>
+                        <a href="baisago.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('Baisago')">Compare</button>
                     </div>
                 </div>
             </div>
             
             <!-- GULPS University Card -->
-            <div class="university-card gulps">
+            <div class="university-card gulps" onclick="window.open('gulps.html', '_blank')">
                 <div class="university-header">
                     <div>
                         <h2 class="university-name">GULPS</h2>
@@ -758,8 +759,8 @@
                     </div>
                     
                     <div class="university-actions">
-                        <button class="action-btn btn-primary">View Details</button>
-                        <button class="action-btn btn-secondary">Compare</button>
+                        <a href="gulps.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('GULPS')">Compare</button>
                     </div>
                 </div>
             </div>
@@ -767,57 +768,22 @@
     </main>
     
     <footer class="footer">
-        <p>© 2025 UniMatch - Helping students find their academic home</p>
+        <p> 2025 UniMatch - Helping students find their academic home since 2025</p>
     </footer>
     
     <script>
-        // Add interaction for university cards (excluding BAC)
-        document.querySelectorAll('.university-card:not(.bac)').forEach(card => {
-            card.addEventListener('click', function(e) {
-                // Prevent click if clicking on buttons
-                if (e.target.classList.contains('action-btn')) {
-                    return;
-                }
-                
-                const universityName = this.querySelector('.university-name').textContent;
-                alert(`You selected ${universityName}. In a complete application, this would take you to the detailed page for this university.`);
-            });
-        });
+        // Comparison functionality
+        let comparisonList = [];
         
-        // Button click handlers for non-BAC cards
-        document.querySelectorAll('.university-card:not(.bac) .btn-primary').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const universityName = this.closest('.university-card').querySelector('.university-name').textContent;
-                alert(`Viewing details for ${universityName}`);
-            });
-        });
-        
-        // Compare button handlers for all cards
-        document.querySelectorAll('.btn-secondary').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const universityName = this.closest('.university-card').querySelector('.university-name').textContent;
-                alert(`Added ${universityName} to comparison list`);
-            });
-        });
-        
-        // Check if viewing on mobile device
-        function checkMobile() {
-            if (window.innerWidth <= 768) {
-                document.querySelectorAll('.university-card').forEach(card => {
-                    card.style.height = 'auto';
-                });
+        function addToCompare(universityName) {
+            if (!comparisonList.includes(universityName)) {
+                comparisonList.push(universityName);
+                alert(`${universityName} added to comparison list. Total universities selected: ${comparisonList.length}`);
             } else {
-                document.querySelectorAll('.university-card').forEach(card => {
-                    card.style.height = '550px';
-                });
+                alert(`${universityName} is already in your comparison list.`);
             }
         }
         
-        // Run on page load and window resize
-        window.addEventListener('load', checkMobile);
-        window.addEventListener('resize', checkMobile);
-    </script>
-</body>
-</html>
+        // Check if viewing on mobile device
+        function checkMobile() {
+            if (window.innerWidth <=
