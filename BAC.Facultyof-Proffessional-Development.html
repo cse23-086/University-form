@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty of Professional Development & Executive Education - BAC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .program-title {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #9b59b6;
+            padding-bottom: 10px;
+        }
+
+        .program-summary {
+            color: #34495e;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .requirements {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .requirements h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .requirement-item::before {
+            content: "🎓";
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .points-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .professional-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            opacity: 0.2;
+        }
+
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .info-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #9b59b6;
+            padding-bottom: 10px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .info-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-link {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Faculty of Professional Development & Executive Education</h1>
+            <p>Botswana Accountancy College</p>
+        </div>
+
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="professional-icon">📚</div>
+                <h3 class="program-title">Bachelor of Business Administration (Top-Up for Diploma Holders)</h3>
+                <div class="points-badge">Diploma Required</div>
+                <p class="program-summary">
+                    Specialized program designed for diploma holders to upgrade to a degree in business-related fields. 
+                    Perfect for working professionals seeking career advancement through higher education.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">Relevant diploma with minimum GPA</div>
+                    <div class="requirement-item">Work experience preferred</div>
+                    <div class="requirement-item">English proficiency required</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>General Admission Information</h3>
+            <ul class="info-list">
+                <li><strong>Points Calculation:</strong> Based on Botswana General Certificate of Secondary Education (BGCSE) or equivalent</li>
+                <li><strong>Alternative Entry:</strong> Mature entry available for candidates 25+ years with relevant work experience</li>
+                <li><strong>English Proficiency:</strong> Required for all programs (minimum Grade C in English)</li>
+                <li><strong>Certificates & Diplomas:</strong> Various professional certificates and diplomas available</li>
+                <li><strong>Executive Education:</strong> Tailored programs for working professionals</li>
+                <li><strong>Flexible Learning:</strong> Part-time and distance learning options available</li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <h3>Additional Services</h3>
+            <ul class="info-list">
+                <li>Professional development workshops and seminars</li>
+                <li>Executive education programs for corporate clients</li>
+                <li>Customized training solutions for organizations</li>
+                <li>Continuing professional development (CPD) courses</li>
+                <li>Industry-specific certifications</li>
+                <li>Career guidance and counseling services</li>
+            </ul>
+        </div>
+
+        <div class="nav-links">
+            <a href="#" class="nav-link">Business & Leisure</a>
+            <a href="#" class="nav-link">ICT Faculty</a>
+            <a href="#" class="nav-link">Accounting & Finance</a>
+            <a href="#" class="nav-link">Back to Main</a>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive elements
+        document.querySelectorAll('.program-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
