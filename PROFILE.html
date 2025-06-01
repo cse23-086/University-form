@@ -500,190 +500,69 @@
     </footer>
     
     <script>
-        let currentStep = 1;
-        const totalSteps = 3;
-        
-        // Navigation elements
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const form = document.getElementById('education-form');
-        
-        // File upload functionality
-        const uploadArea = document.getElementById('upload-area');
-        const fileInput = document.getElementById('certificate-upload');
-        const previewContainer = document.getElementById('preview-container');
-        const previewImage = document.getElementById('preview-image');
-        
-        // Step navigation
-        function updateStep(step) {
-            // Update step indicators
-            document.querySelectorAll('.step').forEach((s, index) => {
-                if (index + 1 <= step) {
-                    s.classList.add('active');
-                } else {
-                    s.classList.remove('active');
-                }
-            });
-            
-            // Update form sections
-            document.querySelectorAll('.form-section').forEach((section, index) => {
-                if (index + 1 === step) {
-                    section.classList.add('active');
-                } else {
-                    section.classList.remove('active');
-                }
-            });
-            
-            // Update buttons
-            prevBtn.disabled = step === 1;
-            if (step === totalSteps) {
-                nextBtn.textContent = 'Submit';
-                nextBtn.type = 'submit';
-            } else {
-                nextBtn.textContent = 'Next';
-                nextBtn.type = 'button';
-            }
+    // Check authentication and handle profile submission
+    document.addEventListener('DOMContentLoaded', () => {
+        // Check if user is logged in
+        const currentUser = JSON.parse(localStorage.getItem('unimatch_current_user'));
+        if (!currentUser) {
+            window.location.href = 'index.html';
+            return;
         }
         
-        // Next button handler
-        nextBtn.addEventListener('click', (e) => {
-            if (nextBtn.type === 'submit') {
-                e.preventDefault();
-                handleFormSubmit();
-                return;
-            }
-            
-            if (validateCurrentStep()) {
-                currentStep++;
-                updateStep(currentStep);
-            }
-        });
-        
-        // Previous button handler
-        prevBtn.addEventListener('click', () => {
-            if (currentStep > 1) {
-                currentStep--;
-                updateStep(currentStep);
-            }
-        });
-        
-        // Validation function
-        function validateCurrentStep() {
-            const currentSection = document.getElementById(`section-${currentStep}`);
-            const requiredFields = currentSection.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.style.borderColor = '#ff6b6b';
-                    isValid = false;
-                } else {
-                    field.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                }
-            });
-            
-            if (currentStep === 2 && !fileInput.files.length) {
-                uploadArea.style.borderColor = '#ff6b6b';
-                isValid = false;
-            }
-            
-            if (!isValid) {
-                alert('Please fill in all required fields before proceeding.');
-            }
-            
-            return isValid;
+        // Pre-fill name if available
+        if (currentUser.name) {
+            document.getElementById('full-name').value = currentUser.name;
         }
         
-        // File upload handlers
-        uploadArea.addEventListener('click', () => {
-            fileInput.click();
-        });
-        
-        uploadArea.addEventListener('dragover', (e) => {
+        // Handle profile form submission
+        document.getElementById('education-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            uploadArea.classList.add('dragover');
-        });
-        
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
-        });
-        
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                handleFileUpload(files[0]);
-            }
-        });
-        
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                handleFileUpload(e.target.files[0]);
-            }
-        });
-        
-        function handleFileUpload(file) {
-            // Validate file
-            const maxSize = 10 * 1024 * 1024; // 10MB
-            const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
             
-            if (!allowedTypes.includes(file.type)) {
-                alert('Please upload a PNG, JPG, or PDF file.');
-                return;
+            // Collect form data
+            const formData = new FormData(this);
+            const educationProfile = {
+                fullName: formData.get('fullName'),
+                educationLevel: formData.get('educationLevel'),
+                certificate: formData.get('certificate')?.name || null,
+                subjects: []
+            };
+            
+            // Collect subjects
+            for (let i = 1; i <= 6; i++) {
+                educationProfile.subjects.push({
+                    subject: formData.get(`subject${i}`),
+                    grade: formData.get(`grade${i}`)
+                });
             }
             
-            if (file.size > maxSize) {
-                alert('File size must be less than 10MB.');
-                return;
-            }
-            
-            // Show preview for images
-            if (file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    previewImage.src = e.target.result;
-                    previewContainer.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            } else {
-                previewContainer.style.display = 'none';
-            }
-            
-            // Update upload area
-            uploadArea.style.borderColor = '#4CAF50';
-            uploadArea.querySelector('.upload-text').textContent = `File uploaded: ${file.name}`;
-        }
-        
-        // Form submission
-        function handleFormSubmit() {
-            if (validateCurrentStep()) {
-                const formData = new FormData(form);
-                
-                // Create summary object
-                const summary = {
-                    fullName: formData.get('fullName'),
-                    educationLevel: formData.get('educationLevel'),
-                    subjects: []
-                };
-                
-                for (let i = 1; i <= 6; i++) {
-                    summary.subjects.push({
-                        subject: formData.get(`subject${i}`),
-                        grade: formData.get(`grade${i}`)
-                    });
+            // Update user data
+            const users = JSON.parse(localStorage.getItem('unimatch_users') || []);
+            const updatedUsers = users.map(user => {
+                if (user.id === currentUser.id) {
+                    return {
+                        ...user,
+                        educationProfile,
+                        profileComplete: true
+                    };
                 }
-                
-                console.log('Form Data:', summary);
-                alert('Profile setup completed! Your information has been saved successfully.');
-                
-                // In a real application, you would send this data to your server
-                // fetch('/api/education-profile', {
-                //     method: 'POST',
-                //     body: formData
-                // });
-            }
-        }
-    </script>
-</body>
+                return user;
+            });
+            
+            // Save to localStorage
+            localStorage.setItem('unimatch_users', JSON.stringify(updatedUsers));
+            localStorage.setItem('unimatch_current_user', JSON.stringify({
+                ...currentUser,
+                educationProfile,
+                profileComplete: true
+            }));
+            
+            // Show success and redirect
+            showNotification('Profile completed successfully! Redirecting to dashboard...');
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 2000);
+        });
+    });
+</script>
+        </body>
 </html>
