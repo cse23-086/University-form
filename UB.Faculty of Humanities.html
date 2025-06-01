@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty of Humanities - University of Botswana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #5d4157 0%, #4b3844 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+        }
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+        .program-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #9b59b6;
+        }
+        .program-code {
+            display: inline-block;
+            background: #9b59b6;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .program-summary {
+            color: #34495e;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .requirements {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .requirements h4 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        .requirement-item {
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.95rem;
+            padding-left: 15px;
+            position: relative;
+        }
+        .requirement-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #9b59b6;
+            font-size: 1.2rem;
+        }
+        .points-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .humanities-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            opacity: 0.1;
+        }
+        @media (max-width: 768px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Faculty of Humanities</h1>
+            <div class="subtitle">University of Botswana</div>
+        </div>
+
+        <div class="programs-grid">
+            <!-- English -->
+            <div class="program-card">
+                <div class="humanities-icon">📖</div>
+                <div class="program-code">BA English</div>
+                <h3 class="program-title">Bachelor of Arts in English</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Study of literature, language, and critical theory. Covers British, American, African, 
+                    and postcolonial literatures, as well as linguistics and creative writing.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum B)</div>
+                    <div class="requirement-item">Literature in English (Minimum C)</div>
+                    <div class="requirement-item">Any two Arts/Social Science subjects</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- History -->
+            <div class="program-card">
+                <div class="humanities-icon">🏺</div>
+                <div class="program-code">BA History</div>
+                <h3 class="program-title">Bachelor of Arts in History</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Examination of historical processes with focus on African history, world civilizations, 
+                    and historiography. Develops research and analytical skills.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">History (Minimum C)</div>
+                    <div class="requirement-item">Any two Arts/Social Science subjects</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Media Studies -->
+            <div class="program-card">
+                <div class="humanities-icon">🎥</div>
+                <div class="program-code">BA Media Studies</div>
+                <h3 class="program-title">Bachelor of Arts in Media Studies</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Study of mass communication, journalism, digital media, and film. Combines theoretical 
+                    knowledge with practical media production skills.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Any three Arts/Social Science subjects</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Theology -->
+            <div class="program-card">
+                <div class="humanities-icon">✝️</div>
+                <div class="program-code">BA Theology</div>
+                <h3 class="program-title">Bachelor of Arts in Theology</h3>
+                <div class="points-badge">Minimum 30 Points</div>
+                <p class="program-summary">
+                    Study of religious traditions, biblical studies, ethics, and pastoral care. Prepares 
+                    students for religious leadership and academic study of religion.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Religious Education (Minimum C)</div>
+                    <div class="requirement-item">Any two Arts subjects</div>
+                    <div class="requirement-item">30 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Library & Information Studies -->
+            <div class="program-card">
+                <div class="humanities-icon">📚</div>
+                <div class="program-code">BLIS</div>
+                <h3 class="program-title">Bachelor of Library & Information Studies</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Professional program covering information organization, knowledge management, 
+                    digital libraries, and information technology applications.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Any three Arts/Social Science subjects</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Languages -->
+            <div class="program-card">
+                <div class="humanities-icon">🗣️</div>
+                <div class="program-code">BA Languages</div>
+                <h3 class="program-title">Bachelor of Arts in Languages</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Study of Setswana, French, or other languages. Includes linguistics, translation, 
+                    and literature components.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Setswana/French (Minimum C)</div>
+                    <div class="requirement-item">Any two Arts subjects</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
