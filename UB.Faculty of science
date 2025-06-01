@@ -43,7 +43,7 @@
 
         .programs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
             margin-bottom: 40px;
         }
@@ -58,6 +58,8 @@
             border: 1px solid rgba(255,255,255,0.2);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .program-card::before {
@@ -71,7 +73,7 @@
         }
 
         .program-card:hover {
-            transform: translateY(-15px) scale(1.02);
+            transform: translateY(-10px);
             box-shadow: 0 30px 60px rgba(0,0,0,0.25);
         }
 
@@ -100,6 +102,7 @@
             font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .requirements {
@@ -124,16 +127,17 @@
         }
 
         .requirement-item::before {
-            content: "🔬";
+            content: "•";
             margin-right: 10px;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            color: #27ae60;
         }
 
         .points-badge {
             display: inline-block;
             background: linear-gradient(45deg, #e74c3c, #c0392b);
             color: white;
-            padding: 10px 18px;
+            padding: 8px 16px;
             border-radius: 25px;
             font-weight: bold;
             font-size: 0.9rem;
@@ -153,7 +157,7 @@
             background: #e8f5e8;
             border-radius: 8px;
             padding: 12px;
-            margin-top: 10px;
+            margin: 15px 0;
         }
 
         .specializations h5 {
@@ -226,6 +230,7 @@
         </div>
 
         <div class="programs-grid">
+            <!-- Bachelor of Science -->
             <div class="program-card">
                 <div class="science-icon">🧪</div>
                 <div class="program-code">BSc</div>
@@ -246,4 +251,118 @@
                 </div>
                 <div class="requirements">
                     <h4>Entry Requirements:</h4>
-                    <div class="requirement-item
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum B)</div>
+                    <div class="requirement-item">Two Science subjects (Minimum C in each)</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Environmental Science -->
+            <div class="program-card">
+                <div class="science-icon">🌍</div>
+                <div class="program-code">BEnvSc</div>
+                <h3 class="program-title">Bachelor of Environmental Science</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Study of ecological systems, conservation, climate change, and sustainable development. 
+                    Combines fieldwork with laboratory analysis.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum C)</div>
+                    <div class="requirement-item">Biology (Minimum C)</div>
+                    <div class="requirement-item">Geography/Physics/Chemistry (Minimum C)</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Geology -->
+            <div class="program-card">
+                <div class="science-icon">⛏️</div>
+                <div class="program-code">BSc Geology</div>
+                <h3 class="program-title">Bachelor of Science in Geology</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Study of Earth's materials, structures, and processes. Includes mineral exploration, 
+                    hydrogeology, and geological mapping.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum C)</div>
+                    <div class="requirement-item">Physics (Minimum C)</div>
+                    <div class="requirement-item">Chemistry (Minimum C)</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Computer Science -->
+            <div class="program-card">
+                <div class="science-icon">💻</div>
+                <div class="program-code">BSc CS</div>
+                <h3 class="program-title">Bachelor of Science in Computer Science</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Covers programming, algorithms, artificial intelligence, and software engineering. 
+                    Prepares students for tech industry careers.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum B)</div>
+                    <div class="requirement-item">Physics/Computer Studies (Minimum C)</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Mathematics -->
+            <div class="program-card">
+                <div class="science-icon">🧮</div>
+                <div class="program-code">BSc Math</div>
+                <h3 class="program-title">Bachelor of Science in Mathematics</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Advanced study of pure and applied mathematics. Includes statistics, 
+                    mathematical modeling, and computational mathematics.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum A)</div>
+                    <div class="requirement-item">Additional Mathematics (Minimum C)</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Physics -->
+            <div class="program-card">
+                <div class="science-icon">⚛️</div>
+                <div class="program-code">BSc Physics</div>
+                <h3 class="program-title">Bachelor of Science in Physics</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Study of matter, energy, and their interactions. Includes theoretical physics, 
+                    electronics, and modern experimental techniques.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum B)</div>
+                    <div class="requirement-item">Physics (Minimum B)</div>
+                    <div class="requirement-item">Chemistry (Minimum C)</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="#" class="nav-link">Faculty Homepage</a>
+            <a href="#" class="nav-link">Admissions Portal</a>
+            <a href="#" class="nav-link">Contact Department</a>
+            <a href="#" class="nav-link">View All Programs</a>
+        </div>
+    </div>
+</body>
+</html>
