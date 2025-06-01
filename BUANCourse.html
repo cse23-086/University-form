@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undergraduate Programs - BUAN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0a5c36 0%, #1e8449 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #27ae60, #2ecc71, #58d68d);
+        }
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+        .program-title {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .program-degree {
+            color: #27ae60;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 5px 12px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .faculty-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #16a085, #27ae60);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .program-description {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .requirements-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 15px;
+        }
+        .requirements-title {
+            color: #2c3e50;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .requirements-title::before {
+            content: "📋";
+            margin-right: 8px;
+        }
+        .requirement-item {
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.9rem;
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.4;
+        }
+        .requirement-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .special-note {
+            background: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid #27ae60;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            color: #2c3e50;
+            font-style: italic;
+        }
+        .general-info {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        .general-info h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 10px;
+        }
+        .general-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .general-item {
+            background: rgba(39, 174, 96, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #27ae60;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 8px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .header .subtitle {
+                font-size: 1rem;
+            }
+            .programs-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .program-card {
+                padding: 20px;
+            }
+            .program-title {
+                font-size: 1.2rem;
+            }
+            .faculty-tag {
+                position: static;
+                margin-bottom: 10px;
+                margin-top: 5px;
+            }
+            .general-info {
+                padding: 20px;
+            }
+            .general-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .program-card {
+                padding: 15px;
+            }
+            .requirements-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Undergraduate Programs</h1>
+            <div class="subtitle">Botswana University of Agriculture and Natural Resources (BUAN)</div>
+        </div>
+
+        <div class="programs-grid">
+            <!-- Agriculture -->
+            <div class="program-card">
+                <div class="faculty-tag">Agriculture</div>
+                <h3 class="program-title">Bachelor of Science in Agriculture</h3>
+                <div class="program-degree">BSc Agriculture</div>
+                <div class="program-description">
+                    Comprehensive program covering crop production, soil science, animal science, and agribusiness. Develops practical skills for modern agricultural practices.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 34 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics & Science (Biology/Chemistry)</div>
+                </div>
+            </div>
+
+            <!-- Agricultural Education -->
+            <div class="program-card">
+                <div class="faculty-tag">Agriculture</div>
+                <h3 class="program-title">Bachelor of Science in Agricultural Education</h3>
+                <div class="program-degree">BSc Agricultural Education</div>
+                <div class="program-description">
+                    Specialized program that trains agriculture teachers with comprehensive science knowledge and modern pedagogy methods for educational excellence.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 34 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics & Science (Biology/Chemistry)</div>
+                </div>
+            </div>
+
+            <!-- Agribusiness Management -->
+            <div class="program-card">
+                <div class="faculty-tag">Agriculture</div>
+                <h3 class="program-title">Bachelor of Science in Agribusiness Management</h3>
+                <div class="program-degree">BSc Agribusiness</div>
+                <div class="program-description">
+                    Business-focused program emphasizing agricultural economics, marketing, and entrepreneurship. Perfect for agricultural business leadership roles.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 34 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics & Science (Biology/Chemistry)</div>
+                </div>
+            </div>
+
+            <!-- Environmental Science -->
+            <div class="program-card">
+                <div class="faculty-tag">Natural Resources</div>
+                <h3 class="program-title">Bachelor of Science in Environmental Science</h3>
+                <div class="program-degree">BSc Environmental Science</div>
+                <div class="program-description">
+                    Interdisciplinary program studying conservation, climate change, and sustainability. Addresses critical environmental challenges facing our planet.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 34 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics & Biology (Minimum C)</div>
+                </div>
+            </div>
+
+            <!-- Wildlife & Range Management -->
+            <div class="program-card">
+                <div class="faculty-tag">Natural Resources</div>
+                <h3 class="program-title">Bachelor of Science in Wildlife & Range Management</h3>
+                <div class="program-degree">BSc Wildlife Management</div>
+                <div class="program-description">
+                    Specialized program focusing on biodiversity, ecology, and wildlife conservation. Essential for sustainable ecosystem management.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 34 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics & Biology (Minimum C)</div>
+                </div>
+            </div>
+
+            <!-- Forestry & Rangeland Resources -->
+            <div class="program-card">
+                <div class="faculty-tag">Natural Resources</div>
+                <h3 class="program-title">Bachelor of Science in Forestry & Rangeland Resources</h3>
+                <div class="program-degree">BSc Forestry</div>
+                <div class="program-description">
+                    Comprehensive program covering forest management and sustainable land use practices. Critical for environmental conservation efforts.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 34 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics & Biology (Minimum C)</div>
+                </div>
+            </div>
+
+            <!-- Animal Science -->
+            <div class="program-card">
+                <div class="faculty-tag">Animal Science & Veterinary</div>
+                <h3 class="program-title">Bachelor of Science in Animal Science</h3>
+                <div class="program-degree">BSc Animal Science</div>
+                <div class="program-description">
+                    Specialized program focusing on livestock production, nutrition, and health. Essential for sustainable animal agriculture development.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 34 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics, Biology, Chemistry</div>
+                </div>
+            </div>
+
+            <!-- Veterinary Medicine -->
+            <div class="program-card">
+                <div class="faculty-tag">Animal Science & Veterinary</div>
+                <h3 class="program-title">Bachelor of Veterinary Medicine</h3>
+                <div class="program-degree">BVM</div>
+                <div class="program-description">
+                    Prestigious 5-year professional degree program for aspiring veterinarians. Comprehensive medical training for animal healthcare professionals.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 38 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics, Biology, Chemistry (Minimum B)</div>
+                </div>
+                <div class="special-note">
+                    ⭐ Highly competitive program with stringent requirements
+                </div>
+            </div>
+
+            <!-- Agricultural Engineering -->
+            <div class="program-card">
+                <div class="faculty-tag">Engineering & Technology</div>
+                <h3 class="program-title">Bachelor of Engineering in Agricultural Engineering</h3>
+                <div class="program-degree">BEng Agricultural Engineering</div>
+                <div class="program-description">
+                    Innovative program combining engineering principles with farm machinery and irrigation systems. Perfect for agricultural technology advancement.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 36 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">Mathematics (Minimum B) & Physics/Chemistry</div>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                </div>
+                <div class="special-note">
+                    🔧 Engineering program with higher math requirements
+                </div>
+            </div>
+
+            <!-- Irrigation & Water Resources -->
+            <div class="program-card">
+                <div class="faculty-tag">Engineering & Technology</div>
+                <h3 class="program-title">Bachelor of Science in Irrigation & Water Resources</h3>
+                <div class="program-degree">BSc Irrigation Engineering</div>
+                <div class="program-description">
+                    Critical program focusing on water management and hydrology. Essential for addressing water scarcity and sustainable irrigation systems.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 34 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">Mathematics (Minimum B) & Physics/Chemistry</div>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="general-info">
+            <h3>General Admission Information</h3>
+            <div class="general-grid">
+                <div class="general-item">
+                    <strong>Standard Entry:</strong> Minimum 34 points in best six BGCSE subjects (varies by program - some require up to 38 points)
+                </div>
+                <div class="general-item">
+                    <strong>Language Requirement:</strong> English Language proficiency with minimum grade C for all programs
+                </div>
+                <div class="general-item">
+                    <strong>Science Prerequisites:</strong> Mathematics & Science subjects required for most programs with specific grade requirements
+                </div>
+                <div class="general-item">
+                    <strong>Competitive Programs:</strong> Higher points required for BVM (38 points) and Engineering programs (36 points)
+                </div>
+                <div class="general-item">
+                    <strong>Advanced Entry:</strong> Diploma holders may apply for advanced entry with credit transfer opportunities
+                </div>
+                <div class="general-item">
+                    <strong>Specialization Focus:</strong> All programs emphasize practical application in agriculture, natural resources, and related fields
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
