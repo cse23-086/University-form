@@ -26,12 +26,14 @@
             padding: 1.5rem 3rem;
             background-color: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
+            position: relative;
         }
         
         .logo {
             font-size: 2rem;
             font-weight: bold;
             color: white;
+            z-index: 10;
         }
         
         .logo span {
@@ -48,10 +50,25 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            padding: 0.5rem;
         }
         
         .nav a:hover {
             color: #FFD166;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px;
+            transition: all 0.3s ease;
         }
         
         .main {
@@ -72,6 +89,7 @@
             font-size: 3rem;
             color: white;
             margin-bottom: 1rem;
+            line-height: 1.2;
         }
         
         .hero p {
@@ -79,12 +97,14 @@
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 2rem;
             max-width: 600px;
+            line-height: 1.5;
         }
         
         .features {
             display: flex;
             gap: 1.5rem;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
         
         .feature {
@@ -95,6 +115,10 @@
             width: 180px;
             text-align: center;
             transition: transform 0.3s ease;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .feature:hover {
@@ -116,6 +140,7 @@
             margin: 2rem;
             max-width: 400px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            align-self: center;
         }
         
         .tabs {
@@ -130,6 +155,7 @@
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1rem;
         }
         
         .tab.active {
@@ -173,6 +199,7 @@
             color: white;
             outline: none;
             transition: all 0.3s ease;
+            font-size: 1rem;
         }
         
         .input-group input:focus {
@@ -202,7 +229,7 @@
         
         .submit-btn {
             width: 100%;
-            padding: 0.8rem;
+            padding: 1rem;
             background-color: #FFD166;
             border: none;
             border-radius: 5px;
@@ -210,6 +237,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1rem;
         }
         
         .submit-btn:hover {
@@ -254,8 +282,8 @@
         }
         
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.1);
             display: flex;
@@ -264,6 +292,7 @@
             color: white;
             font-size: 1.2rem;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .social-icon:hover {
@@ -277,18 +306,28 @@
             color: rgba(255, 255, 255, 0.7);
             background-color: rgba(0, 0, 0, 0.1);
             margin-top: auto;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
         }
         
         @media (max-width: 1024px) {
             .main {
                 flex-direction: column;
                 align-items: center;
+                padding: 1rem;
             }
             
             .hero {
                 padding-left: 0;
                 text-align: center;
                 margin-bottom: 2rem;
+                align-items: center;
             }
             
             .hero p {
@@ -298,21 +337,148 @@
             .features {
                 justify-content: center;
             }
+            
+            .auth-container {
+                margin: 1rem;
+                width: 100%;
+                max-width: 500px;
+            }
         }
         
         @media (max-width: 768px) {
             .header {
-                padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
+                padding: 1rem 1.5rem;
+            }
+            
+            .hamburger {
+                display: block;
             }
             
             .nav {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 70%;
+                background-color: rgba(106, 17, 203, 0.95);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in-out;
+                z-index: 5;
+            }
+            
+            .nav.active {
+                transform: translateX(0);
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .feature {
+                width: 160px;
+                min-height: 140px;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
                 gap: 1rem;
             }
             
             .feature {
-                width: 150px;
+                width: 140px;
+                min-height: 130px;
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .feature-icon {
+                font-size: 1.8rem;
+            }
+            
+            .tab {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .input-group input {
+                padding: 0.7rem;
+            }
+            
+            .submit-btn {
+                padding: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .features {
+                justify-content: space-around;
+            }
+            
+            .feature {
+                width: 45%;
+                min-height: 120px;
+            }
+            
+            .auth-container {
+                margin: 0.5rem;
+            }
+            
+            .form-container {
+                padding: 1.2rem;
+            }
+            
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            
+            .feature {
+                width: 100%;
+                min-height: auto;
+            }
+            
+            .tab {
+                padding: 0.7rem;
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -327,6 +493,11 @@
             <a href="#">Resources</a>
             <a href="#">About Us</a>
         </nav>
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </header>
     
     <main class="main">
@@ -337,7 +508,7 @@
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">🔍</div>
-                    <p>Search Top 3 Universities in Botswana </p>
+                    <p>Search Top 3 Universities in Botswana</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">📊</div>
@@ -350,8 +521,7 @@
             </div>
             
             <div class="cta-text">
-                <p>Join thousands of students finding their academic home with UniMatch!
-                    Your fututre is in your hands! </p>
+                <p>Join thousands of students finding their academic home with UniMatch! Your future is in your hands!</p>
             </div>
         </section>
         
@@ -454,6 +624,31 @@
         document.querySelectorAll('.submit-btn').forEach(button => {
             button.addEventListener('click', () => {
                 alert('This is a demo. In a real application, this would process your information.');
+            });
+        });
+        
+        // Mobile navigation toggle
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('.nav');
+        
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            
+            // Animate hamburger to X
+            hamburger.children[0].classList.toggle('rotate-45');
+            hamburger.children[1].classList.toggle('opacity-0');
+            hamburger.children[2].classList.toggle('-rotate-45');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.children[0].classList.remove('rotate-45');
+                hamburger.children[1].classList.remove('opacity-0');
+                hamburger.children[2].classList.remove('-rotate-45');
             });
         });
     </script>
