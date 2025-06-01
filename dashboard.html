@@ -46,7 +46,7 @@
         // Check authentication
         const currentUser = JSON.parse(localStorage.getItem('unimatch_current_user'));
         if (!currentUser) {
-            window.location.href = 'main.html';
+            window.location.href = 'index.html';
         } else {
             document.getElementById('welcome-message').textContent = 
                 `Welcome, ${currentUser.name || 'Student'}!`;
