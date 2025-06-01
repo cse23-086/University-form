@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty of Social Sciences - University of Botswana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #3a4a6b 0%, #2c3e50 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+        .program-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+        .program-code {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .program-summary {
+            color: #34495e;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .requirements {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .requirements h4 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        .requirement-item {
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.95rem;
+            padding-left: 15px;
+            position: relative;
+        }
+        .requirement-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-size: 1.2rem;
+        }
+        .points-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .social-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            opacity: 0.1;
+        }
+        @media (max-width: 768px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Faculty of Social Sciences</h1>
+            <div class="subtitle">University of Botswana</div>
+        </div>
+
+        <div class="programs-grid">
+            <!-- Social Work -->
+            <div class="program-card">
+                <div class="social-icon">👥</div>
+                <div class="program-code">BSW</div>
+                <h3 class="program-title">Bachelor of Social Work</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Prepares students for professional social work practice with focus on social justice, 
+                    human rights, and community development. Includes fieldwork placements.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Social Studies/History (Minimum C)</div>
+                    <div class="requirement-item">Any two Arts/Social Science subjects</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Economics -->
+            <div class="program-card">
+                <div class="social-icon">📈</div>
+                <div class="program-code">BSc Econ</div>
+                <h3 class="program-title">Bachelor of Science in Economics</h3>
+                <div class="points-badge">Minimum 36 Points</div>
+                <p class="program-summary">
+                    Study of economic theory, policy analysis, and quantitative methods. Covers microeconomics, 
+                    macroeconomics, and development economics.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum B)</div>
+                    <div class="requirement-item">Social Studies/Commerce (Minimum C)</div>
+                    <div class="requirement-item">36 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Political Science -->
+            <div class="program-card">
+                <div class="social-icon">🏛️</div>
+                <div class="program-code">BA PolSci</div>
+                <h3 class="program-title">Bachelor of Arts in Political Science</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Examines political systems, governance, international relations, and public policy. 
+                    Develops critical analysis of political processes.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">History/Social Studies (Minimum C)</div>
+                    <div class="requirement-item">Any two Arts/Social Science subjects</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Sociology -->
+            <div class="program-card">
+                <div class="social-icon">🏘️</div>
+                <div class="program-code">BA Soc</div>
+                <h3 class="program-title">Bachelor of Arts in Sociology</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Study of social behavior, institutions, and relationships. Covers topics like social 
+                    stratification, gender studies, and urban sociology.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Social Studies/History (Minimum C)</div>
+                    <div class="requirement-item">Any two Arts/Social Science subjects</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Public Administration -->
+            <div class="program-card">
+                <div class="social-icon">📋</div>
+                <div class="program-code">BPA</div>
+                <h3 class="program-title">Bachelor of Public Administration</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Focuses on government operations, policy implementation, and public sector management. 
+                    Prepares for careers in civil service.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Social Studies/History (Minimum C)</div>
+                    <div class="requirement-item">Any two Arts/Social Science subjects</div>
+                    <div class="requirement-item">34 points in best 6 subjects</div>
+                </div>
+            </div>
+
+            <!-- Psychology -->
+            <div class="program-card">
+                <div class="social-icon">🧠</div>
+                <div class="program-code">BSc Psych</div>
+                <h3 class="program-title">Bachelor of Science in Psychology</h3>
+                <div class="points-badge">Minimum 36 Points</div>
+                <p class="program-summary">
+                    Scientific study of human behavior and mental processes. Covers cognitive, developmental, 
+                    and clinical psychology.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">English Language (Minimum C)</div>
+                    <div class="requirement-item">Mathematics (Minimum C)</div>
+                    <div class="requirement-item">Biology/Social Studies (Minimum C)</div>
+                    <div class="requirement-item">36 points in best 6 subjects</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
