@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diploma Programs - Boitekanelo College</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: 800;
+            background: linear-gradient(45deg, #00d4ff, #090979, #ff006e, #fb8500);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 400% 400%;
+            animation: gradientPulse 4s ease infinite;
+        }
+        
+        .header .subtitle {
+            font-size: 1.6rem;
+            opacity: 0.9;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+        
+        .header .tagline {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            font-style: italic;
+            color: #a0a9c1;
+        }
+        
+        @keyframes gradientPulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .faculty-section {
+            margin-bottom: 50px;
+        }
+        
+        .faculty-header {
+            background: linear-gradient(135deg, #00d4ff, #090979);
+            color: white;
+            padding: 25px 35px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .faculty-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .faculty-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .faculty-header .faculty-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .faculty-header.business {
+            background: linear-gradient(135deg, #ff006e, #8338ec);
+            box-shadow: 0 15px 40px rgba(255, 0, 110, 0.3);
+        }
+        
+        .faculty-header.social {
+            background: linear-gradient(135deg, #fb8500, #ffb700);
+            box-shadow: 0 15px 40px rgba(251, 133, 0, 0.3);
+        }
+        
+        .faculty-header.allied {
+            background: linear-gradient(135deg, #06ffa5, #00cc88);
+            box-shadow: 0 15px 40px rgba(6, 255, 165, 0.3);
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 25px;
+        }
+        
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(45deg, #00d4ff, #090979, #ff006e, #fb8500, #06ffa5);
+            background-size: 400% 400%;
+            animation: gradientFlow 5s ease infinite;
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .program-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        }
+        
+        .program-title {
+            color: #1a1a2e;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .program-summary {
+            color: #4a5568;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            background: #f7fafc;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 4px solid #00d4ff;
+        }
+        
+        .requirements-container {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .points-badge {
+            background: linear-gradient(135deg, #00d4ff, #0891b2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .subjects-section {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .subjects-title {
+            color: #1a1a2e;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .subjects-title::before {
+            content: "📚";
+            font-size: 1.4rem;
+        }
+        
+        .subject-item {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border-left: 4px solid #06ffa5;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
+        .subject-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            border-left-color: #ff006e;
+        }
+        
+        .subject-item strong {
+            color: #1a1a2e;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 45px;
+            margin-top: 50px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .info-section h3 {
+            color: #1a1a2e;
+            margin-bottom: 35px;
+            font-size: 2rem;
+            text-align: center;
+            padding-bottom: 25px;
+            position: relative;
+            font-weight: 800;
+        }
+        
+        .info-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 5px;
+            background: linear-gradient(45deg, #00d4ff, #ff006e);
+            border-radius: 3px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .info-item {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-top: 5px solid #00d4ff;
+            transition: all 0.4s ease;
+        }
+        
+        .info-item:nth-child(2) { border-top-color: #ff006e; }
+        .info-item:nth-child(3) { border-top-color: #fb8500; }
+        .info-item:nth-child(4) { border-top-color: #06ffa5; }
+        
+        .info-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .info-item h4 {
+            color: #1a1a2e;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .info-item p {
+            color: #4a5568;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+            
+            .programs-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .program-card {
+                padding: 25px;
+            }
+            
+            .faculty-header h2 {
+                font-size: 1.6rem;
+            }
+            
+            .info-section {
+                padding: 30px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .program-card {
+                padding: 20px;
+            }
+            
+            .program-title {
+                font-size: 1.4rem;
+            }
+            
+            .info-section {
+                padding: 25px;
+            }
+            
+            .info-section h3 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Boitekanelo College</h1>
+            <div class="subtitle">Professional Diploma Programs</div>
+            <div class="tagline">Empowering Excellence Through Quality Education</div>
+        </div>
+
+        <!-- Faculty of Health Sciences -->
+        <div class="faculty-section">
+            <div class="faculty-header">
+                <h2>Faculty of Health Sciences</h2>
+                <div class="faculty-subtitle">Building Healthcare Professionals for Tomorrow</div>
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Clinical Medicine</h3>
+                    <p class="program-summary">Trains students to become Clinical Officers capable of diagnosing, treating, and managing common medical conditions in healthcare settings.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">34 Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Biology:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Chemistry:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Mathematics/Physics:</strong> Grade C or better</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Health Education & Promotion</h3>
+                    <p class="program-summary">Focuses on community health education, disease prevention strategies, and health advocacy programs for public wellness.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">30+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Biology:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Science/Social Science:</strong> Any relevant subject</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Pharmacy Technician</h3>
+                    <p class="program-summary">Covers pharmaceutical care, drug dispensing, inventory management, and pharmacy operations in healthcare facilities.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">34+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Biology:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Chemistry:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Mathematics:</strong> Grade C or better</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Faculty of Business & Management -->
+        <div class="faculty-section">
+            <div class="faculty-header business">
+                <h2>Faculty of Business & Management</h2>
+                <div class="faculty-subtitle">Developing Future Business Leaders and Entrepreneurs</div>
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Business Administration</h3>
+                    <p class="program-summary">Comprehensive program covering management principles, accounting fundamentals, marketing strategies, and entrepreneurship development.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">28+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Mathematics:</strong> Grade C or better</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Human Resource Management</h3>
+                    <p class="program-summary">Focuses on recruitment processes, employee training and development, labor law compliance, and organizational behavior management.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">26+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Social Science/Commerce:</strong> Any relevant subject</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Accounting & Finance</h3>
+                    <p class="program-summary">Teaches financial accounting principles, taxation systems, auditing procedures, and corporate finance management.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">30+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Mathematics:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Accounting/Business Studies:</strong> Preferred background</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Faculty of Social & Development Studies -->
+        <div class="faculty-section">
+            <div class="faculty-header social">
+                <h2>Faculty of Social & Development Studies</h2>
+                <div class="faculty-subtitle">Creating Change Agents for Community Development</div>
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Social Work</h3>
+                    <p class="program-summary">Trains students in professional counseling techniques, community development strategies, and social welfare policy implementation.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">26+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Social Science:</strong> History, Sociology, or related subject</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Public Administration</h3>
+                    <p class="program-summary">Covers governance principles, policy-making processes, and public sector management for effective government service delivery.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">28+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Social Science/Commerce:</strong> Any relevant subject</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Community Development</h3>
+                    <p class="program-summary">Focuses on grassroots development project management, NGO operations, and community advocacy for sustainable development.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">24+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Social Science:</strong> Any relevant subject</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Faculty of Allied Health Sciences -->
+        <div class="faculty-section">
+            <div class="faculty-header allied">
+                <h2>Faculty of Allied Health Sciences</h2>
+                <div class="faculty-subtitle">Supporting Healthcare Through Specialized Services</div>
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Medical Laboratory Science</h3>
+                    <p class="program-summary">Comprehensive training in diagnostic testing procedures, laboratory techniques, and pathology analysis for medical diagnostics.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">34+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Biology:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Chemistry:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Mathematics:</strong> Grade C or better</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Physiotherapy</h3>
+                    <p class="program-summary">Covers rehabilitation techniques, musculoskeletal therapy, and comprehensive patient care for physical recovery and wellness.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">32+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Biology:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Science:</strong> Any additional science subject</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <h3 class="program-title">Diploma in Health Records & Information Management</h3>
+                    <p class="program-summary">Focuses on medical data systems, patient record management, health informatics, and healthcare information technology.</p>
+                    
+                    <div class="requirements-container">
+                        <div class="points-badge">26+ Points Required (BGCSE)</div>
+                        
+                        <div class="subjects-section">
+                            <h4 class="subjects-title">Subject Requirements</h4>
+                            <div class="subject-item"><strong>English:</strong> Grade C or better</div>
+                            <div class="subject-item"><strong>Mathematics/IT:</strong> Grade C or better</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Why Choose Boitekanelo College?</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>Quality Education</h4>
+                    <p>Our diploma programs are designed to meet industry standards and provide practical skills that employers value in today's competitive job market.</p>
+                </div>
+                <div class="info-item">
+                    <h4>Experienced Faculty</h4>
+                    <p>Learn from qualified instructors with real-world experience who are committed to your academic and professional success.</p>
+                </div>
+                <div class="info-item">
+                    <h4>Practical Training</h4>
+                    <p>All programs include hands-on training, internships, and practical placements to ensure you graduate job-ready with relevant experience.</p>
+                </div>
+                <div class="info-item">
+                    <h4>Career Support</h4>
+                    <p>Our career services team provides ongoing support including job placement assistance, career counseling, and professional development opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
