@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UniMatch Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .welcome {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome" id="welcome-message">Welcome!</div>
+    <p>Your university matching dashboard will appear here.</p>
+
+    <script>
+        const currentUser = JSON.parse(localStorage.getItem('unimatch_current_user'));
+        if (currentUser) {
+            document.getElementById('welcome-message').textContent = `Welcome, ${currentUser.name}!`;
+        } else {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
