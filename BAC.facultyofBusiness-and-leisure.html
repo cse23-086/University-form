@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty of Business and Leisure - BAC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .program-title {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .program-summary {
+            color: #34495e;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .requirements {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .requirements h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .requirement-item::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .points-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-link {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Faculty of Business and Leisure</h1>
+            <p>Botswana Accountancy College</p>
+        </div>
+
+        <div class="programs-grid">
+            <div class="program-card">
+                <h3 class="program-title">Bachelor of Business Administration (BBA)</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Comprehensive business program covering core areas such as management, marketing, finance, and entrepreneurship. 
+                    Designed to develop well-rounded business professionals ready for leadership roles.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">34 points minimum in best six subjects</div>
+                    <div class="requirement-item">English (at least Grade C)</div>
+                    <div class="requirement-item">Mathematics (at least Grade D)</div>
+                    <div class="requirement-item">Any other business-related subjects</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <h3 class="program-title">BBA in Banking & Finance</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Specialized program focusing on banking operations, financial markets, risk management, and investment strategies. 
+                    Perfect for careers in banking and financial services.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">34 points in best six subjects</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Mathematics (Grade C)</div>
+                    <div class="requirement-item">Preferably Commerce/Accounting</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <h3 class="program-title">BBA in Marketing</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Dynamic program covering consumer behavior, digital marketing, branding, and sales strategies. 
+                    Ideal for creative minds interested in modern marketing techniques.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">34 points in best six subjects</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Any two business-related subjects</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <h3 class="program-title">BBA in Human Resource Management</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Comprehensive program focusing on recruitment, training, labor laws, and organizational behavior. 
+                    Essential for careers in human resources and people management.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">34 points in best six subjects</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Preferably a social science subject</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <h3 class="program-title">Bachelor of Tourism & Hospitality Management</h3>
+                <div class="points-badge">Minimum 30 Points</div>
+                <p class="program-summary">
+                    Exciting program covering tourism operations, hotel management, event planning, and customer service. 
+                    Perfect for those passionate about the hospitality industry.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">30 points in best six subjects</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Preferably Geography/History</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="#" class="nav-link">ICT Faculty</a>
+            <a href="#" class="nav-link">Accounting & Finance</a>
+            <a href="#" class="nav-link">Professional Development</a>
+            <a href="#" class="nav-link">Back to Main</a>
+        </div>
+    </div>
+</body>
+</html>
