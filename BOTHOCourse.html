@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undergraduate Programs - Botho University</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #2c1810 0%, #3d2817 50%, #5a3d2a 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            padding: 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff8c42, #ffd662, #42a5f5, #66bb6a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        .header .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+        
+        .header .full-name {
+            font-size: 1rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #ff8c42, #ffd662, #42a5f5, #66bb6a, #ab47bc);
+            background-size: 300% 300%;
+            animation: gradientFlow 4s ease infinite;
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+        
+        .faculty-badge {
+            background: linear-gradient(135deg, #ff8c42, #ff6f00);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
+        }
+        
+        .faculty-badge.computing {
+            background: linear-gradient(135deg, #42a5f5, #1976d2);
+            box-shadow: 0 4px 15px rgba(66, 165, 245, 0.3);
+        }
+        
+        .faculty-badge.health {
+            background: linear-gradient(135deg, #66bb6a, #388e3c);
+            box-shadow: 0 4px 15px rgba(102, 187, 106, 0.3);
+        }
+        
+        .faculty-badge.hospitality {
+            background: linear-gradient(135deg, #ab47bc, #7b1fa2);
+            box-shadow: 0 4px 15px rgba(171, 71, 188, 0.3);
+        }
+        
+        .program-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .program-description {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .program-details {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .duration-badge {
+            background: linear-gradient(135deg, #ffd662, #ff8f00);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .modules-section {
+            background: #e8f5e8;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .modules-title {
+            color: #2c3e50;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .modules-title::before {
+            content: "📚";
+            font-size: 1.1rem;
+        }
+        
+        .module-item {
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.9rem;
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.4;
+        }
+        
+        .module-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #66bb6a;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .requirements-section {
+            background: #f1f3f4;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        
+        .requirements-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .requirements-title::before {
+            content: "📋";
+            font-size: 1.2rem;
+        }
+        
+        .points-requirement {
+            background: linear-gradient(135deg, #ff8c42, #ff6f00);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
+        }
+        
+        .requirement-item {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 0.95rem;
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .requirement-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #66bb6a;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .general-requirements {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px;
+            margin-top: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .general-requirements h3 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            text-align: center;
+            padding-bottom: 15px;
+            position: relative;
+        }
+        
+        .general-requirements h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff8c42, #42a5f5);
+            border-radius: 2px;
+        }
+        
+        .general-req-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .general-req-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #ff8c42;
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        .general-req-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .general-req-item strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+            
+            .programs-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .program-card {
+                padding: 22px;
+            }
+            
+            .program-title {
+                font-size: 1.3rem;
+            }
+            
+            .general-requirements {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.9rem;
+            }
+            
+            .program-card {
+                padding: 20px;
+            }
+            
+            .program-title {
+                font-size: 1.2rem;
+            }
+            
+            .general-requirements {
+                padding: 20px;
+            }
+            
+            .general-requirements h3 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Botho University</h1>
+            <div class="subtitle">Undergraduate Programs</div>
+            <div class="full-name">Excellence in Higher Education</div>
+        </div>
+
+        <div class="programs-grid">
+            <!-- Faculty of Business & Accounting -->
+            <div class="program-card">
+                <div class="faculty-badge">Business & Accounting</div>
+                <h3 class="program-title">Bachelor of Business Administration (BBA)</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Comprehensive business education covering management principles, marketing strategies, finance, and entrepreneurship development.</p>
+                
+                <div class="modules-section">
+                    <h4 class="modules-title">Key Modules</h4>
+                    <div class="module-item">Principles of Management (Leadership, organizational behavior)</div>
+                    <div class="module-item">Financial Accounting (Bookkeeping, financial statements)</div>
+                    <div class="module-item">Marketing Management (Consumer behavior, market research)</div>
+                </div>
+                
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">34+ Points Required (BGCSE)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Mathematics (C or better)</div>
+                    <div class="requirement-item">Business Studies recommended</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="faculty-badge">Business & Accounting</div>
+                <h3 class="program-title">Bachelor of Accounting (BAcc)</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Professional accounting program focusing on financial accounting, auditing practices, taxation systems, and corporate finance management.</p>
+                
+                <div class="modules-section">
+                    <h4 class="modules-title">Key Modules</h4>
+                    <div class="module-item">Taxation (Income tax, VAT compliance)</div>
+                    <div class="module-item">Auditing (Internal controls, risk assessment)</div>
+                    <div class="module-item">Financial Reporting (IFRS, corporate finance)</div>
+                </div>
+                
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">34+ Points Required (BGCSE)</div>
+                    <div class="requirement-item">Mathematics (B or better)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Accounting or Economics recommended</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="faculty-badge">Business & Accounting</div>
+                <h3 class="program-title">Bachelor of Banking & Finance</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Specialized finance program covering investment analysis, risk management, and financial derivatives for the banking sector.</p>
+                
+                <div class="modules-section">
+                    <h4 class="modules-title">Key Modules</h4>
+                    <div class="module-item">Investment Analysis (Portfolio management, stocks/bonds)</div>
+                    <div class="module-item">Risk Management (Financial derivatives, hedging)</div>
+                    <div class="module-item">Banking Operations (Credit analysis, loan management)</div>
+                </div>
+                
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">34+ Points Required (BGCSE)</div>
+                    <div class="requirement-item">Mathematics (B or better)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Economics or Accounting recommended</div>
+                </div>
+            </div>
+
+            <!-- Faculty of Computing -->
+            <div class="program-card">
+                <div class="faculty-badge computing">Computing</div>
+                <h3 class="program-title">Bachelor of Science in Computing</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Comprehensive computing program covering programming languages, database management, and advanced systems analysis.</p>
+                
+                <div class="modules-section">
+                    <h4 class="modules-title">Key Modules</h4>
+                    <div class="module-item">Programming (Python/Java) (Algorithms, OOP)</div>
+                    <div class="module-item">Database Systems (SQL, NoSQL)</div>
+                    <div class="module-item">Software Engineering (System design, testing)</div>
+                </div>
+                
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">34+ Points Required (BGCSE)</div>
+                    <div class="requirement-item">Mathematics (B or better)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Computer Studies or Physics recommended</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="faculty-badge computing">Computing</div>
+                <h3 class="program-title">Bachelor of Cyber Security</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Specialized cybersecurity program focusing on network security, ethical hacking techniques, and digital forensics.</p>
+                
+                <div class="modules-section">
+                    <h4 class="modules-title">Key Modules</h4>
+                    <div class="module-item">Ethical Hacking (Penetration testing)</div>
+                    <div class="module-item">Digital Forensics (Evidence collection)</div>
+                    <div class="module-item">Network Security (Firewall configuration, intrusion detection)</div>
+                </div>
+                
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">34+ Points Required (BGCSE)</div>
+                    <div class="requirement-item">Mathematics (B or better)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">IT/Physics strongly recommended</div>
+                </div>
+            </div>
+
+            <!-- Faculty of Health & Education -->
+            <div class="program-card">
+                <div class="faculty-badge health">Health & Education</div>
+                <h3 class="program-title">Bachelor of Public Health</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Public health program focusing on disease prevention, health policy development, and community health management.</p>
+                
+                <div class="modules-section">
+                    <h4 class="modules-title">Key Modules</h4>
+                    <div class="module-item">Epidemiology (Disease patterns)</div>
+                    <div class="module-item">Health Policy (Global health systems)</div>
+                    <div class="module-item">Environmental Health (Public health protection)</div>
+                </div>
+                
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">34+ Points Required (BGCSE)</div>
+                    <div class="requirement-item">Biology (C or better)</div>
+                    <div class="requirement-item">Chemistry (C or better)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="faculty-badge health">Health & Education</div>
+                <h3 class="program-title">Bachelor of Education (Primary)</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Primary education program covering child psychology, curriculum design, and modern teaching methodologies.</p>
+                
+                <div class="modules-section">
+                    <h4 class="modules-title">Key Modules</h4>
+                    <div class="module-item">Child Psychology (Learning theories)</div>
+                    <div class="module-item">Curriculum Design (Lesson planning)</div>
+                    <div class="module-item">Educational Assessment (Student evaluation methods)</div>
+                </div>
+                
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">34+ Points Required (BGCSE)</div>
+                    <div class="requirement-item">English Language (B or better)</div>
+                    <div class="requirement-item">Any Science/Arts subject (C or better)</div>
+                    <div class="requirement-item">Teaching aptitude assessment required</div>
+                </div>
+            </div>
+
+            <!-- Faculty of Hospitality & Sustainable Tourism -->
+            <div class="program-card">
+                <div class="faculty-badge hospitality">Hospitality & Tourism</div>
+                <h3 class="program-title">Bachelor of Hospitality Management</h3>
+                <div class="duration-badge">3 Years</div>
+                <p class="program-description">Hospitality management program covering hotel operations, food service management, and tourism industry practices.</p>
+                
+                <div class="modules-section">
+                    <h4 class="modules-title">Key Modules</h4>
+                    <div class="module-item">Hotel Operations (Front office, housekeeping)</div>
+                    <div class="module-item">Food & Beverage Management (Menu costing)</div>
+                    <div class="module-item">Tourism Marketing (Destination management)</div>
+                </div>
+                
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">30+ Points Required (BGCSE)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Any 2 subjects (D or better)</div>
+                    <div class="requirement-item">Customer service orientation preferred</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="general-requirements">
+            <h3>General Admission Requirements</h3>
+            <div class="general-req-grid">
+                <div class="general-req-item">
+                    <strong>Academic Points:</strong>
+                    Minimum 30–34 points in best six BGCSE subjects, varying by program specialization and competitive demand.
+                </div>
+                <div class="general-req-item">
+                    <strong>English Proficiency:</strong>
+                    Minimum grade C in English Language required for most programs, with Education requiring grade B.
+                </div>
+                <div class="general-req-item">
+                    <strong>Mathematics Requirement:</strong>
+                    Grade B required for Computing and Business programs, grade C for others where applicable.
+                </div>
+                <div class="general-req-item">
+                    <strong>Alternative Entry Pathways:</strong>
+                    Diploma holders and mature students (25+ years) with relevant experience may apply through alternative assessment procedures.
+                </div>
+                <div class="general-req-item">
+                    <strong>Additional Requirements:</strong>
+                    Some programs may require interviews, portfolios, or specific aptitude assessments based on the field of study.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
