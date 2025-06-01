@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -391,7 +390,7 @@
         <div class="logo">Uni<span>Match</span></div>
         <nav class="nav">
             <a href="#">Home</a>
-            <a href="#">Universities</a>
+            <a href="universities.html">Universities</a>
             <a href="#">Compare</a>
             <a href="#">Resources</a>
             <a href="#">About Us</a>
@@ -411,7 +410,7 @@
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">🔍</div>
-                    <p>Search Top 3 Universities in Botswana</p>
+                    <p>Search Top Universities in Botswana</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">📊</div>
@@ -510,7 +509,7 @@
     
     <script>
         // User storage (in a real app, this would be a database)
-        let users = JSON.parse(localStorage.getItem('unimatch_users') || '[]');
+        let users = JSON.parse(window.localStorage?.getItem('unimatch_users') || '[]');
         
         // Tab switching functionality
         const loginTab = document.getElementById('login-tab');
@@ -578,11 +577,6 @@
         async function sendEmail(to, subject, body) {
             // Simulate API call delay
             await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // In a real application, you would use a service like:
-            // - EmailJS (for client-side email sending)
-            // - SendGrid, Mailgun, or AWS SES (for server-side)
-            // - Your own backend API
             
             console.log('Email sent to:', to);
             console.log('Subject:', subject);
@@ -657,31 +651,30 @@
                     `Hi ${name},\n\nWelcome to UniMatch! Your account has been successfully created.\n\nYou can now log in and start exploring universities that match your academic goals.\n\nBest regards,\nThe UniMatch Team`
                 );
                 
-                // Save user with profile completion flag
+                // Save user
                 const newUser = {
                     id: Date.now(),
                     name,
                     email,
                     password, // In a real app, this would be hashed
-                    createdAt: new Date().toISOString(),
-                    profileCompleted: false // Flag to track if profile is completed
+                    createdAt: new Date().toISOString()
                 };
                 
                 users.push(newUser);
-                localStorage.setItem('unimatch_users', JSON.stringify(users));
+                if (window.localStorage) {
+                    localStorage.setItem('unimatch_users', JSON.stringify(users));
+                    localStorage.setItem('unimatch_current_user', JSON.stringify(newUser));
+                }
                 
                 showNotification('Account created successfully! Welcome email sent to ' + email);
-                
-                // Store current user session
-                localStorage.setItem('unimatch_current_user', JSON.stringify(newUser));
                 
                 // Clear form
                 signupForm.reset();
                 
-                // Redirect new users to profile page to complete their information
+                // Redirect to universities page after signup
                 setTimeout(() => {
-                    showNotification('Redirecting to complete your profile...', 'success');
-                    window.location.href = 'profile.html';
+                    showNotification('Redirecting to explore universities...', 'success');
+                    window.location.href = 'universities.html';
                 }, 1500);
                 
             } catch (error) {
@@ -692,7 +685,7 @@
             }
         });
         
-        // Handle login
+        // Handle login - UPDATED TO REDIRECT TO UNIVERSITIES PAGE
         loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -743,23 +736,20 @@
                     `Hi ${user.name},\n\nYou have successfully logged into your UniMatch account.\n\nIf this wasn't you, please contact our support team immediately.\n\nBest regards,\nThe UniMatch Team`
                 );
                 
-                showNotification('Login successful! Notification sent to ' + email);
+                showNotification('Login successful! Welcome back, ' + user.name);
                 
                 // Store current user session
-                localStorage.setItem('unimatch_current_user', JSON.stringify(user));
+                if (window.localStorage) {
+                    localStorage.setItem('unimatch_current_user', JSON.stringify(user));
+                }
                 
                 // Clear form
                 loginForm.reset();
                 
-                // Check if user profile is completed, redirect accordingly
+                // Redirect directly to universities page after successful login
                 setTimeout(() => {
-                    if (!user.profileCompleted) {
-                        showNotification('Please complete your profile...', 'success');
-                        window.location.href = 'profile.html';
-                    } else {
-                        showNotification('Redirecting to your dashboard...', 'success');
-                        window.location.href = 'dashboard.html';
-                    }
+                    showNotification('Redirecting to explore universities...', 'success');
+                    window.location.href = 'Universities.html';
                 }, 1500);
                 
             } catch (error) {
