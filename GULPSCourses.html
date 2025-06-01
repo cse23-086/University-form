@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undergraduate Programs - GULPS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px 15px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            padding: 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        .header .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+        
+        .header .full-name {
+            font-size: 1rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #f0932b);
+            background-size: 300% 300%;
+            animation: gradientFlow 4s ease infinite;
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+        
+        .faculty-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .program-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .program-description {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .program-details {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .duration-badge {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .requirements-section {
+            background: #f1f3f4;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        
+        .requirements-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .requirements-title::before {
+            content: "📋";
+            font-size: 1.2rem;
+        }
+        
+        .points-requirement {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .requirement-item {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 0.95rem;
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .requirement-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ecdc4;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .general-requirements {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px;
+            margin-top: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .general-requirements h3 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            text-align: center;
+            padding-bottom: 15px;
+            position: relative;
+        }
+        
+        .general-requirements h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+        }
+        
+        .general-req-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .general-req-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #4ecdc4;
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        .general-req-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .general-req-item strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+            
+            .programs-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .program-card {
+                padding: 22px;
+            }
+            
+            .program-title {
+                font-size: 1.3rem;
+            }
+            
+            .general-requirements {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.9rem;
+            }
+            
+            .program-card {
+                padding: 20px;
+            }
+            
+            .program-title {
+                font-size: 1.2rem;
+            }
+            
+            .general-requirements {
+                padding: 20px;
+            }
+            
+            .general-requirements h3 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>GULPS</h1>
+            <div class="subtitle">Undergraduate Programs</div>
+            <div class="full-name">Gaborone University of Law and Professional Studies</div>
+        </div>
+
+        <div class="programs-grid">
+            <!-- Faculty of Law -->
+            <div class="program-card">
+                <div class="faculty-badge">Faculty of Law</div>
+                <h3 class="program-title">Bachelor of Laws (LLB)</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Comprehensive legal education covering constitutional law, criminal law, contract law, and practical legal training for professional practice.</p>
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">34 Points Required (BGCSE)</div>
+                    <div class="requirement-item">English Language (B or better)</div>
+                    <div class="requirement-item">History or English Literature (C or better) preferred</div>
+                    <div class="requirement-item">Strong analytical and communication skills</div>
+                </div>
+            </div>
+
+            <!-- Business & Management Programs -->
+            <div class="program-card">
+                <div class="faculty-badge">Business & Management</div>
+                <h3 class="program-title">Bachelor of Business Administration (BBA)</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Comprehensive business education covering management principles, marketing strategies, finance, and entrepreneurship development.</p>
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">30 Points Required (BGCSE)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Mathematics (D or better)</div>
+                    <div class="requirement-item">Business Studies recommended</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="faculty-badge">Business & Management</div>
+                <h3 class="program-title">Bachelor of Accounting (BAcc)</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Professional accounting program focusing on financial accounting, auditing practices, taxation systems, and corporate finance management.</p>
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">32 Points Required (BGCSE)</div>
+                    <div class="requirement-item">Mathematics (C or better)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Accounting or Economics recommended</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="faculty-badge">Business & Management</div>
+                <h3 class="program-title">Bachelor of Human Resource Management (BHRM)</h3>
+                <div class="duration-badge">3 Years</div>
+                <p class="program-description">Specialized program in HR policies, organizational behavior, labor laws, and strategic human capital management.</p>
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">30 Points Required (BGCSE)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Social Studies or Psychology recommended</div>
+                    <div class="requirement-item">Strong interpersonal skills</div>
+                </div>
+            </div>
+
+            <!-- Information Technology Programs -->
+            <div class="program-card">
+                <div class="faculty-badge">Information Technology</div>
+                <h3 class="program-title">Bachelor of Science in Information Technology (BSc IT)</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Comprehensive IT program covering programming languages, database management, networking systems, and advanced systems analysis.</p>
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">32 Points Required (BGCSE)</div>
+                    <div class="requirement-item">Mathematics (C or better)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Computer Studies or Physics recommended</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="faculty-badge">Information Technology</div>
+                <h3 class="program-title">Bachelor of Science in Cyber Security (BSc Cyber Security)</h3>
+                <div class="duration-badge">4 Years</div>
+                <p class="program-description">Specialized cybersecurity program focusing on network security, ethical hacking techniques, digital forensics, and cyber threat management.</p>
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">34 Points Required (BGCSE)</div>
+                    <div class="requirement-item">Mathematics (B or better)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Computer Studies or Physics strongly recommended</div>
+                </div>
+            </div>
+
+            <!-- Public Administration & Governance Programs -->
+            <div class="program-card">
+                <div class="faculty-badge">Public Administration & Governance</div>
+                <h3 class="program-title">Bachelor of Public Administration (BPA)</h3>
+                <div class="duration-badge">3 Years</div>
+                <p class="program-description">Public sector management program covering public policy development, governance systems, and administrative management practices.</p>
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">30 Points Required (BGCSE)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">History or Social Studies (C or better)</div>
+                    <div class="requirement-item">Government or Economics recommended</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="faculty-badge">Public Administration & Governance</div>
+                <h3 class="program-title">Bachelor of Arts in Governance & Development (BA Governance)</h3>
+                <div class="duration-badge">3 Years</div>
+                <p class="program-description">Interdisciplinary program studying political systems, development policies, governance structures, and sustainable development strategies.</p>
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">30 Points Required (BGCSE)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">History or Government recommended</div>
+                    <div class="requirement-item">Strong analytical and research skills</div>
+                </div>
+            </div>
+
+            <!-- Social Sciences Programs -->
+            <div class="program-card">
+                <div class="faculty-badge">Social Sciences</div>
+                <h3 class="program-title">Bachelor of Arts in Psychology (BA Psychology)</h3>
+                <div class="duration-badge">3 Years</div>
+                <p class="program-description">Comprehensive psychology program covering human behavior analysis, mental health studies, and professional counseling techniques.</p>
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">30 Points Required (BGCSE)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Biology or Social Studies (C or better)</div>
+                    <div class="requirement-item">Strong empathy and communication skills</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="faculty-badge">Social Sciences</div>
+                <h3 class="program-title">Bachelor of Arts in Sociology (BA Sociology)</h3>
+                <div class="duration-badge">3 Years</div>
+                <p class="program-description">Social science program exploring social theories, research methodologies, and community development strategies for social change.</p>
+                <div class="requirements-section">
+                    <h4 class="requirements-title">Entry Requirements</h4>
+                    <div class="points-requirement">30 Points Required (BGCSE)</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Social Studies or History recommended</div>
+                    <div class="requirement-item">Interest in social research and community work</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="general-requirements">
+            <h3>General Admission Requirements</h3>
+            <div class="general-req-grid">
+                <div class="general-req-item">
+                    <strong>Academic Points:</strong>
+                    Minimum 30–34 points in best six BGCSE subjects, varying by program specialization and competitive demand.
+                </div>
+                <div class="general-req-item">
+                    <strong>English Proficiency:</strong>
+                    Minimum grade C in English Language required for all programs, with some requiring grade B for specialized fields.
+                </div>
+                <div class="general-req-item">
+                    <strong>Mathematics Requirement:</strong>
+                    Required for IT, Business, and Accounting programs with specific grade requirements ranging from D to B.
+                </div>
+                <div class="general-req-item">
+                    <strong>Alternative Entry Pathways:</strong>
+                    Diploma holders and mature students (25+ years) with relevant experience may apply through alternative assessment procedures.
+                </div>
+                <div class="general-req-item">
+                    <strong>Additional Requirements:</strong>
+                    Some programs may require interviews, portfolios, or specific subject prerequisites based on the field of study.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
