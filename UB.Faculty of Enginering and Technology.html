@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty of Engineering & Technology - University of Botswana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+        }
+
+        .program-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        }
+
+        .program-title {
+            color: #0f4c75;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #3282b8;
+            padding-bottom: 10px;
+        }
+
+        .program-code {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .program-summary {
+            color: #34495e;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .requirements {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .requirements h4 {
+            color: #0f4c75;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .requirement-item::before {
+            content: "⚙️";
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .points-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .points-badge.high-req {
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        .engineering-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            opacity: 0.15;
+        }
+
+        .specializations {
+            background: #e8f4fd;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+
+        .specializations h5 {
+            color: #0f4c75;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .spec-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .spec-item {
+            background: #3282b8;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            margin: 0 10px 10px 0;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-link {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Faculty of Engineering & Technology</h1>
+            <div class="subtitle">University of Botswana</div>
+        </div>
+
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="engineering-icon">🏗️</div>
+                <div class="program-code">BEng</div>
+                <h3 class="program-title">Bachelor of Engineering</h3>
+                <div class="points-badge high-req">Minimum 38 Points</div>
+                <p class="program-summary">
+                    Comprehensive technical training in engineering disciplines with strong emphasis on practical application and problem-solving skills.
+                </p>
+                <div class="specializations">
+                    <h5>Specializations Available:</h5>
+                    <div class="spec-list">
+                        <span class="spec-item">Civil Engineering</span>
+                        <span class="spec-item">Electrical Engineering</span>
+                        <span class="spec-item">Mechanical Engineering</span>
+                        <span class="spec-item">Telecommunications</span>
+                    </div>
+                </div>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">38+ points in best 6 subjects (including Math & Science)</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Mathematics (Grade A/B)</div>
+                    <div class="requirement-item">Physics (Grade B)</div>
+                    <div class="requirement-item">Chemistry (Grade C)</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="engineering-icon">💻</div>
+                <div class="program-code">BSc CS</div>
+                <h3 class="program-title">Bachelor of Science in Computer Science</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Advanced program in programming, AI, cybersecurity, and software development. 
+                    Prepare for careers in software engineering and emerging technologies.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">34+ points in best 6 subjects</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Mathematics (Grade B)</div>
+                    <div class="requirement-item">Computer Science/Physics</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="engineering-icon">🌐</div>
+                <div class="program-code">BSc IT</div>
+                <h3 class="program-title">Bachelor of Science in Information Technology</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Comprehensive program covering IT systems, networking, and database management. 
+                    Focus on practical IT solutions and system administration.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">34+ points in best 6 subjects</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Mathematics (Grade C)</div>
+                    <div class="requirement-item">ICT/Computer Science</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="#" class="nav-link">Business Faculty</a>
+            <a href="#" class="nav-link">Science Faculty</a>
+            <a href="#" class="nav-link">Social Sciences</a>
+            <a href="#" class="nav-link">Humanities</a>
+            <a href="#" class="nav-link">Education</a>
+            <a href="#" class="nav-link">Health Sciences</a>
+            <a href="#" class="nav-link">Back to Main</a>
+        </div>
+    </div>
+</body>
+</html>
