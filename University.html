@@ -105,9 +105,6 @@
         .university-header {
             padding: 1.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
         
         .university-name {
@@ -196,6 +193,10 @@
         .btn-primary {
             background-color: #FFD166;
             color: #333;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .btn-primary:hover {
@@ -341,8 +342,8 @@
         
         <div class="universities-container">
             <!-- BAC University Card -->
-            <div class="university-card bac" onclick="window.location.href='BAC.html'">
-                <div class="university-header">
+            <div class="university-card bac">
+                <div class="university-header" onclick="window.location.href='bac.html'">
                     <div>
                         <h2 class="university-name">BAC</h2>
                         <p class="university-location">Botswana Accountancy College</p>
@@ -350,7 +351,7 @@
                     <div class="university-logo">BAC</div>
                 </div>
                 
-                <div class="university-content">
+                <div class="university-content" onclick="window.location.href='bac.html'">
                     <div class="university-stats">
                         <div class="stat">
                             <div class="stat-label">Student Rating</div>
@@ -381,7 +382,7 @@
                     </div>
                     
                     <div class="university-actions">
-                        <button class="action-btn btn-primary" onclick="window.location.href='BAC.html'">View Details</button>
+                        <a href="bac.html" class="action-btn btn-primary">View Details</a>
                         <button class="action-btn btn-secondary">Compare</button>
                     </div>
                 </div>
@@ -428,13 +429,6 @@
                     </div>
                     
                     <div class="university-actions">
-                        <button class="action-btn btn-primary">View Details</button>
-                        <button class="action-btn btn-secondary">Compare</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="university-actions">
                         <button class="action-btn btn-primary">View Details</button>
                         <button class="action-btn btn-secondary">Compare</button>
                     </div>
@@ -773,26 +767,25 @@
     </main>
     
     <footer class="footer">
-        <p> 2025 UniMatch - Helping students find their academic home</p>
+        <p>© 2025 UniMatch - Helping students find their academic home</p>
     </footer>
     
     <script>
-        // Add interaction for university cards
-        document.querySelectorAll('.university-card').forEach(card => {
+        // Add interaction for university cards (excluding BAC)
+        document.querySelectorAll('.university-card:not(.bac)').forEach(card => {
             card.addEventListener('click', function(e) {
                 // Prevent click if clicking on buttons
                 if (e.target.classList.contains('action-btn')) {
                     return;
                 }
                 
-                // Here you would normally redirect to university detail page
                 const universityName = this.querySelector('.university-name').textContent;
                 alert(`You selected ${universityName}. In a complete application, this would take you to the detailed page for this university.`);
             });
         });
         
-        // Button click handlers
-        document.querySelectorAll('.btn-primary').forEach(button => {
+        // Button click handlers for non-BAC cards
+        document.querySelectorAll('.university-card:not(.bac) .btn-primary').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.stopPropagation();
                 const universityName = this.closest('.university-card').querySelector('.university-name').textContent;
@@ -800,6 +793,7 @@
             });
         });
         
+        // Compare button handlers for all cards
         document.querySelectorAll('.btn-secondary').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.stopPropagation();
