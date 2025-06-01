@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undergraduate Programs - Baisago University</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #ff7f50, #ff6347, #ffa500);
+        }
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+        .program-title {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .program-degree {
+            color: #ff7f50;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 5px 12px;
+            background: rgba(255, 127, 80, 0.1);
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .faculty-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .program-description {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .requirements-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 15px;
+        }
+        .requirements-title {
+            color: #2c3e50;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .requirements-title::before {
+            content: "📋";
+            margin-right: 8px;
+        }
+        .requirement-item {
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.9rem;
+            padding-left: 18px;
+            position: relative;
+            line-height: 1.4;
+        }
+        .requirement-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ff7f50;
+            font-weight: bold;
+        }
+        .general-info {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        .general-info h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #ff7f50;
+            padding-bottom: 10px;
+        }
+        .general-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .general-item {
+            background: rgba(255, 127, 80, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff7f50;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 8px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .header .subtitle {
+                font-size: 1rem;
+            }
+            .programs-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .program-card {
+                padding: 20px;
+            }
+            .program-title {
+                font-size: 1.2rem;
+            }
+            .faculty-tag {
+                position: static;
+                margin-bottom: 10px;
+                margin-top: 5px;
+            }
+            .general-info {
+                padding: 20px;
+            }
+            .general-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .program-card {
+                padding: 15px;
+            }
+            .requirements-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Undergraduate Programs</h1>
+            <div class="subtitle">Baisago University</div>
+        </div>
+
+        <div class="programs-grid">
+            <!-- Business Administration -->
+            <div class="program-card">
+                <div class="faculty-tag">Business & Accounting</div>
+                <h3 class="program-title">Bachelor of Business Administration</h3>
+                <div class="program-degree">BBA</div>
+                <div class="program-description">
+                    Comprehensive program covering management, marketing, finance, and entrepreneurship. Develops strategic thinking and leadership skills for modern business environments.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 24 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Mathematics recommended</div>
+                </div>
+            </div>
+
+            <!-- Accounting -->
+            <div class="program-card">
+                <div class="faculty-tag">Business & Accounting</div>
+                <h3 class="program-title">Bachelor of Accounting</h3>
+                <div class="program-degree">BAcc</div>
+                <div class="program-description">
+                    Specialized program in financial reporting, auditing, taxation, and accounting software. Prepares students for professional accounting careers and certifications.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 24 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Mathematics (C or better) - Required</div>
+                </div>
+            </div>
+
+            <!-- Finance & Investment -->
+            <div class="program-card">
+                <div class="faculty-tag">Business & Accounting</div>
+                <h3 class="program-title">Bachelor of Finance & Investment</h3>
+                <div class="program-degree">BFI</div>
+                <div class="program-description">
+                    Advanced program focusing on investment analysis, risk management, and corporate finance. Ideal for careers in banking, investment, and financial consulting.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 24 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Mathematics (C or better) - Required</div>
+                </div>
+            </div>
+
+            <!-- Computer Science -->
+            <div class="program-card">
+                <div class="faculty-tag">Information Technology</div>
+                <h3 class="program-title">Bachelor of Science in Computer Science</h3>
+                <div class="program-degree">BSc CS</div>
+                <div class="program-description">
+                    Comprehensive program covering programming, algorithms, artificial intelligence, and software development. Perfect foundation for tech careers and innovation.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 24 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">Mathematics (B or better) - Required</div>
+                    <div class="requirement-item">Physics/Computer Studies recommended</div>
+                </div>
+            </div>
+
+            <!-- Information Technology -->
+            <div class="program-card">
+                <div class="faculty-tag">Information Technology</div>
+                <h3 class="program-title">Bachelor of Science in Information Technology</h3>
+                <div class="program-degree">BSc IT</div>
+                <div class="program-description">
+                    Practical program focusing on networking, databases, and IT systems management. Prepares students for roles in IT infrastructure and support.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 24 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">Mathematics (B or better) - Required</div>
+                    <div class="requirement-item">Physics/Computer Studies recommended</div>
+                </div>
+            </div>
+
+            <!-- Cybersecurity -->
+            <div class="program-card">
+                <div class="faculty-tag">Information Technology</div>
+                <h3 class="program-title">Bachelor of Cybersecurity</h3>
+                <div class="program-degree">BSc CyberSec</div>
+                <div class="program-description">
+                    Cutting-edge program in ethical hacking, digital forensics, and network security. Addresses the growing demand for cybersecurity professionals.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 24 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">Mathematics (B or better) - Required</div>
+                    <div class="requirement-item">Physics/Computer Studies recommended</div>
+                </div>
+            </div>
+
+            <!-- Primary Education -->
+            <div class="program-card">
+                <div class="faculty-tag">Education</div>
+                <h3 class="program-title">Bachelor of Education (Primary)</h3>
+                <div class="program-degree">BEd Primary</div>
+                <div class="program-description">
+                    Specialized program in child development, literacy, and primary curriculum design. Prepares educators for foundational learning environments.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 24 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Strong communication skills essential</div>
+                </div>
+            </div>
+
+            <!-- Secondary Education -->
+            <div class="program-card">
+                <div class="faculty-tag">Education</div>
+                <h3 class="program-title">Bachelor of Education (Secondary)</h3>
+                <div class="program-degree">BEd Secondary</div>
+                <div class="program-description">
+                    Advanced program with subject specialization in Sciences or Humanities combined with pedagogy. Prepares teachers for secondary education.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 24 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">English Language (C or better)</div>
+                    <div class="requirement-item">Relevant subjects for chosen specialization</div>
+                </div>
+            </div>
+
+            <!-- Nursing Science -->
+            <div class="program-card">
+                <div class="faculty-tag">Health Sciences</div>
+                <h3 class="program-title">Bachelor of Nursing Science</h3>
+                <div class="program-degree">BNSc</div>
+                <div class="program-description">
+                    Comprehensive program covering anatomy, clinical practice, and community health. Combines theoretical knowledge with hands-on healthcare experience.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 24 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">Biology & Chemistry (C or better) - Required</div>
+                    <div class="requirement-item">Mathematics/Physics recommended</div>
+                </div>
+            </div>
+
+            <!-- Public Health -->
+            <div class="program-card">
+                <div class="faculty-tag">Health Sciences</div>
+                <h3 class="program-title">Bachelor of Public Health</h3>
+                <div class="program-degree">BPH</div>
+                <div class="program-description">
+                    Strategic program focusing on epidemiology, health policy, and disease prevention. Prepares professionals for community health leadership roles.
+                </div>
+                <div class="requirements-section">
+                    <div class="requirements-title">Admission Requirements</div>
+                    <div class="requirement-item">Minimum 24 points in best 6 BGCSE subjects</div>
+                    <div class="requirement-item">Biology & Chemistry (C or better) - Required</div>
+                    <div class="requirement-item">Mathematics/Physics recommended</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="general-info">
+            <h3>General Admission Information</h3>
+            <div class="general-grid">
+                <div class="general-item">
+                    <strong>Standard Entry:</strong> Minimum 24 points in best six BGCSE subjects (or equivalent qualification)
+                </div>
+                <div class="general-item">
+                    <strong>Language Requirement:</strong> English Language proficiency with minimum grade C
+                </div>
+                <div class="general-item">
+                    <strong>Mature Entry:</strong> Applicants 25+ years with relevant work experience may qualify
+                </div>
+                <div class="general-item">
+                    <strong>Advanced Standing:</strong> Diploma holders may qualify for credit transfer and reduced study time
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
