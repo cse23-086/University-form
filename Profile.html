@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,6 +126,11 @@
             color: #333;
         }
         
+        .step.completed {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
         .form-section {
             display: none;
             animation: fadeIn 0.5s ease;
@@ -233,6 +239,12 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
+        .file-name {
+            color: #FFD166;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        
         .subjects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -306,6 +318,30 @@
             padding: 1.5rem;
             color: rgba(255, 255, 255, 0.7);
             background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background-color: #f44336;
         }
         
         @media (max-width: 768px) {
@@ -390,6 +426,7 @@
                         </div>
                         <div class="preview-container" id="preview-container">
                             <img id="preview-image" class="preview-image" alt="Certificate preview">
+                            <div class="file-name" id="file-name"></div>
                         </div>
                     </div>
                 </div>
@@ -500,69 +537,311 @@
     </footer>
     
     <script>
-    // Check authentication and handle profile submission
-    document.addEventListener('DOMContentLoaded', () => {
-        // Check if user is logged in
-        const currentUser = JSON.parse(localStorage.getItem('unimatch_current_user'));
-        if (!currentUser) {
-            window.location.href = 'main.html';
-            return;
-        }
+        let currentStep = 1;
+        const totalSteps = 3;
         
-        // Pre-fill name if available
-        if (currentUser.name) {
-            document.getElementById('full-name').value = currentUser.name;
-        }
+        // DOM elements
+        const form = document.getElementById('education-form');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('certificate-upload');
+        const previewContainer = document.getElementById('preview-container');
+        const previewImage = document.getElementById('preview-image');
+        const fileName = document.getElementById('file-name');
         
-        // Handle profile form submission
-        document.getElementById('education-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Initialize form
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mock user data if not exists
+            if (!getUserData()) {
+                const mockUser = {
+                    id: 'user_123',
+                    name: 'John Doe',
+                    email: 'john@example.com'
+                };
+                saveUserData(mockUser);
+            }
             
-            // Collect form data
-            const formData = new FormData(this);
+            // Pre-fill name
+            const user = getUserData();
+            if (user && user.name) {
+                document.getElementById('full-name').value = user.name;
+            }
+            
+            updateStepIndicator();
+            setupEventListeners();
+        });
+        
+        function setupEventListeners() {
+            // Next button
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Next button clicked, current step:', currentStep);
+                
+                if (validateCurrentStep()) {
+                    if (currentStep < totalSteps) {
+                        nextStep();
+                    } else {
+                        submitForm();
+                    }
+                } else {
+                    console.log('Validation failed for step', currentStep);
+                }
+            });
+            
+            // Previous button
+            prevBtn.addEventListener('click', function() {
+                if (currentStep > 1) {
+                    prevStep();
+                }
+            });
+            
+            // File upload
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('dragleave', handleDragLeave);
+            uploadArea.addEventListener('drop', handleDrop);
+            fileInput.addEventListener('change', handleFileSelect);
+        }
+        
+        function nextStep() {
+            console.log('Moving to next step from', currentStep);
+            
+            // Hide current section
+            const currentSection = document.getElementById(`section-${currentStep}`);
+            const currentStepEl = document.getElementById(`step-${currentStep}`);
+            
+            if (currentSection && currentStepEl) {
+                currentSection.classList.remove('active');
+                currentStepEl.classList.remove('active');
+                currentStepEl.classList.add('completed');
+            }
+            
+            currentStep++;
+            
+            // Show next section
+            const nextSection = document.getElementById(`section-${currentStep}`);
+            const nextStepEl = document.getElementById(`step-${currentStep}`);
+            
+            if (nextSection && nextStepEl) {
+                nextSection.classList.add('active');
+                nextStepEl.classList.add('active');
+            }
+            
+            updateButtons();
+        }
+        
+        function prevStep() {
+            // Hide current section
+            document.getElementById(`section-${currentStep}`).classList.remove('active');
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            
+            currentStep--;
+            
+            // Show previous section
+            document.getElementById(`section-${currentStep}`).classList.add('active');
+            document.getElementById(`step-${currentStep}`).classList.remove('completed');
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            
+            updateButtons();
+        }
+        
+        function updateButtons() {
+            prevBtn.disabled = currentStep === 1;
+            nextBtn.textContent = currentStep === totalSteps ? 'Complete Profile' : 'Next';
+        }
+        
+        function updateStepIndicator() {
+            for (let i = 1; i <= totalSteps; i++) {
+                const step = document.getElementById(`step-${i}`);
+                if (i === currentStep) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else if (i < currentStep) {
+                    step.classList.remove('active');
+                    step.classList.add('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            }
+        }
+        
+        function validateCurrentStep() {
+            console.log('Validating step', currentStep);
+            const currentSection = document.getElementById(`section-${currentStep}`);
+            
+            if (!currentSection) {
+                console.error('Current section not found');
+                return false;
+            }
+            
+            const requiredFields = currentSection.querySelectorAll('[required]');
+            console.log('Found required fields:', requiredFields.length);
+            
+            for (let field of requiredFields) {
+                if (!field.value || !field.value.trim()) {
+                    console.log('Empty field found:', field.name || field.id);
+                    field.focus();
+                    showNotification('Please fill in all required fields', 'error');
+                    return false;
+                }
+            }
+            
+            // Special validation for step 2 (file upload)
+            if (currentStep === 2) {
+                const fileInput = document.getElementById('certificate-upload');
+                if (!fileInput.files || fileInput.files.length === 0) {
+                    showNotification('Please upload your certificate', 'error');
+                    return false;
+                }
+            }
+            
+            console.log('Step validation passed');
+            return true;
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        }
+        
+        function handleDragLeave(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        }
+        
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        }
+        
+        function handleFile(file) {
+            // Validate file
+            if (file.size > 10 * 1024 * 1024) {
+                showNotification('File size must be less than 10MB', 'error');
+                return;
+            }
+            
+            if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
+                showNotification('Please upload an image or PDF file', 'error');
+                return;
+            }
+            
+            // Show preview
+            fileName.textContent = file.name;
+            
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.style.display = 'none';
+            }
+            
+            previewContainer.style.display = 'block';
+            showNotification('File uploaded successfully!');
+        }
+        
+        function submitForm() {
+            const formData = new FormData(form);
+            
+            // Create education profile object
             const educationProfile = {
                 fullName: formData.get('fullName'),
                 educationLevel: formData.get('educationLevel'),
-                certificate: formData.get('certificate')?.name || null,
+                certificate: fileInput.files[0]?.name || null,
                 subjects: []
             };
             
-            // Collect subjects
+            // Collect subjects and grades
             for (let i = 1; i <= 6; i++) {
-                educationProfile.subjects.push({
-                    subject: formData.get(`subject${i}`),
-                    grade: formData.get(`grade${i}`)
-                });
+                const subject = formData.get(`subject${i}`);
+                const grade = formData.get(`grade${i}`);
+                if (subject && grade) {
+                    educationProfile.subjects.push({
+                        subject: subject.trim(),
+                        grade: grade
+                    });
+                }
             }
             
-            // Update user data
-            const users = JSON.parse(localStorage.getItem('unimatch_users') || []);
-            const updatedUsers = users.map(user => {
-                if (user.id === currentUser.id) {
-                    return {
-                        ...user,
-                        educationProfile,
-                        profileComplete: true
-                    };
-                }
-                return user;
-            });
-            
-            // Save to localStorage
-            localStorage.setItem('unimatch_users', JSON.stringify(updatedUsers));
-            localStorage.setItem('unimatch_current_user', JSON.stringify({
-                ...currentUser,
+            // Save profile data
+            const userData = getUserData();
+            const updatedUser = {
+                ...userData,
                 educationProfile,
                 profileComplete: true
-            }));
+            };
             
-            // Show success and redirect
-            showNotification('Profile completed successfully! Redirecting to dashboard...');
+            saveUserData(updatedUser);
+            
+            // Show success message
+            showNotification('Profile completed successfully! 🎉');
+            
+            // Simulate redirect after delay
             setTimeout(() => {
-                window.location.href = 'dashboard.html';
+                showNotification('Redirecting to dashboard...');
+                // In a real app, you would redirect to the dashboard
+                console.log('Profile saved:', updatedUser);
             }, 2000);
-        });
-    });
-</script>
-        </body>
+        }
+        
+        function showNotification(message, type = 'success') {
+            // Remove existing notifications
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+        
+        // Mock user data functions (replace with real API calls)
+        function getUserData() {
+            const data = localStorage.getItem('unimatch_current_user');
+            return data ? JSON.parse(data) : null;
+        }
+        
+        function saveUserData(userData) {
+            localStorage.setItem('unimatch_current_user', JSON.stringify(userData));
+        }
+        
+        // Initialize buttons
+        updateButtons();
+    </script>
+</body>
 </html>
