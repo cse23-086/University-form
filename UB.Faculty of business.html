@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty of Business - University of Botswana</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .header .school-name {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .program-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+        }
+
+        .program-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        }
+
+        .program-title {
+            color: #1e3c72;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 10px;
+        }
+
+        .program-code {
+            display: inline-block;
+            background: #1e3c72;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .program-summary {
+            color: #34495e;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .requirements {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .requirements h4 {
+            color: #1e3c72;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .requirement-item::before {
+            content: "🎯";
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .points-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .business-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            opacity: 0.15;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            margin: 0 10px 10px 0;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-link {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Faculty of Business</h1>
+            <div class="subtitle">University of Botswana</div>
+            <div class="school-name">UB School of Business</div>
+        </div>
+
+        <div class="programs-grid">
+            <div class="program-card">
+                <div class="business-icon">📊</div>
+                <div class="program-code">BAcc</div>
+                <h3 class="program-title">Bachelor of Accountancy</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Comprehensive accounting program covering financial accounting, auditing, taxation, and management accounting. 
+                    Prepare for professional accounting careers and CPA certification.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">34+ points in best 6 subjects (including English & Math)</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Mathematics (Grade B)</div>
+                    <div class="requirement-item">Accounting (Grade C preferred)</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="business-icon">💼</div>
+                <div class="program-code">BBA</div>
+                <h3 class="program-title">Bachelor of Business Administration</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Dynamic program focusing on management, marketing, finance, HR, and entrepreneurship. 
+                    Build comprehensive business skills for leadership roles across industries.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">34+ points in best 6 subjects</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Mathematics (Grade C)</div>
+                    <div class="requirement-item">Any business-related subjects</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="business-icon">💰</div>
+                <div class="program-code">BFIN</div>
+                <h3 class="program-title">Bachelor of Finance</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Specialized program in banking, investments, risk management, and financial markets. 
+                    Perfect for careers in banking, investment, and financial analysis.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">34+ points in best 6 subjects</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Mathematics (Grade B)</div>
+                    <div class="requirement-item">Accounting/Commerce preferred</div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="business-icon">💻</div>
+                <div class="program-code">BIS</div>
+                <h3 class="program-title">Bachelor of Information Systems</h3>
+                <div class="points-badge">Minimum 34 Points</div>
+                <p class="program-summary">
+                    Innovative program combining business and IT, covering databases, e-commerce, and systems analysis. 
+                    Bridge the gap between technology and business operations.
+                </p>
+                <div class="requirements">
+                    <h4>Entry Requirements:</h4>
+                    <div class="requirement-item">34+ points in best 6 subjects</div>
+                    <div class="requirement-item">English (Grade C)</div>
+                    <div class="requirement-item">Mathematics (Grade C)</div>
+                    <div class="requirement-item">Computer Science/ICT preferred</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="#" class="nav-link">Engineering & Technology</a>
+            <a href="#" class="nav-link">Science Faculty</a>
+            <a href="#" class="nav-link">Social Sciences</a>
+            <a href="#" class="nav-link">Humanities</a>
+            <a href="#" class="nav-link">Education</a>
+            <a href="#" class="nav-link">Health Sciences</a>
+            <a href="#" class="nav-link">Back to Main</a>
+        </div>
+    </div>
+</body>
+</html>
