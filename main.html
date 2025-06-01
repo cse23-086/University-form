@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -656,13 +657,14 @@
                     `Hi ${name},\n\nWelcome to UniMatch! Your account has been successfully created.\n\nYou can now log in and start exploring universities that match your academic goals.\n\nBest regards,\nThe UniMatch Team`
                 );
                 
-                // Save user
+                // Save user with profile completion flag
                 const newUser = {
                     id: Date.now(),
                     name,
                     email,
                     password, // In a real app, this would be hashed
-                    createdAt: new Date().toISOString()
+                    createdAt: new Date().toISOString(),
+                    profileCompleted: false // Flag to track if profile is completed
                 };
                 
                 users.push(newUser);
@@ -670,12 +672,16 @@
                 
                 showNotification('Account created successfully! Welcome email sent to ' + email);
                 
+                // Store current user session
+                localStorage.setItem('unimatch_current_user', JSON.stringify(newUser));
+                
                 // Clear form
                 signupForm.reset();
                 
-                // Switch to login tab
+                // Redirect new users to profile page to complete their information
                 setTimeout(() => {
-                    loginTab.click();
+                    showNotification('Redirecting to complete your profile...', 'success');
+                    window.location.href = 'profile.html';
                 }, 1500);
                 
             } catch (error) {
@@ -745,10 +751,15 @@
                 // Clear form
                 loginForm.reset();
                 
-                // Redirect to dashboard/profile (you can replace this with actual page)
+                // Check if user profile is completed, redirect accordingly
                 setTimeout(() => {
-                    showNotification('Redirecting to your dashboard...', 'success');
-                    // window.location.href = 'dashboard.html';
+                    if (!user.profileCompleted) {
+                        showNotification('Please complete your profile...', 'success');
+                        window.location.href = 'profile.html';
+                    } else {
+                        showNotification('Redirecting to your dashboard...', 'success');
+                        window.location.href = 'dashboard.html';
+                    }
                 }, 1500);
                 
             } catch (error) {
