@@ -276,7 +276,7 @@
         <div class="welcome-content">
             <h2 class="welcome-title">Welcome to UNI MATCH</h2>
             <p class="welcome-text">We are glad to help you select a better course for you. Let us guide you through your academic journey and find the perfect match for your interests and goals.</p>
-            <button class="back-btn" onclick="hideWelcome()">Continue Exploring</button>
+            <button class="back-btn" onclick="redirectToMain()">Continue Exploring</button>
         </div>
     </div>
 
@@ -285,8 +285,9 @@
             document.getElementById('welcomeMessage').classList.add('show');
         }
 
-        function hideWelcome() {
-            document.getElementById('welcomeMessage').classList.remove('show');
+        function redirectToMain() {
+            // Redirect to the main page
+            window.location.href = "main.html";
         }
 
         // Add some interactive particle effects on mouse move
