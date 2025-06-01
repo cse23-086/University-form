@@ -5,7 +5,384 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniMatch - Find Your Perfect University</title>
     <style>
-        /* ... keep all your CSS unchanged ... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #ffd700;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 3px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+            min-height: calc(100vh - 120px);
+        }
+
+        .hero {
+            padding: 2rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+        }
+
+        .feature p {
+            color: white;
+            font-size: 1rem;
+        }
+
+        .cta-text {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid #ffd700;
+        }
+
+        .cta-text p {
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            background: #f0f0f0;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .form-container {
+            position: relative;
+        }
+
+        .form {
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-group input.error {
+            border-color: #ff4757;
+        }
+
+        .error-message {
+            color: #ff4757;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .social-login {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .social-login p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-weight: bold;
+            color: white;
+        }
+
+        .social-icon:nth-child(1) {
+            background: #3b5998;
+        }
+
+        .social-icon:nth-child(2) {
+            background: #db4437;
+        }
+
+        .social-icon:nth-child(3) {
+            background: #0077b5;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.success {
+            background: #2ed573;
+        }
+
+        .notification.error {
+            background: #ff4757;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem 0;
+            }
+
+            .nav.active {
+                display: flex;
+            }
+
+            .nav a {
+                color: #333;
+                padding: 0.5rem 0;
+            }
+
+            .main {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .auth-container {
+                order: -1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -60,19 +437,21 @@
                 <form class="form active" id="login-form">
                     <div class="input-group">
                         <label for="login-email">Email</label>
-                        <input type="email" id="login-email" placeholder="Enter your email">
+                        <input type="email" id="login-email" placeholder="Enter your email" required>
+                        <div class="error-message" id="login-email-error"></div>
                     </div>
                     
                     <div class="input-group">
                         <label for="login-password">Password</label>
-                        <input type="password" id="login-password" placeholder="Enter your password">
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                        <div class="error-message" id="login-password-error"></div>
                     </div>
                     
                     <div class="forgot-password">
-                        <a href="#">Forgot Password?</a>
+                        <a href="#" id="forgot-password-link">Forgot Password?</a>
                     </div>
                     
-                    <button type="button" class="submit-btn">Login</button>
+                    <button type="submit" class="submit-btn" id="login-btn">Login</button>
                     
                     <div class="social-login">
                         <p>Or login with</p>
@@ -87,25 +466,29 @@
                 <form class="form" id="signup-form">
                     <div class="input-group">
                         <label for="signup-name">Full Name</label>
-                        <input type="text" id="signup-name" placeholder="Enter your full name">
+                        <input type="text" id="signup-name" placeholder="Enter your full name" required>
+                        <div class="error-message" id="signup-name-error"></div>
                     </div>
                     
                     <div class="input-group">
                         <label for="signup-email">Email</label>
-                        <input type="email" id="signup-email" placeholder="Enter your email">
+                        <input type="email" id="signup-email" placeholder="Enter your email" required>
+                        <div class="error-message" id="signup-email-error"></div>
                     </div>
                     
                     <div class="input-group">
                         <label for="signup-password">Password</label>
-                        <input type="password" id="signup-password" placeholder="Create a password">
+                        <input type="password" id="signup-password" placeholder="Create a password" required>
+                        <div class="error-message" id="signup-password-error"></div>
                     </div>
                     
                     <div class="input-group">
                         <label for="signup-confirm">Confirm Password</label>
-                        <input type="password" id="signup-confirm" placeholder="Confirm your password">
+                        <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+                        <div class="error-message" id="signup-confirm-error"></div>
                     </div>
                     
-                    <button type="button" class="submit-btn">Create Account</button>
+                    <button type="submit" class="submit-btn" id="signup-btn">Create Account</button>
                     
                     <div class="social-login">
                         <p>Or sign up with</p>
@@ -125,6 +508,9 @@
     </footer>
     
     <script>
+        // User storage (in a real app, this would be a database)
+        let users = JSON.parse(localStorage.getItem('unimatch_users') || '[]');
+        
         // Tab switching functionality
         const loginTab = document.getElementById('login-tab');
         const signupTab = document.getElementById('signup-tab');
@@ -145,16 +531,271 @@
             loginForm.classList.remove('active');
         });
         
-        // Form submission handlers
-        document.querySelectorAll('.submit-btn').forEach(button => {
-            button.addEventListener('click', function () {
-                if (this.closest('form').id === 'signup-form') {
-                    // Redirect to PROFILE.html after signup
-                    window.location.href = 'PROFILE.html';
-                } else {
-                    alert('This is a demo. In a real application, this would process your information.');
+        // Notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 4000);
+        }
+        
+        // Email validation
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        // Password validation
+        function isValidPassword(password) {
+            return password.length >= 6;
+        }
+        
+        // Clear error
+        function clearError(inputId) {
+            const input = document.getElementById(inputId);
+            const errorMsg = document.getElementById(inputId + '-error');
+            input.classList.remove('error');
+            errorMsg.style.display = 'none';
+        }
+        
+        // Show error
+        function showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            const errorMsg = document.getElementById(inputId + '-error');
+            input.classList.add('error');
+            errorMsg.textContent = message;
+            errorMsg.style.display = 'block';
+        }
+        
+        // Simulate email sending
+        async function sendEmail(to, subject, body) {
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // In a real application, you would use a service like:
+            // - EmailJS (for client-side email sending)
+            // - SendGrid, Mailgun, or AWS SES (for server-side)
+            // - Your own backend API
+            
+            console.log('Email sent to:', to);
+            console.log('Subject:', subject);
+            console.log('Body:', body);
+            
+            // Simulate success
+            return { success: true };
+        }
+        
+        // Handle signup
+        signupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signup-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm').value;
+            const submitBtn = document.getElementById('signup-btn');
+            
+            // Clear previous errors
+            ['signup-name', 'signup-email', 'signup-password', 'signup-confirm'].forEach(clearError);
+            
+            let hasErrors = false;
+            
+            // Validate name
+            if (!name) {
+                showError('signup-name', 'Full name is required');
+                hasErrors = true;
+            }
+            
+            // Validate email
+            if (!email) {
+                showError('signup-email', 'Email is required');
+                hasErrors = true;
+            } else if (!isValidEmail(email)) {
+                showError('signup-email', 'Please enter a valid email address');
+                hasErrors = true;
+            } else if (users.find(u => u.email === email)) {
+                showError('signup-email', 'This email is already registered');
+                hasErrors = true;
+            }
+            
+            // Validate password
+            if (!password) {
+                showError('signup-password', 'Password is required');
+                hasErrors = true;
+            } else if (!isValidPassword(password)) {
+                showError('signup-password', 'Password must be at least 6 characters long');
+                hasErrors = true;
+            }
+            
+            // Validate confirm password
+            if (!confirmPassword) {
+                showError('signup-confirm', 'Please confirm your password');
+                hasErrors = true;
+            } else if (password !== confirmPassword) {
+                showError('signup-confirm', 'Passwords do not match');
+                hasErrors = true;
+            }
+            
+            if (hasErrors) return;
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="loading"></div>Creating Account...';
+            
+            try {
+                // Send welcome email
+                await sendEmail(
+                    email,
+                    'Welcome to UniMatch!',
+                    `Hi ${name},\n\nWelcome to UniMatch! Your account has been successfully created.\n\nYou can now log in and start exploring universities that match your academic goals.\n\nBest regards,\nThe UniMatch Team`
+                );
+                
+                // Save user
+                const newUser = {
+                    id: Date.now(),
+                    name,
+                    email,
+                    password, // In a real app, this would be hashed
+                    createdAt: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('unimatch_users', JSON.stringify(users));
+                
+                showNotification('Account created successfully! Welcome email sent to ' + email);
+                
+                // Clear form
+                signupForm.reset();
+                
+                // Switch to login tab
+                setTimeout(() => {
+                    loginTab.click();
+                }, 1500);
+                
+            } catch (error) {
+                showNotification('Error creating account. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Create Account';
+            }
+        });
+        
+        // Handle login
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const submitBtn = document.getElementById('login-btn');
+            
+            // Clear previous errors
+            ['login-email', 'login-password'].forEach(clearError);
+            
+            let hasErrors = false;
+            
+            // Validate email
+            if (!email) {
+                showError('login-email', 'Email is required');
+                hasErrors = true;
+            } else if (!isValidEmail(email)) {
+                showError('login-email', 'Please enter a valid email address');
+                hasErrors = true;
+            }
+            
+            // Validate password
+            if (!password) {
+                showError('login-password', 'Password is required');
+                hasErrors = true;
+            }
+            
+            if (hasErrors) return;
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="loading"></div>Logging in...';
+            
+            try {
+                // Find user
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (!user) {
+                    showError('login-email', 'Invalid email or password');
+                    showError('login-password', 'Invalid email or password');
+                    return;
                 }
-            });
+                
+                // Send login notification email
+                await sendEmail(
+                    email,
+                    'Login Notification - UniMatch',
+                    `Hi ${user.name},\n\nYou have successfully logged into your UniMatch account.\n\nIf this wasn't you, please contact our support team immediately.\n\nBest regards,\nThe UniMatch Team`
+                );
+                
+                showNotification('Login successful! Notification sent to ' + email);
+                
+                // Store current user session
+                localStorage.setItem('unimatch_current_user', JSON.stringify(user));
+                
+                // Clear form
+                loginForm.reset();
+                
+                // Redirect to dashboard/profile (you can replace this with actual page)
+                setTimeout(() => {
+                    showNotification('Redirecting to your dashboard...', 'success');
+                    // window.location.href = 'dashboard.html';
+                }, 1500);
+                
+            } catch (error) {
+                showNotification('Error logging in. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Login';
+            }
+        });
+        
+        // Handle forgot password
+        document.getElementById('forgot-password-link').addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value.trim();
+            
+            if (!email) {
+                showError('login-email', 'Please enter your email address first');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showError('login-email', 'Please enter a valid email address');
+                return;
+            }
+            
+            const user = users.find(u => u.email === email);
+            
+            if (!user) {
+                showError('login-email', 'No account found with this email address');
+                return;
+            }
+            
+            try {
+                // Send password reset email
+                await sendEmail(
+                    email,
+                    'Password Reset - UniMatch',
+                    `Hi ${user.name},\n\nYou requested to reset your password for your UniMatch account.\n\nClick the link below to reset your password:\n[Reset Password Link - This would be a real link in production]\n\nIf you didn't request this, please ignore this email.\n\nBest regards,\nThe UniMatch Team`
+                );
+                
+                showNotification('Password reset instructions sent to ' + email);
+                clearError('login-email');
+                
+            } catch (error) {
+                showNotification('Error sending reset email. Please try again.', 'error');
+            }
         });
         
         // Mobile navigation toggle
@@ -164,11 +805,6 @@
         hamburger.addEventListener('click', () => {
             nav.classList.toggle('active');
             hamburger.classList.toggle('active');
-            
-            // Animate hamburger to X
-            hamburger.children[0].classList.toggle('rotate-45');
-            hamburger.children[1].classList.toggle('opacity-0');
-            hamburger.children[2].classList.toggle('-rotate-45');
         });
         
         // Close mobile menu when clicking on a link
@@ -176,9 +812,17 @@
             link.addEventListener('click', () => {
                 nav.classList.remove('active');
                 hamburger.classList.remove('active');
-                hamburger.children[0].classList.remove('rotate-45');
-                hamburger.children[1].classList.remove('opacity-0');
-                hamburger.children[2].classList.remove('-rotate-45');
+            });
+        });
+        
+        // Real-time input validation
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    showError(this.id, 'This field is required');
+                } else {
+                    clearError(this.id);
+                }
             });
         });
     </script>
