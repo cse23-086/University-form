@@ -66,20 +66,37 @@
             gap: 2rem;
         }
         
-        .nav a {
+        .nav a, .nav .programs-btn {
             color: white;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
         }
         
-        .nav a:hover {
+        .nav a:hover, .nav .programs-btn:hover {
             color: #d8b15d;
         }
         
-        .nav a.active {
+        .nav a.active, .nav .programs-btn.active {
             color: #d8b15d;
             border-bottom: 2px solid #d8b15d;
+        }
+        
+        .nav .programs-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            background-color: rgba(216, 177, 93, 0.1);
+            border: 1px solid rgba(216, 177, 93, 0.3);
+        }
+        
+        .nav .programs-btn:hover {
+            background-color: rgba(216, 177, 93, 0.2);
+            transform: translateY(-2px);
         }
         
         .main {
@@ -753,6 +770,7 @@
             <a href="#">Home</a>
             <a href="#">Universities</a>
             <a href="#" class="active">Boitekanelo College</a>
+            <button class="programs-btn" onclick="window.location.href='boitekanelo-courses.html'">Programs</button>
             <a href="#">Compare</a>
             <a href="#">Resources</a>
             <a href="#">About Us</a>
@@ -780,366 +798,3 @@
                         <div class="quick-stat-label">Students</div>
                     </div>
                     <div class="quick-stat">
-                        <div class="quick-stat-value">89%</div>
-                        <div class="quick-stat-label">Employment Rate</div>
-                    </div>
-                    <div class="quick-stat">
-                        <div class="quick-stat-value">25+</div>
-                        <div class="quick-stat-label">Years Experience</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <div class="content-area">
-            <div class="main-content">
-                <section class="program-section">
-                    <h2 class="section-title">Undergraduate Programs</h2>
-                    <div class="programs-list">
-                        <!-- Program 1 -->
-                        <div class="program-card">
-                            <h3 class="program-title">Bachelor of Public Health</h3>
-                            <div class="program-duration">
-                                <i class="highlight-icon">⏱</i> 4 Years Full-Time
-                            </div>
-                            <div class="program-tags">
-                                <span class="program-tag">Healthcare</span>
-                                <span class="program-tag">Policy</span>
-                                <span class="program-tag">Popular</span>
-                            </div>
-                            <p class="program-description">
-                                Develop expertise in public health practice, research, and policy. This program equips students with the skills to address population health challenges through evidence-based interventions.
-                            </p>
-                            <div class="program-highlights">
-                                <ul class="highlight-list">
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Community health assessments
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Epidemiology fundamentals
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> 6-month internship
-                                    </li>
-                                </ul>
-                            </div>
-                            <button class="apply-btn">Apply Now</button>
-                        </div>
-                        
-                        <!-- Program 2 -->
-                        <div class="program-card">
-                            <h3 class="program-title">Bachelor of Pharmacy</h3>
-                            <div class="program-duration">
-                                <i class="highlight-icon">⏱</i> 5 Years Full-Time
-                            </div>
-                            <div class="program-tags">
-                                <span class="program-tag">Medicine</span>
-                                <span class="program-tag">Clinical</span>
-                                <span class="program-tag">High Demand</span>
-                            </div>
-                            <p class="program-description">
-                                Become a qualified pharmacist with comprehensive knowledge of pharmaceutical sciences, drug development, and patient care. Includes clinical rotations in various healthcare settings.
-                            </p>
-                            <div class="program-highlights">
-                                <ul class="highlight-list">
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Pharmaceutical chemistry
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Clinical pharmacy practice
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Hospital rotations
-                                    </li>
-                                </ul>
-                            </div>
-                            <span class="notification-badge">Limited Seats</span>
-                            <button class="apply-btn">Apply Now</button>
-                        </div>
-                        
-                        <!-- Program 3 -->
-                        <div class="program-card">
-                            <h3 class="program-title">Bachelor of Environmental Health</h3>
-                            <div class="program-duration">
-                                <i class="highlight-icon">⏱</i> 4 Years Full-Time
-                            </div>
-                            <div class="program-tags">
-                                <span class="program-tag">Environment</span>
-                                <span class="program-tag">Health</span>
-                                <span class="program-tag">Safety</span>
-                            </div>
-                            <p class="program-description">
-                                Study the relationship between environmental factors and human health. Learn to identify, assess, and manage environmental health risks in various settings.
-                            </p>
-                            <div class="program-highlights">
-                                <ul class="highlight-list">
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Food safety management
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Environmental impact assessment
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Field research projects
-                                    </li>
-                                </ul>
-                            </div>
-                            <button class="apply-btn">Apply Now</button>
-                        </div>
-                        
-                        <!-- Program 4 -->
-                        <div class="program-card">
-                            <h3 class="program-title">Bachelor of Medical Laboratory Sciences</h3>
-                            <div class="program-duration">
-                                <i class="highlight-icon">⏱</i> 4 Years Full-Time
-                            </div>
-                            <div class="program-tags">
-                                <span class="program-tag">Diagnostics</span>
-                                <span class="program-tag">Clinical</span>
-                                <span class="program-tag">New</span>
-                            </div>
-                            <p class="program-description">
-                                Train to become a medical laboratory scientist with skills in performing laboratory tests critical for diagnosis, treatment, and prevention of disease.
-                            </p>
-                            <div class="program-highlights">
-                                <ul class="highlight-list">
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Clinical biochemistry
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Hematology techniques
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Microbiology laboratory practice
-                                    </li>
-                                </ul>
-                            </div>
-                            <span class="notification-badge">New Program</span>
-                            <button class="apply-btn">Apply Now</button>
-                        </div>
-                        
-                        <!-- Program 5 -->
-                        <div class="program-card">
-                            <h3 class="program-title">Bachelor of Nursing Science</h3>
-                            <div class="program-duration">
-                                <i class="highlight-icon">⏱</i> 4 Years Full-Time
-                            </div>
-                            <div class="program-tags">
-                                <span class="program-tag">Healthcare</span>
-                                <span class="program-tag">Clinical</span>
-                                <span class="program-tag">Patient Care</span>
-                            </div>
-                            <p class="program-description">
-                                Develop comprehensive nursing skills combining theoretical knowledge with clinical practice. Prepare for a career in various healthcare settings as a registered nurse.
-                            </p>
-                            <div class="program-highlights">
-                                <ul class="highlight-list">
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Clinical rotations
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Advanced care techniques
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Community health nursing
-                                    </li>
-                                </ul>
-                            </div>
-                            <button class="apply-btn">Apply Now</button>
-                        </div>
-                        
-                        <!-- Program 6 -->
-                        <div class="program-card">
-                            <h3 class="program-title">Bachelor of Health Information Management</h3>
-                            <div class="program-duration">
-                                <i class="highlight-icon">⏱</i> 4 Years Full-Time
-                            </div>
-                            <div class="program-tags">
-                                <span class="program-tag">Healthcare</span>
-                                <span class="program-tag">Technology</span>
-                                <span class="program-tag">Management</span>
-                            </div>
-                            <p class="program-description">
-                                Learn to manage health data and information resources. Develop skills in health informatics, electronic health records management, and healthcare data analytics.
-                            </p>
-                            <div class="program-highlights">
-                                <ul class="highlight-list">
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Health data analytics
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Medical coding & classification
-                                    </li>
-                                    <li class="highlight-item">
-                                        <i class="highlight-icon">✓</i> Healthcare IT systems
-                                    </li>
-                                </ul>
-                            </div>
-                            <button class="apply-btn">Apply Now</button>
-                        </div>
-                    </div>
-                </section>
-                
-                <section class="success-rate-chart">
-                    <h3 class="sidebar-title">Graduate Employment Rates by Program</h3>
-                    <div class="chart-bars">
-                        <div class="chart-bar" style="height: 92%;">
-                            <span class="bar-value">92%</span>
-                            <span class="bar-label">Pharmacy</span>
-                        </div>
-                        <div class="chart-bar" style="height: 89%;">
-                            <span class="bar-value">89%</span>
-                            <span class="bar-label">Public Health</span>
-                        </div>
-                        <div class="chart-bar" style="height: 87%;">
-                            <span class="bar-value">87%</span>
-                            <span class="bar-label">Medical Lab</span>
-                        </div>
-                        <div class="chart-bar" style="height: 90%;">
-                            <span class="bar-value">90%</span>
-                            <span class="bar-label">Nursing</span>
-                        </div>
-                        <div class="chart-bar" style="height: 85%;">
-                            <span class="bar-value">85%</span>
-                            <span class="bar-label">Env. Health</span>
-                        </div>
-                    </div>
-                </section>
-                
-                <section class="testimonials-section">
-                    <h2 class="section-title">Student Testimonials</h2>
-                    <div class="testimonials-container">
-                        <div class="testimonial-card">
-                            <p class="testimonial-content">
-                                "Boitekanelo College provided me with the perfect balance of theoretical knowledge and practical experience. The hands-on training in the medical laboratory program prepared me exceptionally well for my current role at Princess Marina Hospital."
-                            </p>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">TM</div>
-                                <div class="author-details">
-                                    <div class="author-name">Tshepo Mothibi</div>
-                                    <div class="author-title">Medical Laboratory Scientist, Class of 2020</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="testimonial-card">
-                            <p class="testimonial-content">
-                                "The public health program at Boitekanelo gave me the tools to make a real difference in my community. The faculty's expertise and the internship opportunities were invaluable in shaping my career path in health policy."
-                            </p>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">AM</div>
-                                <div class="author-details">
-                                    <div class="author-name">Amantle Moeng</div>
-                                    <div class="author-title">Public Health Officer, Class of 2019</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                
-                <section class="virtual-tour-section">
-                    <h2 class="tour-title">Explore Our Campus Virtually</h2>
-                    <p class="tour-description">
-                        Can't visit in person? Take our interactive virtual tour to explore state-of-the-art laboratories, lecture halls, and student facilities from anywhere in the world.
-                    </p>
-                    <button class="tour-btn">
-                        <i class="tour-btn-icon">▶</i> Start Virtual Tour
-                    </button>
-                </section>
-            </div>
-            
-            <div class="sidebar">
-                <section class="sidebar-section">
-                    <h3 class="sidebar-title">Contact Information</h3>
-                    <ul class="contact-list">
-                        <li class="contact-item">
-                            <div class="contact-icon">📞</div>
-                            <div>+267 395 7632</div>
-                        </li>
-                        <li class="contact-item">
-                            <div class="contact-icon">✉</div>
-                            <div>admissions@boitekanelo.edu.bw</div>
-                        </li>
-                        <li class="contact-item">
-                            <div class="contact-icon">🏠</div>
-                            <div>Plot 54321, Block 7, Gaborone</div>
-                        </li>
-                        <li class="contact-item">
-                            <div class="contact-icon">🕒</div>
-                            <div>Mon-Fri: 8:00 AM - 5:00 PM</div>
-                        </li>
-                    </ul>
-                    <div class="location-map">
-                        <!-- Map placeholder -->
-                    </div>
-                </section>
-                
-                <section class="sidebar-section">
-                    <h3 class="sidebar-title">Key Facilities</h3>
-                    <ul class="facilities-list">
-                        <li class="facility-item">
-                            <div class="facility-icon">🏥</div>
-                            <div>Modern Teaching Hospital</div>
-                        </li>
-                        <li class="facility-item">
-                            <div class="facility-icon">🔬</div>
-                            <div>Advanced Science Labs</div>
-                        </li>
-                        <li class="facility-item">
-                            <div class="facility-icon">📚</div>
-                            <div>Health Sciences Library</div>
-                        </li>
-                        <li class="facility-item">
-                            <div class="facility-icon">🏋️</div>
-                            <div>Student Wellness Center</div>
-                        </li>
-                        <li class="facility-item">
-                            <div class="facility-icon">🍽</div>
-                            <div>Cafeteria & Dining Hall</div>
-                        </li>
-                    </ul>
-                </section>
-                
-                <section class="sidebar-section">
-                    <h3 class="sidebar-title">Upcoming Events</h3>
-                    <ul class="facilities-list">
-                        <li class="facility-item">
-                            <div class="facility-icon">🗓</div>
-                            <div>
-                                <strong>Open Day:</strong> June 15, 2023
-                            </div>
-                        </li>
-                        <li class="facility-item">
-                            <div class="facility-icon">🗓</div>
-                            <div>
-                                <strong>Application Deadline:</strong> July 31, 2023
-                            </div>
-                        </li>
-                        <li class="facility-item">
-                            <div class="facility-icon">🗓</div>
-                            <div>
-                                <strong>Health Symposium:</strong> August 12, 2023
-                            </div>
-                        </li>
-                    </ul>
-                </section>
-            </div>
-        </div>
-        
-        <section class="admission-cta">
-            <h2 class="cta-title">Ready to Start Your Healthcare Journey?</h2>
-            <p class="cta-text">
-                Boitekanelo College is accepting applications for the 2023/2024 academic year. Join Botswana's premier healthcare education institution and become part of the next generation of healthcare professionals.
-            </p>
-            <div class="cta-buttons">
-                <button class="cta-btn cta-btn-primary">Apply Now</button>
-                <button class="cta-btn cta-btn-secondary">Request Info</button>
-            </div>
-        </section>
-    </main>
-    
-    <footer class="footer">
-        <p>&copy; 2023 UniMatch. All rights reserved. | Boitekanelo College information provided for demonstration purposes.</p>
-    </footer>
-</body>
-</html>
