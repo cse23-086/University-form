@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -289,6 +290,16 @@
         
         .btn-secondary:hover {
             background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-tertiary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-tertiary:hover {
+            background-color: #7251b5;
             transform: translateY(-2px);
         }
         
@@ -593,6 +604,10 @@
                 font-size: 1rem;
             }
             
+            .hero-buttons {
+                flex-wrap: wrap;
+            }
+            
             .stats-section {
                 margin-top: -2rem;
                 flex-direction: column;
@@ -741,7 +756,7 @@
                     </ul>
                 </li>
                 <li class="menu-item">
-                    <a href="#">
+                    <a href="#programs">
                         <i class="fas fa-graduation-cap"></i>
                         <span>All Programs</span>
                     </a>
@@ -775,6 +790,7 @@
             <div class="hero-buttons">
                 <a href="#" class="btn btn-primary">Apply Now</a>
                 <a href="#" class="btn btn-secondary">Virtual Tour</a>
+                <a href="#programs" class="btn btn-tertiary">Programs</a>
             </div>
         </section>
         
@@ -869,7 +885,7 @@
         </section>
         
         <!-- Programs Section -->
-        <section class="programs-section">
+        <section id="programs" class="programs-section">
             <div class="section-heading">
                 <h2>Featured Programs</h2>
                 <p>Discover our diverse range of innovative programs designed to meet the needs of industries and prepare you for a successful career.</p>
@@ -935,4 +951,77 @@
                         </div>
                     </div>
                     <div class="program-content">
-                
+                        <p class="program-desc">
+                            Combines healthcare, information technology, and business management to prepare students for careers in managing patient health information and electronic health records.
+                        </p>
+                        <ul class="program-features">
+                            <li><i class="fas fa-check"></i> Health data management</li>
+                            <li><i class="fas fa-check"></i> Medical coding and classification</li>
+                            <li><i class="fas fa-check"></i> Healthcare statistics</li>
+                            <li><i class="fas fa-check"></i> Health informatics</li>
+                        </ul>
+                    </div>
+                    <div class="program-footer">
+                        <div class="program-price">P8,200/semester</div>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">Botho<span>University</span></div>
+                <p>Quality Education for a Better Future</p>
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Admissions</a>
+                    <a href="#programs">Programs</a>
+                    <a href="#">Research</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p>&copy; 2023 Botho University. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Toggle sidebar
+        document.querySelector('.toggle-sidebar').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.main-content').classList.toggle('shifted');
+        });
+
+        // Close sidebar
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('active');
+            document.querySelector('.main-content').classList.remove('shifted');
+        });
+
+        // Toggle submenus
+        document.querySelectorAll('.submenu-toggle').forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parent = this.parentElement;
+                parent.classList.toggle('open');
+            });
+        });
+
+        // Smooth scrolling for Programs button
+        document.querySelector('a[href="#programs"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#programs').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
