@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -552,7 +551,22 @@
         
         // Initialize form
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize mock user data if not exists (removed localStorage usage)
+            // Initialize mock user data if not exists
+            if (!getUserData()) {
+                const mockUser = {
+                    id: 'user_123',
+                    name: 'John Doe',
+                    email: 'john@example.com'
+                };
+                saveUserData(mockUser);
+            }
+            
+            // Pre-fill name
+            const user = getUserData();
+            if (user && user.name) {
+                document.getElementById('full-name').value = user.name;
+            }
+            
             updateStepIndicator();
             setupEventListeners();
         });
@@ -764,14 +778,25 @@
                 }
             }
             
-            // Show success message and redirect
+            // Save profile data
+            const userData = getUserData();
+            const updatedUser = {
+                ...userData,
+                educationProfile,
+                profileComplete: true
+            };
+            
+            saveUserData(updatedUser);
+            
+            // Show success message
             showNotification('Profile completed successfully! 🎉');
             
-            // Redirect to universities page after 1.5 seconds
+            // Simulate redirect after delay
             setTimeout(() => {
-                // Change this URL to match your universities page filename
-                window.location.href = 'university.html';
-            }, 1500);
+                showNotification('Redirecting to dashboard...');
+                // In a real app, you would redirect to the dashboard
+                console.log('Profile saved:', updatedUser);
+            }, 2000);
         }
         
         function showNotification(message, type = 'success') {
@@ -802,6 +827,16 @@
                     }
                 }, 300);
             }, 3000);
+        }
+        
+        // Mock user data functions (replace with real API calls)
+        function getUserData() {
+            const data = localStorage.getItem('unimatch_current_user');
+            return data ? JSON.parse(data) : null;
+        }
+        
+        function saveUserData(userData) {
+            localStorage.setItem('unimatch_current_user', JSON.stringify(userData));
         }
         
         // Initialize buttons
