@@ -1,327 +1,386 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniMatch - Compare Universities</title>
+    <title>UniMatch - Find Your Perfect University</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
-        
+
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 3rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-        }
-        
-        .logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: white;
-        }
-        
-        .logo span {
-            color: #FFD166;
-        }
-        
-        .nav {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .nav a:hover {
-            color: #FFD166;
-        }
-        
-        .nav a.active {
-            color: #FFD166;
-            border-bottom: 2px solid #FFD166;
-        }
-        
-        .main {
-            flex: 1;
-            padding: 2rem;
-        }
-        
-        .page-title {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        
-        .universities-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-            margin: 0 auto;
-            max-width: 1400px;
-        }
-        
-        .university-card {
-            background-color: rgba(255, 255, 255, 0.15);
+            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            width: calc(25% - 1.5rem);
-            min-width: 280px;
-            cursor: pointer;
-            height: 550px;
-        }
-        
-        .university-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .university-header {
-            padding: 1.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        
-        .university-name {
+
+        .logo {
             font-size: 1.8rem;
             font-weight: bold;
             color: white;
         }
-        
-        .university-location {
-            color: rgba(255, 255, 255, 0.8);
-            font-style: italic;
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #ffd700;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 3px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+            min-height: calc(100vh - 120px);
+        }
+
+        .hero {
+            padding: 2rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+        }
+
+        .feature p {
+            color: white;
+            font-size: 1rem;
+        }
+
+        .cta-text {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid #ffd700;
+        }
+
+        .cta-text p {
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            background: #f0f0f0;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .form-container {
+            position: relative;
+        }
+
+        .form {
+            display: none;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-group input.error {
+            border-color: #ff4757;
+        }
+
+        .error-message {
+            color: #ff4757;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
             font-size: 0.9rem;
         }
-        
-        .university-logo {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(255, 255, 255, 0.3);
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
             border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .social-login {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .social-login p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: white;
-        }
-        
-        .university-content {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            flex: 1;
-        }
-        
-        .university-stats {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-        
-        .stat {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 0.8rem;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .stat-value {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #FFD166;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .university-description {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            flex: 1;
-        }
-        
-        .university-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: auto;
-        }
-        
-        .action-btn {
-            flex: 1;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .btn-primary {
-            background-color: #FFD166;
-            color: #333;
-        }
-        
-        .btn-primary:hover {
-            background-color: #ffc233;
-        }
-        
-        .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+            font-weight: bold;
             color: white;
         }
-        
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.3);
+
+        .social-icon:nth-child(1) {
+            background: #3b5998;
         }
-        
-        .top-programs {
-            margin-top: 0.5rem;
+
+        .social-icon:nth-child(2) {
+            background: #db4437;
         }
-        
-        .top-programs h4 {
-            color: white;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
+
+        .social-icon:nth-child(3) {
+            background: #0077b5;
         }
-        
-        .programs-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+
+        .social-icon:hover {
+            transform: scale(1.1);
         }
-        
-        .program-tag {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 0.3rem 0.6rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .university-card.bac {
-            border-top: 5px solid #FF6B6B;
-        }
-        
-        .university-card.ub {
-            border-top: 5px solid #4ECDC4;
-        }
-        
-        .university-card.buist {
-            border-top: 5px solid #FFD166;
-        }
-        
-        .university-card.botho {
-            border-top: 5px solid #9381FF;
-        }
-        
-        .university-card.buan {
-            border-top: 5px solid #6AB04C;
-        }
-        
-        .university-card.boitekanelo {
-            border-top: 5px solid #EB4D4B;
-        }
-        
-        .university-card.ihs {
-            border-top: 5px solid #22A6B3;
-        }
-        
-        .university-card.baisago {
-            border-top: 5px solid #F0932B;
-        }
-        
-        .university-card.gulps {
-            border-top: 5px solid #BE2EDD;
-        }
-        
+
         .footer {
             text-align: center;
-            padding: 1.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            background-color: rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.2);
         }
-        
-        @media (max-width: 1200px) {
-            .university-card {
-                width: calc(50% - 1rem);
-            }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
         }
-        
+
+        .notification.success {
+            background: #2ed573;
+        }
+
+        .notification.error {
+            background: #ff4757;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
-            .header {
-                padding: 1rem;
-                flex-direction: column;
-                gap: 1rem;
+            .hamburger {
+                display: flex;
             }
-            
+
             .nav {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .university-card {
-                width: 100%;
-                height: auto;
-            }
-            
-            .university-actions {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
                 flex-direction: column;
+                text-align: center;
+                padding: 1rem 0;
             }
-        }
-        
-        @media (max-width: 480px) {
+
+            .nav.active {
+                display: flex;
+            }
+
+            .nav a {
+                color: #333;
+                padding: 0.5rem 0;
+            }
+
             .main {
+                grid-template-columns: 1fr;
+                gap: 3rem;
                 padding: 1rem;
             }
-            
-            .page-title {
+
+            .hero h1 {
                 font-size: 2rem;
             }
-            
-            .university-header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
+
+            .auth-container {
+                order: -1;
             }
         }
     </style>
@@ -331,459 +390,442 @@
         <div class="logo">Uni<span>Match</span></div>
         <nav class="nav">
             <a href="#">Home</a>
-            <a href="#" class="active">Universities</a>
+            <a href="universities.html">Universities</a>
             <a href="#">Compare</a>
             <a href="#">Resources</a>
             <a href="#">About Us</a>
         </nav>
+        <div class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </header>
     
     <main class="main">
-        <h1 class="page-title">Explore Top Universities</h1>
+        <section class="hero">
+            <h1>Find Your Perfect University Match</h1>
+            <p>Discover, compare, and apply to universities that align with your academic goals, interests, and career aspirations.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🔍</div>
+                    <p>Search Top Universities in Botswana</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <p>Compare Programs</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📝</div>
+                    <p>Application Tracking</p>
+                </div>
+            </div>
+            
+            <div class="cta-text">
+                <p>Join thousands of students finding their academic home with UniMatch! Your future is in your hands!</p>
+            </div>
+        </section>
         
-        <div class="universities-container">
-            <!-- BAC University Card -->
-            <div class="university-card bac" onclick="window.open('https://cse23-086.github.io/University-form/BAC.html', '_blank')">
-                <div class="university-header">
-                    <div>
-                        <h2 class="university-name">BAC</h2>
-                        <p class="university-location">Botswana Accountancy College</p>
-                    </div>
-                    <div class="university-logo">BAC</div>
-                </div>
-                
-                <div class="university-content">
-                    <div class="university-stats">
-                        <div class="stat">
-                            <div class="stat-label">Student Rating</div>
-                            <div class="stat-value">4.2/5</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Students</div>
-                            <div class="stat-value">3,500+</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Employment Rate</div>
-                            <div class="stat-value">92%</div>
-                        </div>
-                    </div>
-                    
-                    <p class="university-description">
-                        BAC is known for its excellence in accounting, finance, and business education. With strong industry connections and professional accreditations, BAC prepares students for successful careers in the financial sector.
-                    </p>
-                    
-                    <div class="top-programs">
-                        <h4>Top Programs:</h4>
-                        <div class="programs-list">
-                            <span class="program-tag">Accountancy</span>
-                            <span class="program-tag">Business</span>
-                            <span class="program-tag">Finance</span>
-                            <span class="program-tag">Computing</span>
-                        </div>
-                    </div>
-                    
-                    <div class="university-actions">
-                        <a href="bac.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
-                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BAC')">Compare</button>
-                    </div>
-                </div>
-            </div>
-          <!-- UB University Card -->
-<div class="university-card UB" onclick="window.open('https://cse23-086.github.io/University-form/UB.html', '_blank')">
-    <div class="university-header">
-        <div>
-            <h2 class="university-name">UB</h2>
-            <p class="university-location">University of Botswana</p>
-        </div>
-        <div class="university-logo">UB</div>
-    </div>
-    
-    <div class="university-content">
-        <div class="university-stats">
-            <div class="stat">
-                <div class="stat-label">Student Rating</div>
-                <div class="stat-value">4.5/5</div>
-            </div>
-            <div class="stat">
-                <div class="stat-label">Students</div>
-                <div class="stat-value">15,000+</div>
-            </div>
-            <div class="stat">
-                <div class="stat-label">Employment Rate</div>
-                <div class="stat-value">88%</div>
-            </div>
-        </div>
-        
-        <p class="university-description">
-            The University of Botswana is the first institution of higher education in Botswana. It has a wide range of programs across multiple disciplines, with particularly strong offerings in medicine, law, and engineering.
-        </p>
-        
-        <div class="top-programs">
-            <h4>Top Programs:</h4>
-            <div class="programs-list">
-                <span class="program-tag">Medicine</span>
-                <span class="program-tag">Law</span>
-                <span class="program-tag">Engineering</span>
-                <span class="program-tag">Sciences</span>
-            </div>
-        </div>
-        
-        <div class="university-actions">
-            <a href="UB.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
-            <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('UB')">Compare</button>
-        </div>
-    </div>
-</div>
-    
-               
-            <!-- BUIST University Card -->
-            <div class="university-card buist" onclick="window.open('https://cse23-086.github.io/University-form/BUIST.html', '_blank')">
-                <div class="university-header">
-                    <div>
-                        <h2 class="university-name">BUIST</h2>
-                        <p class="university-location">Botswana Uni. of Innovation & Science</p>
-                    </div>
-                    <div class="university-logo">BUIST</div>
-                </div>
-                
-                <div class="university-content">
-                    <div class="university-stats">
-                        <div class="stat">
-                            <div class="stat-label">Student Rating</div>
-                            <div class="stat-value">4.3/5</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Students</div>
-                            <div class="stat-value">5,000+</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Employment Rate</div>
-                            <div class="stat-value">90%</div>
-                        </div>
-                    </div>
-                    
-                    <p class="university-description">
-                        BUIST focuses on innovation, science, and technology education. With state-of-the-art laboratories and research facilities, it's at the forefront of technological advancement in Botswana.
-                    </p>
-                    
-                    <div class="top-programs">
-                        <h4>Top Programs:</h4>
-                        <div class="programs-list">
-                            <span class="program-tag">Computer Engineering</span>
-                            <span class="program-tag">Biotechnology</span>
-                            <span class="program-tag">IT Systems</span>
-                            <span class="program-tag">Energy</span>
-                        </div>
-                    </div>
-                    
-                    <div class="university-actions">
-                        <a href="buist.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
-                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BUIST')">Compare</button>
-                    </div>
-                </div>
+        <div class="auth-container">
+            <div class="tabs">
+                <div class="tab active" id="login-tab">Login</div>
+                <div class="tab" id="signup-tab">Sign Up</div>
             </div>
             
-            <!-- BOTHO University Card -->
-            <div class="university-card botho" onclick="window.open('https://cse23-086.github.io/University-form/BOTHO.html', '_blank')">
-                <div class="university-header">
-                    <div>
-                        <h2 class="university-name">BOTHO</h2>
-                        <p class="university-location">Botho University</p>
+            <div class="form-container">
+                <form class="form active" id="login-form">
+                    <div class="input-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="Enter your email" required>
+                        <div class="error-message" id="login-email-error"></div>
                     </div>
-                    <div class="university-logo">BOTHO</div>
-                </div>
+                    
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                        <div class="error-message" id="login-password-error"></div>
+                    </div>
+                    
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="login-btn">Login</button>
+                    
+                    <div class="social-login">
+                        <p>Or login with</p>
+                        <div class="social-icons">
+                            <div class="social-icon">f</div>
+                            <div class="social-icon">G</div>
+                            <div class="social-icon">in</div>
+                        </div>
+                    </div>
+                </form>
                 
-                <div class="university-content">
-                    <div class="university-stats">
-                        <div class="stat">
-                            <div class="stat-label">Student Rating</div>
-                            <div class="stat-value">4.1/5</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Students</div>
-                            <div class="stat-value">6,000+</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Employment Rate</div>
-                            <div class="stat-value">85%</div>
-                        </div>
+                <form class="form" id="signup-form">
+                    <div class="input-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" placeholder="Enter your full name" required>
+                        <div class="error-message" id="signup-name-error"></div>
                     </div>
                     
-                    <p class="university-description">
-                        Botho University is known for its practical, industry-focused approach to education. With campuses across Southern Africa, it emphasizes entrepreneurship and innovation.
-                    </p>
-                    
-                    <div class="top-programs">
-                        <h4>Top Programs:</h4>
-                        <div class="programs-list">
-                            <span class="program-tag">Business Admin</span>
-                            <span class="program-tag">Computing</span>
-                            <span class="program-tag">Health Info Management</span>
-                            <span class="program-tag">Hospitality</span>
-                        </div>
+                    <div class="input-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" placeholder="Enter your email" required>
+                        <div class="error-message" id="signup-email-error"></div>
                     </div>
                     
-                    <div class="university-actions">
-                        <a href="botho.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
-                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BOTHO')">Compare</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- BUAN University Card -->
-            <div class="university-card buan" onclick="window.open('https://cse23-086.github.io/University-form/BUAN.html', '_blank')">
-                <div class="university-header">
-                    <div>
-                        <h2 class="university-name">BUAN</h2>
-                        <p class="university-location">Botswana Uni. of Agriculture & Natural Resources</p>
-                    </div>
-                    <div class="university-logo">BUAN</div>
-                </div>
-                
-                <div class="university-content">
-                    <div class="university-stats">
-                        <div class="stat">
-                            <div class="stat-label">Student Rating</div>
-                            <div class="stat-value">4.3/5</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Students</div>
-                            <div class="stat-value">2,000+</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Employment Rate</div>
-                            <div class="stat-value">87%</div>
-                        </div>
+                    <div class="input-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" placeholder="Create a password" required>
+                        <div class="error-message" id="signup-password-error"></div>
                     </div>
                     
-                    <p class="university-description">
-                        BUAN specializes in agricultural sciences and natural resource management. With extensive research facilities and demonstration farms, it prepares students for careers in sustainable agriculture and environmental management.
-                    </p>
-                    
-                    <div class="top-programs">
-                        <h4>Top Programs:</h4>
-                        <div class="programs-list">
-                            <span class="program-tag">Crop Science</span>
-                            <span class="program-tag">Animal Science</span>
-                            <span class="program-tag">Agricultural Economics</span>
-                            <span class="program-tag">Natural Resources</span>
-                        </div>
+                    <div class="input-group">
+                        <label for="signup-confirm">Confirm Password</label>
+                        <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+                        <div class="error-message" id="signup-confirm-error"></div>
                     </div>
                     
-                    <div class="university-actions">
-                        <a href="buan.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
-                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BUAN')">Compare</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Boitekanelo College Card -->
-            <div class="university-card boitekanelo" onclick="window.open('https://cse23-086.github.io/University-form/Boitekanelo.html', '_blank')">
-                <div class="university-header">
-                    <div>
-                        <h2 class="university-name">Boitekanelo</h2>
-                        <p class="university-location">Boitekanelo College</p>
-                    </div>
-                    <div class="university-logo">BC</div>
-                </div>
-                
-                <div class="university-content">
-                    <div class="university-stats">
-                        <div class="stat">
-                            <div class="stat-label">Student Rating</div>
-                            <div class="stat-value">4.0/5</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Students</div>
-                            <div class="stat-value">1,800+</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Employment Rate</div>
-                            <div class="stat-value">89%</div>
-                        </div>
-                    </div>
+                    <button type="submit" class="submit-btn" id="signup-btn">Create Account</button>
                     
-                    <p class="university-description">
-                        Boitekanelo College is dedicated to training health professionals. With a focus on practical skills and community health, the college produces graduates ready to address Botswana's healthcare challenges.
-                    </p>
-                    
-                    <div class="top-programs">
-                        <h4>Top Programs:</h4>
-                        <div class="programs-list">
-                            <span class="program-tag">Public Health</span>
-                            <span class="program-tag">Pharmacy</span>
-                            <span class="program-tag">Environmental Health</span>
-                            <span class="program-tag">Medical Laboratory</span>
+                    <div class="social-login">
+                        <p>Or sign up with</p>
+                        <div class="social-icons">
+                            <div class="social-icon">f</div>
+                            <div class="social-icon">G</div>
+                            <div class="social-icon">in</div>
                         </div>
                     </div>
-                    
-                    <div class="university-actions">
-                        <a href="boitekanelo.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
-                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('Boitekanelo')">Compare</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- IHS University Card -->
-            <div class="university-card ihs" onclick="window.open('https://cse23-086.github.io/University-form/IHS.html', '_blank')">
-                <div class="university-header">
-                    <div>
-                        <h2 class="university-name">IHS</h2>
-                        <p class="university-location">Institute of Health Sciences</p>
-                    </div>
-                    <div class="university-logo">IHS</div>
-                </div>
-                
-                <div class="university-content">
-                    <div class="university-stats">
-                        <div class="stat">
-                            <div class="stat-label">Student Rating</div>
-                            <div class="stat-value">4.2/5</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Students</div>
-                            <div class="stat-value">2,500+</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Employment Rate</div>
-                            <div class="stat-value">93%</div>
-                        </div>
-                    </div>
-                    
-                    <p class="university-description">
-                        The Institute of Health Sciences operates across multiple campuses in Botswana, providing essential education for nursing and allied health professionals. It partners closely with the Ministry of Health to meet national healthcare workforce needs.
-                    </p>
-                    
-                    <div class="top-programs">
-                        <h4>Top Programs:</h4>
-                        <div class="programs-list">
-                            <span class="program-tag">Nursing</span>
-                            <span class="program-tag">Midwifery</span>
-                            <span class="program-tag">Dental Therapy</span>
-                            <span class="program-tag">Health Education</span>
-                        </div>
-                    </div>
-                    
-                    <div class="university-actions">
-                        <a href="ihs.html" class="action-btn btn-primary">View Details</a>
-                        <button class="action-btn btn-secondary">Compare</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Baisago University Card -->
-            <div class="university-card baisago" onclick="window.open('https://cse23-086.github.io/University-form/Baisago.html', '_blank')">
-                <div class="university-header">
-                    <div>
-                        <h2 class="university-name">Baisago</h2>
-                        <p class="university-location">Baisago University</p>
-                    </div>
-                    <div class="university-logo">BU</div>
-                </div>
-                
-                <div class="university-content">
-                    <div class="university-stats">
-                        <div class="stat">
-                            <div class="stat-label">Student Rating</div>
-                            <div class="stat-value">3.9/5</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Students</div>
-                            <div class="stat-value">3,200+</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Employment Rate</div>
-                            <div class="stat-value">82%</div>
-                        </div>
-                    </div>
-                    
-                    <p class="university-description">
-                        Baisago University offers programs across multiple disciplines with an emphasis on business and IT. With campuses in Gaborone and Francistown, it provides accessible higher education with flexible study options.
-                    </p>
-                    
-                    <div class="top-programs">
-                        <h4>Top Programs:</h4>
-                        <div class="programs-list">
-                            <span class="program-tag">Business Management</span>
-                            <span class="program-tag">IT</span>
-                            <span class="program-tag">Public Administration</span>
-                            <span class="program-tag">Human Resources</span>
-                        </div>
-                    </div>
-                    
-                    <div class="university-actions">
-                        <a href="baisago.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
-                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('Baisago')">Compare</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- GULPS University Card -->
-            <div class="university-card gulps" onclick="window.open('https://cse23-086.github.io/University-form/GULPS.html', '_blank')">
-                <div class="university-header">
-                    <div>
-                        <h2 class="university-name">GULPS</h2>
-                        <p class="university-location">Gaborone Uni. College of Law & Prof. Studies</p>
-                    </div>
-                    <div class="university-logo">GULPS</div>
-                </div>
-                
-                <div class="university-content">
-                    <div class="university-stats">
-                        <div class="stat">
-                            <div class="stat-label">Student Rating</div>
-                            <div class="stat-value">4.1/5</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Students</div>
-                            <div class="stat-value">1,500+</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-label">Employment Rate</div>
-                            <div class="stat-value">86%</div>
-                        </div>
-                    </div>
-                    
-                    <p class="university-description">
-                        Gaborone University College of Law and Professional Studies specializes in legal education and professional development. It offers practical training alongside academic learning to prepare graduates for the legal profession and related fields.
-                    </p>
-                    
-                    <div class="top-programs">
-                        <h4>Top Programs:</h4>
-                        <div class="programs-list">
-                            <span class="program-tag">Law</span>
-                            <span class="program-tag">Paralegal Studies</span>
-                            <span class="program-tag">Legal Administration</span>
-                            <span class="program-tag">Criminology</span>
-                        </div>
-                    </div>
-                    
-                    <div class="university-actions">
-                        <a href="gulps.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
-                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('GULPS')">Compare</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </main>
     
     <footer class="footer">
-        <p> 2025 UniMatch - Helping students find their academic home since 2025</p>
+        <p>© 2025 UniMatch - Here to assist students find their academic home and courses since 2025</p>
     </footer>
     
     <script>
-        // Comparison functionality
-        let comparisonList = [];
+        // User storage (in a real app, this would be a database)
+        let users = JSON.parse(window.localStorage?.getItem('unimatch_users') || '[]');
         
-        function addToCompare(universityName) {
-            if (!comparisonList.includes(universityName)) {
-                comparisonList.push(universityName);
-                alert(`${universityName} added to comparison list. Total universities selected: ${comparisonList.length}`);
-            } else {
-                alert(`${universityName} is already in your comparison list.`);
-            }
+        // Tab switching functionality
+        const loginTab = document.getElementById('login-tab');
+        const signupTab = document.getElementById('signup-tab');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('active');
+            signupTab.classList.remove('active');
+            loginForm.classList.add('active');
+            signupForm.classList.remove('active');
+        });
+        
+        signupTab.addEventListener('click', () => {
+            signupTab.classList.add('active');
+            loginTab.classList.remove('active');
+            signupForm.classList.add('active');
+            loginForm.classList.remove('active');
+        });
+        
+        // Notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 100);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 4000);
         }
         
-        // Check if viewing on mobile device
-        function checkMobile() {
-            if (window.innerWidth <=
+        // Email validation
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        // Password validation
+        function isValidPassword(password) {
+            return password.length >= 6;
+        }
+        
+        // Clear error
+        function clearError(inputId) {
+            const input = document.getElementById(inputId);
+            const errorMsg = document.getElementById(inputId + '-error');
+            input.classList.remove('error');
+            errorMsg.style.display = 'none';
+        }
+        
+        // Show error
+        function showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            const errorMsg = document.getElementById(inputId + '-error');
+            input.classList.add('error');
+            errorMsg.textContent = message;
+            errorMsg.style.display = 'block';
+        }
+        
+        // Simulate email sending
+        async function sendEmail(to, subject, body) {
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            console.log('Email sent to:', to);
+            console.log('Subject:', subject);
+            console.log('Body:', body);
+            
+            // Simulate success
+            return { success: true };
+        }
+        
+        // Handle signup
+        signupForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signup-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm').value;
+            const submitBtn = document.getElementById('signup-btn');
+            
+            // Clear previous errors
+            ['signup-name', 'signup-email', 'signup-password', 'signup-confirm'].forEach(clearError);
+            
+            let hasErrors = false;
+            
+            // Validate name
+            if (!name) {
+                showError('signup-name', 'Full name is required');
+                hasErrors = true;
+            }
+            
+            // Validate email
+            if (!email) {
+                showError('signup-email', 'Email is required');
+                hasErrors = true;
+            } else if (!isValidEmail(email)) {
+                showError('signup-email', 'Please enter a valid email address');
+                hasErrors = true;
+            } else if (users.find(u => u.email === email)) {
+                showError('signup-email', 'This email is already registered');
+                hasErrors = true;
+            }
+            
+            // Validate password
+            if (!password) {
+                showError('signup-password', 'Password is required');
+                hasErrors = true;
+            } else if (!isValidPassword(password)) {
+                showError('signup-password', 'Password must be at least 6 characters long');
+                hasErrors = true;
+            }
+            
+            // Validate confirm password
+            if (!confirmPassword) {
+                showError('signup-confirm', 'Please confirm your password');
+                hasErrors = true;
+            } else if (password !== confirmPassword) {
+                showError('signup-confirm', 'Passwords do not match');
+                hasErrors = true;
+            }
+            
+            if (hasErrors) return;
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="loading"></div>Creating Account...';
+            
+            try {
+                // Send welcome email
+                await sendEmail(
+                    email,
+                    'Welcome to UniMatch!',
+                    `Hi ${name},\n\nWelcome to UniMatch! Your account has been successfully created.\n\nYou can now log in and start exploring universities that match your academic goals.\n\nBest regards,\nThe UniMatch Team`
+                );
+                
+                // Save user
+                const newUser = {
+                    id: Date.now(),
+                    name,
+                    email,
+                    password, // In a real app, this would be hashed
+                    createdAt: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                if (window.localStorage) {
+                    localStorage.setItem('unimatch_users', JSON.stringify(users));
+                    localStorage.setItem('unimatch_current_user', JSON.stringify(newUser));
+                }
+                
+                showNotification('Account created successfully! Welcome email sent to ' + email);
+                
+                // Clear form
+                signupForm.reset();
+                
+                // Redirect to universities page after signup
+                setTimeout(() => {
+                    showNotification('Redirecting to explore universities...', 'success');
+                    window.location.href = 'https://cse23-086.github.io/University-form/Profile.html';
+                }, 1500);
+                
+            } catch (error) {
+                showNotification('Error creating account. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Create Account';
+            }
+        });
+        
+        // Handle login - UPDATED TO REDIRECT TO UNIVERSITIES PAGE
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const submitBtn = document.getElementById('login-btn');
+            
+            // Clear previous errors
+            ['login-email', 'login-password'].forEach(clearError);
+            
+            let hasErrors = false;
+            
+            // Validate email
+            if (!email) {
+                showError('login-email', 'Email is required');
+                hasErrors = true;
+            } else if (!isValidEmail(email)) {
+                showError('login-email', 'Please enter a valid email address');
+                hasErrors = true;
+            }
+            
+            // Validate password
+            if (!password) {
+                showError('login-password', 'Password is required');
+                hasErrors = true;
+            }
+            
+            if (hasErrors) return;
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="loading"></div>Logging in...';
+            
+            try {
+                // Find user
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (!user) {
+                    showError('login-email', 'Invalid email or password');
+                    showError('login-password', 'Invalid email or password');
+                    return;
+                }
+                
+                // Send login notification email
+                await sendEmail(
+                    email,
+                    'Login Notification - UniMatch',
+                    `Hi ${user.name},\n\nYou have successfully logged into your UniMatch account.\n\nIf this wasn't you, please contact our support team immediately.\n\nBest regards,\nThe UniMatch Team`
+                );
+                
+                showNotification('Login successful! Welcome back, ' + user.name);
+                
+                // Store current user session
+                if (window.localStorage) {
+                    localStorage.setItem('unimatch_current_user', JSON.stringify(user));
+                }
+                
+                // Clear form
+                loginForm.reset();
+                
+                // Redirect directly to universities page after successful login
+                setTimeout(() => {
+                    showNotification('Redirecting to explore universities...', 'success');
+                    window.location.href = 'https://cse23-086.github.io/University-form/University.html';
+                }, 1500);
+                
+            } catch (error) {
+                showNotification('Error logging in. Please try again.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Login';
+            }
+        });
+        
+        // Handle forgot password
+        document.getElementById('forgot-password-link').addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value.trim();
+            
+            if (!email) {
+                showError('login-email', 'Please enter your email address first');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showError('login-email', 'Please enter a valid email address');
+                return;
+            }
+            
+            const user = users.find(u => u.email === email);
+            
+            if (!user) {
+                showError('login-email', 'No account found with this email address');
+                return;
+            }
+            
+            try {
+                // Send password reset email
+                await sendEmail(
+                    email,
+                    'Password Reset - UniMatch',
+                    `Hi ${user.name},\n\nYou requested to reset your password for your UniMatch account.\n\nClick the link below to reset your password:\n[Reset Password Link - This would be a real link in production]\n\nIf you didn't request this, please ignore this email.\n\nBest regards,\nThe UniMatch Team`
+                );
+                
+                showNotification('Password reset instructions sent to ' + email);
+                clearError('login-email');
+                
+            } catch (error) {
+                showNotification('Error sending reset email. Please try again.', 'error');
+            }
+        });
+        
+        // Mobile navigation toggle
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('.nav');
+        
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+        
+        // Real-time input validation
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    showError(this.id, 'This field is required');
+                } else {
+                    clearError(this.id);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
