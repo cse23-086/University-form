@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniMatch - Education Profile Setup</title>
+    <title>UniMatch - Compare Universities</title>
     <style>
         * {
             margin: 0;
@@ -54,236 +54,145 @@
             color: #FFD166;
         }
         
+        .nav a.active {
+            color: #FFD166;
+            border-bottom: 2px solid #FFD166;
+        }
+        
         .main {
             flex: 1;
             padding: 2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         
-        .form-container {
+        .page-title {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .universities-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 1400px;
+        }
+        
+        .university-card {
             background-color: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
             border-radius: 15px;
-            padding: 3rem;
-            max-width: 600px;
-            width: 100%;
+            overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: slideUp 0.8s ease;
-        }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .form-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .form-header h1 {
-            color: white;
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .form-header p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-        }
-        
-        .step-indicator {
+            transition: all 0.3s ease;
             display: flex;
-            justify-content: center;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
-        
-        .step {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .step.active {
-            background-color: #FFD166;
-            color: #333;
-        }
-        
-        .step.completed {
-            background-color: #4CAF50;
-            color: white;
-        }
-        
-        .form-section {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .form-section.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .input-group label {
-            display: block;
-            color: white;
-            margin-bottom: 0.8rem;
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-        
-        .input-group input,
-        .input-group select {
-            width: 100%;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            outline: none;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
-        
-        .input-group input:focus,
-        .input-group select:focus {
-            border-color: #FFD166;
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .input-group select option {
-            background-color: #2575fc;
-            color: white;
-        }
-        
-        .upload-area {
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+            flex-direction: column;
+            width: calc(25% - 1.5rem);
+            min-width: 280px;
             cursor: pointer;
+            height: 550px;
         }
         
-        .upload-area:hover {
-            border-color: #FFD166;
-            background-color: rgba(255, 255, 255, 0.1);
+        .university-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.2);
         }
         
-        .upload-area.dragover {
-            border-color: #FFD166;
-            background-color: rgba(255, 209, 102, 0.1);
+        .university-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .upload-icon {
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 1rem;
+        .university-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
         }
         
-        .upload-text {
+        .university-location {
             color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 0.5rem;
-        }
-        
-        .upload-subtext {
-            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
             font-size: 0.9rem;
         }
         
-        .file-input {
-            display: none;
-        }
-        
-        .preview-container {
-            margin-top: 1rem;
-            display: none;
-        }
-        
-        .preview-image {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .file-name {
-            color: #FFD166;
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-        
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-        
-        .subject-input {
+        .university-logo {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
             display: flex;
-            gap: 0.5rem;
             align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
         }
         
-        .subject-input input {
-            flex: 2;
-        }
-        
-        .subject-input select {
+        .university-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
             flex: 1;
         }
         
-        .grade-select {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+        .university-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
         }
         
-        .button-group {
+        .stat {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #FFD166;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .university-description {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex: 1;
+        }
+        
+        .university-actions {
             display: flex;
             gap: 1rem;
-            margin-top: 2rem;
-            justify-content: space-between;
+            margin-top: auto;
         }
         
-        .btn {
-            padding: 1rem 2rem;
+        .action-btn {
+            flex: 1;
+            padding: 0.8rem;
             border: none;
-            border-radius: 8px;
-            font-weight: bold;
+            border-radius: 5px;
             cursor: pointer;
+            font-weight: 500;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            text-align: center;
+            text-decoration: none;
+            display: block;
         }
         
         .btn-primary {
@@ -293,23 +202,75 @@
         
         .btn-primary:hover {
             background-color: #ffc233;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.2);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.3);
         }
         
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .top-programs {
+            margin-top: 0.5rem;
+        }
+        
+        .top-programs h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .programs-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .program-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .university-card.bac {
+            border-top: 5px solid #FF6B6B;
+        }
+        
+        .university-card.ub {
+            border-top: 5px solid #4ECDC4;
+        }
+        
+        .university-card.buist {
+            border-top: 5px solid #FFD166;
+        }
+        
+        .university-card.botho {
+            border-top: 5px solid #9381FF;
+        }
+        
+        .university-card.buan {
+            border-top: 5px solid #6AB04C;
+        }
+        
+        .university-card.boitekanelo {
+            border-top: 5px solid #EB4D4B;
+        }
+        
+        .university-card.ihs {
+            border-top: 5px solid #22A6B3;
+        }
+        
+        .university-card.baisago {
+            border-top: 5px solid #F0932B;
+        }
+        
+        .university-card.gulps {
+            border-top: 5px solid #BE2EDD;
         }
         
         .footer {
@@ -319,28 +280,10 @@
             background-color: rgba(0, 0, 0, 0.1);
         }
         
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #4CAF50;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.3s ease;
-        }
-        
-        .notification.show {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .notification.error {
-            background-color: #f44336;
+        @media (max-width: 1200px) {
+            .university-card {
+                width: calc(50% - 1rem);
+            }
         }
         
         @media (max-width: 768px) {
@@ -352,19 +295,33 @@
             
             .nav {
                 gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
-            .form-container {
-                margin: 1rem;
-                padding: 2rem;
+            .university-card {
+                width: 100%;
+                height: auto;
             }
             
-            .subjects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .button-group {
+            .university-actions {
                 flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main {
+                padding: 1rem;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .university-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
             }
         }
     </style>
@@ -374,7 +331,7 @@
         <div class="logo">Uni<span>Match</span></div>
         <nav class="nav">
             <a href="#">Home</a>
-            <a href="#">Universities</a>
+            <a href="#" class="active">Universities</a>
             <a href="#">Compare</a>
             <a href="#">Resources</a>
             <a href="#">About Us</a>
@@ -382,465 +339,451 @@
     </header>
     
     <main class="main">
-        <div class="form-container">
-            <div class="form-header">
-                <h1>Education Profile Setup</h1>
-                <p>Let's get your academic information to find the perfect university match</p>
-            </div>
-            
-            <div class="step-indicator">
-                <div class="step active" id="step-1">1</div>
-                <div class="step" id="step-2">2</div>
-                <div class="step" id="step-3">3</div>
-            </div>
-            
-            <form id="education-form">
-                <!-- Step 1: Personal Information -->
-                <div class="form-section active" id="section-1">
-                    <div class="input-group">
-                        <label for="full-name">Full Name</label>
-                        <input type="text" id="full-name" name="fullName" placeholder="Enter your full name" required>
+        <h1 class="page-title">Explore Top Universities</h1>
+        
+        <div class="universities-container">
+            <!-- BAC University Card -->
+            <div class="university-card bac" onclick="window.open('https://cse23-086.github.io/University-form/BAC.html', '_blank')">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">BAC</h2>
+                        <p class="university-location">Botswana Accountancy College</p>
+                    </div>
+                    <div class="university-logo">BAC</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.2/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">3,500+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">92%</div>
+                        </div>
                     </div>
                     
-                    <div class="input-group">
-                        <label for="education-level">Education Level</label>
-                        <select id="education-level" name="educationLevel" required>
-                            <option value="">Select your education level</option>
-                            <option value="BGCSE">BGCSE (Botswana General Certificate of Secondary Education)</option>
-                            <option value="IGCSE">IGCSE (International General Certificate of Secondary Education)</option>
-                            <option value="A Level">A Level (Advanced Level)</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <!-- Step 2: Certificate Upload -->
-                <div class="form-section" id="section-2">
-                    <div class="input-group">
-                        <label>Upload High School Certificate</label>
-                        <div class="upload-area" id="upload-area">
-                            <div class="upload-icon">📄</div>
-                            <div class="upload-text">Click to upload or drag and drop</div>
-                            <div class="upload-subtext">PNG, JPG, PDF up to 10MB</div>
-                            <input type="file" id="certificate-upload" name="certificate" class="file-input" accept="image/*,application/pdf">
-                        </div>
-                        <div class="preview-container" id="preview-container">
-                            <img id="preview-image" class="preview-image" alt="Certificate preview">
-                            <div class="file-name" id="file-name"></div>
+                    <p class="university-description">
+                        BAC is known for its excellence in accounting, finance, and business education. With strong industry connections and professional accreditations, BAC prepares students for successful careers in the financial sector.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Accountancy</span>
+                            <span class="program-tag">Business</span>
+                            <span class="program-tag">Finance</span>
+                            <span class="program-tag">Computing</span>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Step 3: Best 6 Subjects -->
-                <div class="form-section" id="section-3">
-                    <div class="input-group">
-                        <label>Best 6 Subjects and Grades</label>
-                        <div class="subjects-grid" id="subjects-container">
-                            <div class="subject-input">
-                                <input type="text" name="subject1" placeholder="Subject 1" required>
-                                <select name="grade1" class="grade-select" required>
-                                    <option value="">Grade</option>
-                                    <option value="A*">A*</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                </select>
-                            </div>
-                            <div class="subject-input">
-                                <input type="text" name="subject2" placeholder="Subject 2" required>
-                                <select name="grade2" class="grade-select" required>
-                                    <option value="">Grade</option>
-                                    <option value="A*">A*</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                </select>
-                            </div>
-                            <div class="subject-input">
-                                <input type="text" name="subject3" placeholder="Subject 3" required>
-                                <select name="grade3" class="grade-select" required>
-                                    <option value="">Grade</option>
-                                    <option value="A*">A*</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                </select>
-                            </div>
-                            <div class="subject-input">
-                                <input type="text" name="subject4" placeholder="Subject 4" required>
-                                <select name="grade4" class="grade-select" required>
-                                    <option value="">Grade</option>
-                                    <option value="A*">A*</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                </select>
-                            </div>
-                            <div class="subject-input">
-                                <input type="text" name="subject5" placeholder="Subject 5" required>
-                                <select name="grade5" class="grade-select" required>
-                                    <option value="">Grade</option>
-                                    <option value="A*">A*</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                </select>
-                            </div>
-                            <div class="subject-input">
-                                <input type="text" name="subject6" placeholder="Subject 6" required>
-                                <select name="grade6" class="grade-select" required>
-                                    <option value="">Grade</option>
-                                    <option value="A*">A*</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                </select>
-                            </div>
-                        </div>
+                    
+                    <div class="university-actions">
+                        <a href="bac.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BAC')">Compare</button>
                     </div>
                 </div>
-                
-                <div class="button-group">
-                    <button type="button" class="btn btn-secondary" id="prev-btn" disabled>Previous</button>
-                    <button type="button" class="btn btn-primary" id="next-btn">Next</button>
+            </div>
+          <!-- UB University Card -->
+<div class="university-card UB" onclick="window.open('https://cse23-086.github.io/University-form/UB.html', '_blank')">
+    <div class="university-header">
+        <div>
+            <h2 class="university-name">UB</h2>
+            <p class="university-location">University of Botswana</p>
+        </div>
+        <div class="university-logo">UB</div>
+    </div>
+    
+    <div class="university-content">
+        <div class="university-stats">
+            <div class="stat">
+                <div class="stat-label">Student Rating</div>
+                <div class="stat-value">4.5/5</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Students</div>
+                <div class="stat-value">15,000+</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Employment Rate</div>
+                <div class="stat-value">88%</div>
+            </div>
+        </div>
+        
+        <p class="university-description">
+            The University of Botswana is the first institution of higher education in Botswana. It has a wide range of programs across multiple disciplines, with particularly strong offerings in medicine, law, and engineering.
+        </p>
+        
+        <div class="top-programs">
+            <h4>Top Programs:</h4>
+            <div class="programs-list">
+                <span class="program-tag">Medicine</span>
+                <span class="program-tag">Law</span>
+                <span class="program-tag">Engineering</span>
+                <span class="program-tag">Sciences</span>
+            </div>
+        </div>
+        
+        <div class="university-actions">
+            <a href="UB.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+            <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('UB')">Compare</button>
+        </div>
+    </div>
+</div>
+    
+               
+            <!-- BUIST University Card -->
+            <div class="university-card buist" onclick="window.open('https://cse23-086.github.io/University-form/BUIST.html', '_blank')">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">BUIST</h2>
+                        <p class="university-location">Botswana Uni. of Innovation & Science</p>
+                    </div>
+                    <div class="university-logo">BUIST</div>
                 </div>
-            </form>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.3/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">5,000+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">90%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        BUIST focuses on innovation, science, and technology education. With state-of-the-art laboratories and research facilities, it's at the forefront of technological advancement in Botswana.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Computer Engineering</span>
+                            <span class="program-tag">Biotechnology</span>
+                            <span class="program-tag">IT Systems</span>
+                            <span class="program-tag">Energy</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <a href="buist.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BUIST')">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BOTHO University Card -->
+            <div class="university-card botho" onclick="window.open('https://cse23-086.github.io/University-form/BOTHO.html', '_blank')">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">BOTHO</h2>
+                        <p class="university-location">Botho University</p>
+                    </div>
+                    <div class="university-logo">BOTHO</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.1/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">6,000+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">85%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        Botho University is known for its practical, industry-focused approach to education. With campuses across Southern Africa, it emphasizes entrepreneurship and innovation.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Business Admin</span>
+                            <span class="program-tag">Computing</span>
+                            <span class="program-tag">Health Info Management</span>
+                            <span class="program-tag">Hospitality</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <a href="botho.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BOTHO')">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BUAN University Card -->
+            <div class="university-card buan" onclick="window.open('https://cse23-086.github.io/University-form/BUAN.html', '_blank')">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">BUAN</h2>
+                        <p class="university-location">Botswana Uni. of Agriculture & Natural Resources</p>
+                    </div>
+                    <div class="university-logo">BUAN</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.3/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">2,000+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">87%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        BUAN specializes in agricultural sciences and natural resource management. With extensive research facilities and demonstration farms, it prepares students for careers in sustainable agriculture and environmental management.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Crop Science</span>
+                            <span class="program-tag">Animal Science</span>
+                            <span class="program-tag">Agricultural Economics</span>
+                            <span class="program-tag">Natural Resources</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <a href="buan.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('BUAN')">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Boitekanelo College Card -->
+            <div class="university-card boitekanelo" onclick="window.open('https://cse23-086.github.io/University-form/Boitekanelo.html', '_blank')">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">Boitekanelo</h2>
+                        <p class="university-location">Boitekanelo College</p>
+                    </div>
+                    <div class="university-logo">BC</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.0/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">1,800+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">89%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        Boitekanelo College is dedicated to training health professionals. With a focus on practical skills and community health, the college produces graduates ready to address Botswana's healthcare challenges.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Public Health</span>
+                            <span class="program-tag">Pharmacy</span>
+                            <span class="program-tag">Environmental Health</span>
+                            <span class="program-tag">Medical Laboratory</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <a href="boitekanelo.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('Boitekanelo')">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- IHS University Card -->
+            <div class="university-card ihs" onclick="window.open('https://cse23-086.github.io/University-form/IHS.html', '_blank')">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">IHS</h2>
+                        <p class="university-location">Institute of Health Sciences</p>
+                    </div>
+                    <div class="university-logo">IHS</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.2/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">2,500+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">93%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        The Institute of Health Sciences operates across multiple campuses in Botswana, providing essential education for nursing and allied health professionals. It partners closely with the Ministry of Health to meet national healthcare workforce needs.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Nursing</span>
+                            <span class="program-tag">Midwifery</span>
+                            <span class="program-tag">Dental Therapy</span>
+                            <span class="program-tag">Health Education</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <a href="ihs.html" class="action-btn btn-primary">View Details</a>
+                        <button class="action-btn btn-secondary">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Baisago University Card -->
+            <div class="university-card baisago" onclick="window.open('https://cse23-086.github.io/University-form/Baisago.html', '_blank')">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">Baisago</h2>
+                        <p class="university-location">Baisago University</p>
+                    </div>
+                    <div class="university-logo">BU</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">3.9/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">3,200+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">82%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        Baisago University offers programs across multiple disciplines with an emphasis on business and IT. With campuses in Gaborone and Francistown, it provides accessible higher education with flexible study options.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Business Management</span>
+                            <span class="program-tag">IT</span>
+                            <span class="program-tag">Public Administration</span>
+                            <span class="program-tag">Human Resources</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <a href="baisago.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('Baisago')">Compare</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- GULPS University Card -->
+            <div class="university-card gulps" onclick="window.open('https://cse23-086.github.io/University-form/GULPS.html', '_blank')">
+                <div class="university-header">
+                    <div>
+                        <h2 class="university-name">GULPS</h2>
+                        <p class="university-location">Gaborone Uni. College of Law & Prof. Studies</p>
+                    </div>
+                    <div class="university-logo">GULPS</div>
+                </div>
+                
+                <div class="university-content">
+                    <div class="university-stats">
+                        <div class="stat">
+                            <div class="stat-label">Student Rating</div>
+                            <div class="stat-value">4.1/5</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Students</div>
+                            <div class="stat-value">1,500+</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-label">Employment Rate</div>
+                            <div class="stat-value">86%</div>
+                        </div>
+                    </div>
+                    
+                    <p class="university-description">
+                        Gaborone University College of Law and Professional Studies specializes in legal education and professional development. It offers practical training alongside academic learning to prepare graduates for the legal profession and related fields.
+                    </p>
+                    
+                    <div class="top-programs">
+                        <h4>Top Programs:</h4>
+                        <div class="programs-list">
+                            <span class="program-tag">Law</span>
+                            <span class="program-tag">Paralegal Studies</span>
+                            <span class="program-tag">Legal Administration</span>
+                            <span class="program-tag">Criminology</span>
+                        </div>
+                    </div>
+                    
+                    <div class="university-actions">
+                        <a href="gulps.html" class="action-btn btn-primary" onclick="event.stopPropagation()">View Details</a>
+                        <button class="action-btn btn-secondary" onclick="event.stopPropagation(); addToCompare('GULPS')">Compare</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     
     <footer class="footer">
-        <p>© 2025 UniMatch - Here to assist students find their academic home and courses since 2025</p>
+        <p> 2025 UniMatch - Helping students find their academic home since 2025</p>
     </footer>
     
     <script>
-        let currentStep = 1;
-        const totalSteps = 3;
+        // Comparison functionality
+        let comparisonList = [];
         
-        // DOM elements
-        const form = document.getElementById('education-form');
-        const nextBtn = document.getElementById('next-btn');
-        const prevBtn = document.getElementById('prev-btn');
-        const uploadArea = document.getElementById('upload-area');
-        const fileInput = document.getElementById('certificate-upload');
-        const previewContainer = document.getElementById('preview-container');
-        const previewImage = document.getElementById('preview-image');
-        const fileName = document.getElementById('file-name');
-        
-        // Initialize form
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize mock user data if not exists
-            if (!getUserData()) {
-                const mockUser = {
-                    id: 'user_123',
-                    name: 'John Doe',
-                    email: 'john@example.com'
-                };
-                saveUserData(mockUser);
-            }
-            
-            // Pre-fill name
-            const user = getUserData();
-            if (user && user.name) {
-                document.getElementById('full-name').value = user.name;
-            }
-            
-            updateStepIndicator();
-            setupEventListeners();
-        });
-        
-        function setupEventListeners() {
-            // Next button
-            nextBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                console.log('Next button clicked, current step:', currentStep);
-                
-                if (validateCurrentStep()) {
-                    if (currentStep < totalSteps) {
-                        nextStep();
-                    } else {
-                        submitForm();
-                    }
-                } else {
-                    console.log('Validation failed for step', currentStep);
-                }
-            });
-            
-            // Previous button
-            prevBtn.addEventListener('click', function() {
-                if (currentStep > 1) {
-                    prevStep();
-                }
-            });
-            
-            // File upload
-            uploadArea.addEventListener('click', () => fileInput.click());
-            uploadArea.addEventListener('dragover', handleDragOver);
-            uploadArea.addEventListener('dragleave', handleDragLeave);
-            uploadArea.addEventListener('drop', handleDrop);
-            fileInput.addEventListener('change', handleFileSelect);
-        }
-        
-        function nextStep() {
-            console.log('Moving to next step from', currentStep);
-            
-            // Hide current section
-            const currentSection = document.getElementById(`section-${currentStep}`);
-            const currentStepEl = document.getElementById(`step-${currentStep}`);
-            
-            if (currentSection && currentStepEl) {
-                currentSection.classList.remove('active');
-                currentStepEl.classList.remove('active');
-                currentStepEl.classList.add('completed');
-            }
-            
-            currentStep++;
-            
-            // Show next section
-            const nextSection = document.getElementById(`section-${currentStep}`);
-            const nextStepEl = document.getElementById(`step-${currentStep}`);
-            
-            if (nextSection && nextStepEl) {
-                nextSection.classList.add('active');
-                nextStepEl.classList.add('active');
-            }
-            
-            updateButtons();
-        }
-        
-        function prevStep() {
-            // Hide current section
-            document.getElementById(`section-${currentStep}`).classList.remove('active');
-            document.getElementById(`step-${currentStep}`).classList.remove('active');
-            
-            currentStep--;
-            
-            // Show previous section
-            document.getElementById(`section-${currentStep}`).classList.add('active');
-            document.getElementById(`step-${currentStep}`).classList.remove('completed');
-            document.getElementById(`step-${currentStep}`).classList.add('active');
-            
-            updateButtons();
-        }
-        
-        function updateButtons() {
-            prevBtn.disabled = currentStep === 1;
-            nextBtn.textContent = currentStep === totalSteps ? 'Complete Profile' : 'Next';
-        }
-        
-        function updateStepIndicator() {
-            for (let i = 1; i <= totalSteps; i++) {
-                const step = document.getElementById(`step-${i}`);
-                if (i === currentStep) {
-                    step.classList.add('active');
-                    step.classList.remove('completed');
-                } else if (i < currentStep) {
-                    step.classList.remove('active');
-                    step.classList.add('completed');
-                } else {
-                    step.classList.remove('active', 'completed');
-                }
-            }
-        }
-        
-        function validateCurrentStep() {
-            console.log('Validating step', currentStep);
-            const currentSection = document.getElementById(`section-${currentStep}`);
-            
-            if (!currentSection) {
-                console.error('Current section not found');
-                return false;
-            }
-            
-            const requiredFields = currentSection.querySelectorAll('[required]');
-            console.log('Found required fields:', requiredFields.length);
-            
-            for (let field of requiredFields) {
-                if (!field.value || !field.value.trim()) {
-                    console.log('Empty field found:', field.name || field.id);
-                    field.focus();
-                    showNotification('Please fill in all required fields', 'error');
-                    return false;
-                }
-            }
-            
-            // Special validation for step 2 (file upload)
-            if (currentStep === 2) {
-                const fileInput = document.getElementById('certificate-upload');
-                if (!fileInput.files || fileInput.files.length === 0) {
-                    showNotification('Please upload your certificate', 'error');
-                    return false;
-                }
-            }
-            
-            console.log('Step validation passed');
-            return true;
-        }
-        
-        function handleDragOver(e) {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-        }
-        
-        function handleDragLeave(e) {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-        }
-        
-        function handleDrop(e) {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                handleFile(files[0]);
-            }
-        }
-        
-        function handleFileSelect(e) {
-            const file = e.target.files[0];
-            if (file) {
-                handleFile(file);
-            }
-        }
-        
-        function handleFile(file) {
-            // Validate file
-            if (file.size > 10 * 1024 * 1024) {
-                showNotification('File size must be less than 10MB', 'error');
-                return;
-            }
-            
-            if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
-                showNotification('Please upload an image or PDF file', 'error');
-                return;
-            }
-            
-            // Show preview
-            fileName.textContent = file.name;
-            
-            if (file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImage.src = e.target.result;
-                    previewImage.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
+        function addToCompare(universityName) {
+            if (!comparisonList.includes(universityName)) {
+                comparisonList.push(universityName);
+                alert(`${universityName} added to comparison list. Total universities selected: ${comparisonList.length}`);
             } else {
-                previewImage.style.display = 'none';
+                alert(`${universityName} is already in your comparison list.`);
             }
-            
-            previewContainer.style.display = 'block';
-            showNotification('File uploaded successfully!');
         }
         
-        function submitForm() {
-            const formData = new FormData(form);
-            
-            // Create education profile object
-            const educationProfile = {
-                fullName: formData.get('fullName'),
-                educationLevel: formData.get('educationLevel'),
-                certificate: fileInput.files[0]?.name || null,
-                subjects: []
-            };
-            
-            // Collect subjects and grades
-            for (let i = 1; i <= 6; i++) {
-                const subject = formData.get(`subject${i}`);
-                const grade = formData.get(`grade${i}`);
-                if (subject && grade) {
-                    educationProfile.subjects.push({
-                        subject: subject.trim(),
-                        grade: grade
-                    });
-                }
-            }
-            
-            // Save profile data
-            const userData = getUserData();
-            const updatedUser = {
-                ...userData,
-                educationProfile,
-                profileComplete: true
-            };
-            
-            saveUserData(updatedUser);
-            
-            // Show success message
-            showNotification('Profile completed successfully! 🎉');
-            
-            // Simulate redirect after delay
-            setTimeout(() => {
-                showNotification('Redirecting to dashboard...');
-                // In a real app, you would redirect to the dashboard
-                console.log('Profile saved:', updatedUser);
-            }, 2000);
-        }
-        
-        function showNotification(message, type = 'success') {
-            // Remove existing notifications
-            const existingNotification = document.querySelector('.notification');
-            if (existingNotification) {
-                existingNotification.remove();
-            }
-            
-            // Create notification
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            // Show notification
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 100);
-            
-            // Hide notification after 3 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.remove();
-                    }
-                }, 300);
-            }, 3000);
-        }
-        
-        // Mock user data functions (replace with real API calls)
-        function getUserData() {
-            const data = localStorage.getItem('unimatch_current_user');
-            return data ? JSON.parse(data) : null;
-        }
-        
-        function saveUserData(userData) {
-            localStorage.setItem('unimatch_current_user', JSON.stringify(userData));
-        }
-        
-        // Initialize buttons
-        updateButtons();
-    </script>
-</body>
-</html>
+        // Check if viewing on mobile device
+        function checkMobile() {
+            if (window.innerWidth <=
