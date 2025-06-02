@@ -279,11 +279,39 @@
             border-radius: 10px;
             transition: all 0.3s ease;
             cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(78, 205, 196, 0.1), rgba(255, 209, 102, 0.1));
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .program-card:hover::before {
+            opacity: 1;
+        }
+        
+        .program-card > * {
+            position: relative;
+            z-index: 2;
         }
         
         .program-card:hover {
             background-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         
         .program-card h4 {
@@ -715,6 +743,40 @@
                 font-size: 1.5rem;
             }
         }
+
+        .program-finder {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        #find-program-btn {
+            padding: 10px 20px;
+            background-color: #2c7be5;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        #find-program-btn:hover {
+            background-color: #1a68d1;
+        }
+        
+        #find-program-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .program-results {
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
     </style>
 </head>
 <body>
@@ -780,59 +842,59 @@
                     </p>
                     
                     <div class="programs-grid">
-                        <div class="program-card">
+                        <a href="faculty-medicine.html" class="program-card">
                             <h4>Faculty of Medicine</h4>
                             <p>Training future healthcare professionals with state-of-the-art facilities and clinical partnerships.</p>
                             <div class="program-details">
                                 <span>5 Years</span>
                                 <span>MBBS, MSc, PhD</span>
                             </div>
-                        </div>
+                        </a>
                         
-                        <div class="program-card">
+                        <a href="faculty-law.html" class="program-card">
                             <h4>Faculty of Law</h4>
                             <p>Producing legal experts who shape Botswana's judicial system and contribute to justice globally.</p>
                             <div class="program-details">
                                 <span>4 Years</span>
                                 <span>LLB, LLM, PhD</span>
                             </div>
-                        </div>
+                        </a>
                         
-                        <div class="program-card">
+                        <a href="faculty-engineering.html" class="program-card">
                             <h4>Faculty of Engineering</h4>
                             <p>Building technical expertise to drive innovation and infrastructure development.</p>
                             <div class="program-details">
                                 <span>4-5 Years</span>
                                 <span>BEng, MEng, PhD</span>
                             </div>
-                        </div>
+                        </a>
                         
-                        <div class="program-card">
+                        <a href="faculty-science.html" class="program-card">
                             <h4>Faculty of Science</h4>
                             <p>Advancing scientific knowledge with research-intensive programs and modern laboratories.</p>
                             <div class="program-details">
                                 <span>4 Years</span>
                                 <span>BSc, MSc, PhD</span>
                             </div>
-                        </div>
+                        </a>
                         
-                        <div class="program-card">
+                        <a href="faculty-business.html" class="program-card">
                             <h4>Faculty of Business</h4>
                             <p>Developing business leaders and entrepreneurs who drive economic growth in Africa.</p>
                             <div class="program-details">
                                 <span>4 Years</span>
                                 <span>BBA, MBA, PhD</span>
                             </div>
-                        </div>
+                        </a>
                         
-                        <div class="program-card">
+                        <a href="faculty-humanities.html" class="program-card">
                             <h4>Faculty of Humanities</h4>
                             <p>Exploring cultural heritage, social dynamics, and human expressions through diverse disciplines.</p>
                             <div class="program-details">
                                 <span>4 Years</span>
                                 <span>BA, MA, PhD</span>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </section>
                 
@@ -874,33 +936,7 @@
                         UB boasts world-class facilities designed to enhance the learning experience and support students' academic and personal development.
                     </p>
                     
-                    <div class="gallery">
-                        <div class="gallery-item">
-                            <img src="/api/placeholder/400/300" alt="UB Library">
-                            <div class="gallery-caption">The state-of-the-art UB Library houses over 500,000 volumes and digital resources.</div>
-                        </div>
-                        
-                        <div class="gallery-item">
-                            <img src="/api/placeholder/400/300" alt="Science Labs">
-                            <div class="gallery-caption">Modern science laboratories equipped with the latest research technology.</div>
-                        </div>
-                        
-                        <div class="gallery-item">
-                            <img src="/api/placeholder/400/300" alt="Sports Complex">
-                            <div class="gallery-caption">The UB Sports Complex includes an Olympic-sized swimming pool and multiple courts.</div>
-                        </div>
-                        
-                        <div class="gallery-item">
-                            <img src="/api/placeholder/400/300" alt="Student Center">
-                            <div class="gallery-caption">The vibrant Student Center is the hub of campus social life and activities.</div>
-                        </div>
-                        
-                        <div class="gallery-item">
-                            <img src="/api/placeholder/400/300" alt="Medical School">
-                            <div class="gallery-caption">The Faculty of Medicine features simulation labs and clinical training facilities.</div>
-                        </div>
-                        
-                        <div class="gallery-item">
+                    <div class="gallery-item">
                             <img src="/api/placeholder/400/300" alt="Auditorium">
                             <div class="gallery-caption">The main auditorium hosts academic conferences, cultural performances, and ceremonies.</div>
                         </div>
@@ -916,135 +952,284 @@
                     <p class="content-text">
                         Find the perfect academic program that matches your interests, career goals, and qualifications using our interactive Program Finder tool.
                     </p>
-                    
-                    <div class="program-finder">
+                                      <div class="program-finder">
                         <div class="finder-controls">
                             <div class="finder-input">
                                 <select id="faculty-select">
                                     <option value="">Select Faculty</option>
-                                    <option value="medicine">Medicine</option>
-                                    <option value="law">Law</option>
-                                    <option value="engineering">engineering</option> 
-                                     <option value="science">science</option> 
-                                     <option value=" Humanities">Humanities</option> 
-                                     <option value="Business">Business</option> 
-                                 </select> 
-        </div>
-        
-        <div class="finder-input">
-            <select id="program-select" disabled>
-                <option value="">Select Program</option>
-                <!-- Programs will be populated via JavaScript -->
-            </select>
-        </div>
-        
-        <button id="find-program-btn" disabled>Find Program</button>
-    </div>
-    
-    <div class="program-results" id="program-results">
-        <!-- Results will be displayed here -->
-    </div>
-</div>
-
-<style>
-    .program-finder {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        background-color: #f9f9f9;
-    }
-    
-    .finder-controls {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 20px;
-    }
-    
-    .finder-input select {
-        padding: 10px 15px;
-        border-radius: 4px;
-        border: 1px solid #ddd;
-        font-size: 16px;
-        min-width: 200px;
-    }
-    
-    #find-program-btn {
-        padding: 10px 20px;
-        background-color: #2c7be5;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-    }
-    
-    #find-program-btn:hover {
-        background-color: #1a68d1;
-    }
-    
-    #find-program-btn:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-    }
-    
-    .program-results {
-        padding: 15px;
-        border-top: 1px solid #eee;
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const facultySelect = document.getElementById('faculty-select');
-        const programSelect = document.getElementById('program-select');
-        const findBtn = document.getElementById('find-program-btn');
-        const resultsDiv = document.getElementById('program-results');
-        
-        // Sample program data
-        const programs = {
-            medicine: ['MD Program', 'Biomedical Sciences', 'Public Health', 'Nursing'],
-            law: ['Juris Doctor', 'International Law', 'Tax Law', 'Human Rights Law'],
-            engineering: ['Mechanical Engineering', 'Electrical Engineering', 'Computer Science', 'Civil Engineering'],
-            science: ['Biology', 'Chemistry', 'Physics', 'Mathematics'],
-            humanities: ['History', 'Philosophy', 'Literature', 'Cultural Studies'],
-            business: ['MBA', 'Finance', 'Marketing', 'Entrepreneurship']
-        };
-        
-        // Update program options when faculty is selected
-        facultySelect.addEventListener('change', function() {
-            programSelect.innerHTML = '<option value="">Select Program</option>';
-            programSelect.disabled = !this.value;
-            findBtn.disabled = true;
+                                    <option value="medicine">Faculty of Medicine</option>
+                                    <option value="law">Faculty of Law</option>
+                                    <option value="engineering">Faculty of Engineering</option>
+                                    <option value="science">Faculty of Science</option>
+                                    <option value="business">Faculty of Business</option>
+                                    <option value="humanities">Faculty of Humanities</option>
+                                </select>
+                            </div>
+                            <div class="finder-input">
+                                <select id="level-select">
+                                    <option value="">Select Level</option>
+                                    <option value="undergraduate">Undergraduate</option>
+                                    <option value="postgraduate">Postgraduate</option>
+                                    <option value="phd">PhD</option>
+                                </select>
+                            </div>
+                            <div class="finder-input">
+                                <input type="text" id="program-search" placeholder="Search by program name...">
+                            </div>
+                            <button id="find-program-btn" class="btn-primary">Find Programs</button>
+                        </div>
+                        <div class="program-results" id="program-results">
+                            <!-- Results will be displayed here -->
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="testimonials" class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">💬</div>
+                        <h2 class="section-title">Student Testimonials</h2>
+                    </div>
+                    
+                    <p class="content-text">
+                        Hear from current students and alumni about their experiences at the University of Botswana.
+                    </p>
+                    
+                    <div class="testimonials">
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">TM</div>
+                                <div>
+                                    <div class="testimonial-author">Tshepo M.</div>
+                                    <div class="testimonial-program">BSc Computer Science, 2022</div>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">
+                                "The Computer Science program at UB provided me with both theoretical knowledge and practical skills that prepared me well for my career. The lecturers are knowledgeable and supportive, and the campus facilities are excellent."
+                            </p>
+                            <div class="testimonial-rating">★★★★★</div>
+                        </div>
+                        
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">AM</div>
+                                <div>
+                                    <div class="testimonial-author">Amantle M.</div>
+                                    <div class="testimonial-program">LLB Law, 2021</div>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">
+                                "Studying law at UB was challenging but rewarding. The moot court competitions and internships arranged by the faculty gave me real-world experience that made all the difference when I started practicing."
+                            </p>
+                            <div class="testimonial-rating">★★★★☆</div>
+                        </div>
+                        
+                        <div class="testimonial-card">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">KB</div>
+                                <div>
+                                    <div class="testimonial-author">Kabelo B.</div>
+                                    <div class="testimonial-program">BEng Civil Engineering, 2023</div>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">
+                                "The engineering labs at UB are well-equipped, and we had opportunities to work on real construction projects as part of our coursework. The industry connections the university has opened many doors for me."
+                            </p>
+                            <div class="testimonial-rating">★★★★★</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="history" class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">🕰️</div>
+                        <h2 class="section-title">History & Milestones</h2>
+                    </div>
+                    
+                    <p class="content-text">
+                        The University of Botswana has a rich history of academic excellence and national development.
+                    </p>
+                    
+                    <div class="timeline-container">
+                        <div class="timeline-line"></div>
+                        
+                        <div class="timeline-event">
+                            <div class="timeline-date">1982</div>
+                            <p>University of Botswana established as an independent national university</p>
+                        </div>
+                        
+                        <div class="timeline-event">
+                            <div class="timeline-date">1990</div>
+                            <p>Introduction of postgraduate programs, beginning with Master's degrees</p>
+                        </div>
+                        
+                        <div class="timeline-event">
+                            <div class="timeline-date">2001</div>
+                            <p>Launch of the Faculty of Medicine, addressing critical healthcare needs</p>
+                        </div>
+                        
+                        <div class="timeline-event">
+                            <div class="timeline-date">2008</div>
+                            <p>Opening of the UB Science and Technology Park to foster innovation</p>
+                        </div>
+                        
+                        <div class="timeline-event">
+                            <div class="timeline-date">2015</div>
+                            <p>Ranked among top 10 universities in Africa by Times Higher Education</p>
+                        </div>
+                        
+                        <div class="timeline-event">
+                            <div class="timeline-date">2020</div>
+                            <p>Launch of digital learning initiatives in response to global challenges</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="admissions" class="content-section">
+                    <div class="section-header">
+                        <div class="section-icon">📝</div>
+                        <h2 class="section-title">Admissions</h2>
+                    </div>
+                    
+                    <p class="content-text">
+                        The University of Botswana welcomes applications from qualified students across Botswana and internationally. Our admissions process is designed to identify talented individuals who will thrive in our academic community.
+                    </p>
+                    
+                    <div class="highlight-box">
+                        <strong>Key Admission Dates:</strong><br>
+                        - Undergraduate Applications: January 1 - March 31<br>
+                        - Postgraduate Applications: Rolling admissions (varies by program)<br>
+                        - Semester Begins: August (Main intake), January (Limited programs)
+                    </div>
+                    
+                    <h3>Entry Requirements</h3>
+                    <p class="content-text">
+                        Admission requirements vary by program, but generally include:
+                    </p>
+                    <ul class="content-text" style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                        <li>BGCSE or equivalent with credits in relevant subjects</li>
+                        <li>Minimum entry points as specified for each program</li>
+                        <li>Additional requirements for specific programs (e.g., portfolio for design, interview for medicine)</li>
+                        <li>English language proficiency for international students</li>
+                    </ul>
+                    
+                    <h3>How to Apply</h3>
+                    <p class="content-text">
+                        Applications are submitted online through the UB admissions portal. Required documents typically include:
+                    </p>
+                    <ul class="content-text" style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                        <li>Certified copies of academic certificates</li>
+                        <li>National ID or passport copy</li>
+                        <li>Application fee payment receipt</li>
+                        <li>Program-specific supporting documents</li>
+                    </ul>
+                    
+                    <div class="take-action">
+                        <button class="action-btn btn-primary">Apply Now</button>
+                        <button class="action-btn btn-secondary">Download Prospectus</button>
+                        <button class="action-btn btn-secondary">Contact Admissions</button>
+                    </div>
+                </section>
+            </div>
             
-            if (this.value) {
-                programs[this.value].forEach(program => {
-                    const option = document.createElement('option');
-                    option.value = program.toLowerCase().replace(/\s+/g, '-');
-                    option.textContent = program;
-                    programSelect.appendChild(option);
+            <div class="sticky-nav">
+                <h3>Quick Navigation</h3>
+                <div class="page-links">
+                    <a href="#overview" class="active">Overview</a>
+                    <a href="#academics">Academic Programs</a>
+                    <a href="#interactive-map">Campus Map</a>
+                    <a href="#facilities">Facilities</a>
+                    <a href="#program-finder">Program Finder</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#history">History</a>
+                    <a href="#admissions">Admissions</a>
+                </div>
+                
+                <div class="take-action">
+                    <h3>Take Action</h3>
+                    <button class="action-btn btn-primary">Apply Now</button>
+                    <button class="action-btn btn-secondary">Virtual Tour</button>
+                    <button class="action-btn btn-secondary">Contact University</button>
+                    <button class="action-btn btn-secondary">Compare with Others</button>
+                </div>
+                
+                <div class="quick-facts">
+                    <h3>Quick Facts</h3>
+                    <div class="content-text" style="font-size: 0.9rem;">
+                        <p><strong>Location:</strong> Gaborone, Botswana</p>
+                        <p><strong>Campuses:</strong> 3 (Main, Francistown, Maun)</p>
+                        <p><strong>Students:</strong> 15,000+</p>
+                        <p><strong>Staff:</strong> 2,000+</p>
+                        <p><strong>Faculties:</strong> 7</p>
+                        <p><strong>Library Volumes:</strong> 500,000+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2023 UniMatch - University Matching Service. All rights reserved.</p>
+        <p>Data provided by University of Botswana and other official sources.</p>
+    </footer>
+    
+    <div class="notification-badge">
+        <div>
+            <strong>Interested in UB?</strong>
+            <p>Get personalized guidance on admissions and programs</p>
+        </div>
+        <button class="notification-close">×</button>
+    </div>
+
+    <script>
+        // Simple script for the interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Map view switcher
+            const mapBtns = document.querySelectorAll('.map-btn');
+            mapBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    mapBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real implementation, this would change the map view
+                });
+            });
+            
+            // Notification close button
+            const closeBtn = document.querySelector('.notification-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    this.closest('.notification-badge').style.display = 'none';
+                });
+            }
+            
+            // Program finder functionality (basic implementation)
+            const findProgramBtn = document.getElementById('find-program-btn');
+            if (findProgramBtn) {
+                findProgramBtn.addEventListener('click', function() {
+                    const faculty = document.getElementById('faculty-select').value;
+                    const level = document.getElementById('level-select').value;
+                    const search = document.getElementById('program-search').value;
+                    
+                    // In a real implementation, this would fetch matching programs
+                    const resultsDiv = document.getElementById('program-results');
+                    resultsDiv.innerHTML = `<p>Displaying sample results for ${faculty || 'all faculties'}, ${level || 'all levels'} ${search ? 'matching "' + search + '"' : ''}</p>`;
+                    
+                    // Simulate loading
+                    setTimeout(() => {
+                        resultsDiv.innerHTML += `
+                            <div class="program-card">
+                                <h4>Sample Program</h4>
+                                <p>This would display actual program results based on the selected filters.</p>
+                                <div class="program-details">
+                                    <span>4 Years</span>
+                                    <span>Bachelor's Degree</span>
+                                </div>
+                            </div>
+                            <p style="margin-top: 1rem;">In a full implementation, this would show real program matches from the university's offerings.</p>
+                        `;
+                    }, 500);
                 });
             }
         });
-        
-        // Enable find button when program is selected
-        programSelect.addEventListener('change', function() {
-            findBtn.disabled = !this.value;
-        });
-        
-        // Display results when button is clicked
-        findBtn.addEventListener('click', function() {
-            const faculty = facultySelect.options[facultySelect.selectedIndex].text;
-            const program = programSelect.options[programSelect.selectedIndex].text;
-            
-            resultsDiv.innerHTML = `
-                <h3>${program}</h3>
-                <p><strong>Faculty:</strong> ${faculty}</p>
-                <p>Here are the details about the ${program} program in the ${faculty} faculty.</p>
-                <button class="apply-btn">Apply Now</button>
-            `;
-        });
-    });
-</script>
+    </script>
+</body>
+</html>
