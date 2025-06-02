@@ -1,386 +1,371 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniMatch - Find Your Perfect University</title>
+    <title>UniMatch - Education Profile Setup</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
         }
-
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            padding: 1.5rem 3rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
         }
-
+        
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: bold;
             color: white;
         }
-
+        
         .logo span {
-            color: #ffd700;
+            color: #FFD166;
         }
-
+        
         .nav {
             display: flex;
             gap: 2rem;
         }
-
+        
         .nav a {
             color: white;
             text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .nav a:hover {
-            color: #ffd700;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 3px;
-        }
-
-        .hamburger div {
-            width: 25px;
-            height: 3px;
-            background: white;
-            transition: 0.3s;
-        }
-
-        .main {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            padding: 2rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-            align-items: center;
-            min-height: calc(100vh - 120px);
-        }
-
-        .hero {
-            padding: 2rem 0;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-        }
-
-        .features {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-        }
-
-        .feature p {
-            color: white;
-            font-size: 1rem;
-        }
-
-        .cta-text {
-            background: rgba(255, 215, 0, 0.2);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 2px solid #ffd700;
-        }
-
-        .cta-text p {
-            color: white;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-
-        .auth-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 2rem;
-            background: #f0f0f0;
-            border-radius: 10px;
-            padding: 5px;
-        }
-
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 15px;
-            cursor: pointer;
-            border-radius: 8px;
+            font-weight: 500;
             transition: all 0.3s ease;
-            font-weight: 600;
         }
-
-        .tab.active {
-            background: #667eea;
+        
+        .nav a:hover {
+            color: #FFD166;
+        }
+        
+        .main {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.8s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .form-header h1 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active {
+            background-color: #FFD166;
+            color: #333;
+        }
+        
+        .step.completed {
+            background-color: #4CAF50;
             color: white;
         }
-
-        .form-container {
-            position: relative;
-        }
-
-        .form {
+        
+        .form-section {
             display: none;
+            animation: fadeIn 0.5s ease;
         }
-
-        .form.active {
+        
+        .form-section.active {
             display: block;
         }
-
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
         .input-group {
             margin-bottom: 1.5rem;
         }
-
+        
         .input-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #333;
+            color: white;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            font-size: 1.1rem;
         }
-
-        .input-group input {
+        
+        .input-group input,
+        .input-group select {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .input-group input:focus {
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
             outline: none;
-            border-color: #667eea;
+            transition: all 0.3s ease;
+            font-size: 1rem;
         }
-
-        .input-group input.error {
-            border-color: #ff4757;
+        
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #FFD166;
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-
-        .error-message {
-            color: #ff4757;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            display: none;
+        
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
-
-        .forgot-password {
-            text-align: right;
-            margin-bottom: 1.5rem;
+        
+        .input-group select option {
+            background-color: #2575fc;
+            color: white;
         }
-
-        .forgot-password a {
-            color: #667eea;
-            text-decoration: none;
+        
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: #FFD166;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .upload-area.dragover {
+            border-color: #FFD166;
+            background-color: rgba(255, 209, 102, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-text {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-subtext {
+            color: rgba(255, 255, 255, 0.5);
             font-size: 0.9rem;
         }
-
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        
+        .file-input {
+            display: none;
         }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
+        
+        .preview-container {
+            margin-top: 1rem;
+            display: none;
         }
-
-        .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
+        
+        .preview-image {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
-        .social-login {
-            margin-top: 2rem;
-            text-align: center;
+        
+        .file-name {
+            color: #FFD166;
+            font-weight: bold;
+            margin-top: 1rem;
         }
-
-        .social-login p {
-            margin-bottom: 1rem;
-            color: #666;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
+        
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
         }
-
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        
+        .subject-input {
             display: flex;
+            gap: 0.5rem;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        }
+        
+        .subject-input input {
+            flex: 2;
+        }
+        
+        .subject-input select {
+            flex: 1;
+        }
+        
+        .grade-select {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: space-between;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
             font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: #FFD166;
+            color: #333;
+        }
+        
+        .btn-primary:hover {
+            background-color: #ffc233;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
-        .social-icon:nth-child(1) {
-            background: #3b5998;
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
-
-        .social-icon:nth-child(2) {
-            background: #db4437;
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
-
-        .social-icon:nth-child(3) {
-            background: #0077b5;
-        }
-
-        .social-icon:hover {
-            transform: scale(1.1);
-        }
-
+        
         .footer {
             text-align: center;
-            padding: 2rem;
-            color: rgba(255, 255, 255, 0.8);
-            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(0, 0, 0, 0.1);
         }
-
+        
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 15px 20px;
-            border-radius: 10px;
+            background-color: #4CAF50;
             color: white;
-            font-weight: 600;
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
         }
-
-        .notification.success {
-            background: #2ed573;
-        }
-
-        .notification.error {
-            background: #ff4757;
-        }
-
+        
         .notification.show {
+            opacity: 1;
             transform: translateX(0);
         }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
+        
+        .notification.error {
+            background-color: #f44336;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
+        
         @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(255, 255, 255, 0.95);
-                flex-direction: column;
-                text-align: center;
-                padding: 1rem 0;
-            }
-
-            .nav.active {
-                display: flex;
-            }
-
-            .nav a {
-                color: #333;
-                padding: 0.5rem 0;
-            }
-
-            .main {
-                grid-template-columns: 1fr;
-                gap: 3rem;
+            .header {
                 padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
             }
-
-            .hero h1 {
-                font-size: 2rem;
+            
+            .nav {
+                gap: 1rem;
             }
-
-            .auth-container {
-                order: -1;
+            
+            .form-container {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
             }
         }
     </style>
@@ -390,116 +375,160 @@
         <div class="logo">Uni<span>Match</span></div>
         <nav class="nav">
             <a href="#">Home</a>
-            <a href="universities.html">Universities</a>
+            <a href="#">Universities</a>
             <a href="#">Compare</a>
             <a href="#">Resources</a>
             <a href="#">About Us</a>
         </nav>
-        <div class="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
     </header>
     
     <main class="main">
-        <section class="hero">
-            <h1>Find Your Perfect University Match</h1>
-            <p>Discover, compare, and apply to universities that align with your academic goals, interests, and career aspirations.</p>
-            
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-icon">🔍</div>
-                    <p>Search Top Universities in Botswana</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📊</div>
-                    <p>Compare Programs</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📝</div>
-                    <p>Application Tracking</p>
-                </div>
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Education Profile Setup</h1>
+                <p>Let's get your academic information to find the perfect university match</p>
             </div>
             
-            <div class="cta-text">
-                <p>Join thousands of students finding their academic home with UniMatch! Your future is in your hands!</p>
-            </div>
-        </section>
-        
-        <div class="auth-container">
-            <div class="tabs">
-                <div class="tab active" id="login-tab">Login</div>
-                <div class="tab" id="signup-tab">Sign Up</div>
+            <div class="step-indicator">
+                <div class="step active" id="step-1">1</div>
+                <div class="step" id="step-2">2</div>
+                <div class="step" id="step-3">3</div>
             </div>
             
-            <div class="form-container">
-                <form class="form active" id="login-form">
+            <form id="education-form">
+                <!-- Step 1: Personal Information -->
+                <div class="form-section active" id="section-1">
                     <div class="input-group">
-                        <label for="login-email">Email</label>
-                        <input type="email" id="login-email" placeholder="Enter your email" required>
-                        <div class="error-message" id="login-email-error"></div>
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" name="fullName" placeholder="Enter your full name" required>
                     </div>
                     
                     <div class="input-group">
-                        <label for="login-password">Password</label>
-                        <input type="password" id="login-password" placeholder="Enter your password" required>
-                        <div class="error-message" id="login-password-error"></div>
+                        <label for="education-level">Education Level</label>
+                        <select id="education-level" name="educationLevel" required>
+                            <option value="">Select your education level</option>
+                            <option value="BGCSE">BGCSE (Botswana General Certificate of Secondary Education)</option>
+                            <option value="IGCSE">IGCSE (International General Certificate of Secondary Education)</option>
+                            <option value="A Level">A Level (Advanced Level)</option>
+                        </select>
                     </div>
-                    
-                    <div class="forgot-password">
-                        <a href="#" id="forgot-password-link">Forgot Password?</a>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn" id="login-btn">Login</button>
-                    
-                    <div class="social-login">
-                        <p>Or login with</p>
-                        <div class="social-icons">
-                            <div class="social-icon">f</div>
-                            <div class="social-icon">G</div>
-                            <div class="social-icon">in</div>
-                        </div>
-                    </div>
-                </form>
+                </div>
                 
-                <form class="form" id="signup-form">
+                <!-- Step 2: Certificate Upload -->
+                <div class="form-section" id="section-2">
                     <div class="input-group">
-                        <label for="signup-name">Full Name</label>
-                        <input type="text" id="signup-name" placeholder="Enter your full name" required>
-                        <div class="error-message" id="signup-name-error"></div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="signup-email">Email</label>
-                        <input type="email" id="signup-email" placeholder="Enter your email" required>
-                        <div class="error-message" id="signup-email-error"></div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="signup-password">Password</label>
-                        <input type="password" id="signup-password" placeholder="Create a password" required>
-                        <div class="error-message" id="signup-password-error"></div>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="signup-confirm">Confirm Password</label>
-                        <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
-                        <div class="error-message" id="signup-confirm-error"></div>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn" id="signup-btn">Create Account</button>
-                    
-                    <div class="social-login">
-                        <p>Or sign up with</p>
-                        <div class="social-icons">
-                            <div class="social-icon">f</div>
-                            <div class="social-icon">G</div>
-                            <div class="social-icon">in</div>
+                        <label>Upload High School Certificate</label>
+                        <div class="upload-area" id="upload-area">
+                            <div class="upload-icon">📄</div>
+                            <div class="upload-text">Click to upload or drag and drop</div>
+                            <div class="upload-subtext">PNG, JPG, PDF up to 10MB</div>
+                            <input type="file" id="certificate-upload" name="certificate" class="file-input" accept="image/*,application/pdf">
+                        </div>
+                        <div class="preview-container" id="preview-container">
+                            <img id="preview-image" class="preview-image" alt="Certificate preview">
+                            <div class="file-name" id="file-name"></div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+                
+                <!-- Step 3: Best 6 Subjects -->
+                <div class="form-section" id="section-3">
+                    <div class="input-group">
+                        <label>Best 6 Subjects and Grades</label>
+                        <div class="subjects-grid" id="subjects-container">
+                            <div class="subject-input">
+                                <input type="text" name="subject1" placeholder="Subject 1" required>
+                                <select name="grade1" class="grade-select" required>
+                                    <option value="">Grade</option>
+                                    <option value="A*">A*</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                </select>
+                            </div>
+                            <div class="subject-input">
+                                <input type="text" name="subject2" placeholder="Subject 2" required>
+                                <select name="grade2" class="grade-select" required>
+                                    <option value="">Grade</option>
+                                    <option value="A*">A*</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                </select>
+                            </div>
+                            <div class="subject-input">
+                                <input type="text" name="subject3" placeholder="Subject 3" required>
+                                <select name="grade3" class="grade-select" required>
+                                    <option value="">Grade</option>
+                                    <option value="A*">A*</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                </select>
+                            </div>
+                            <div class="subject-input">
+                                <input type="text" name="subject4" placeholder="Subject 4" required>
+                                <select name="grade4" class="grade-select" required>
+                                    <option value="">Grade</option>
+                                    <option value="A*">A*</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                </select>
+                            </div>
+                            <div class="subject-input">
+                                <input type="text" name="subject5" placeholder="Subject 5" required>
+                                <select name="grade5" class="grade-select" required>
+                                    <option value="">Grade</option>
+                                    <option value="A*">A*</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                </select>
+                            </div>
+                            <div class="subject-input">
+                                <input type="text" name="subject6" placeholder="Subject 6" required>
+                                <select name="grade6" class="grade-select" required>
+                                    <option value="">Grade</option>
+                                    <option value="A*">A*</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" id="prev-btn" disabled>Previous</button>
+                    <button type="button" class="btn btn-primary" id="next-btn">Next</button>
+                </div>
+            </form>
         </div>
     </main>
     
@@ -508,324 +537,275 @@
     </footer>
     
     <script>
-        // User storage (in a real app, this would be a database)
-        let users = JSON.parse(window.localStorage?.getItem('unimatch_users') || '[]');
+        let currentStep = 1;
+        const totalSteps = 3;
         
-        // Tab switching functionality
-        const loginTab = document.getElementById('login-tab');
-        const signupTab = document.getElementById('signup-tab');
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
+        // DOM elements
+        const form = document.getElementById('education-form');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('certificate-upload');
+        const previewContainer = document.getElementById('preview-container');
+        const previewImage = document.getElementById('preview-image');
+        const fileName = document.getElementById('file-name');
         
-        loginTab.addEventListener('click', () => {
-            loginTab.classList.add('active');
-            signupTab.classList.remove('active');
-            loginForm.classList.add('active');
-            signupForm.classList.remove('active');
+        // Initialize form
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mock user data if not exists (removed localStorage usage)
+            updateStepIndicator();
+            setupEventListeners();
         });
         
-        signupTab.addEventListener('click', () => {
-            signupTab.classList.add('active');
-            loginTab.classList.remove('active');
-            signupForm.classList.add('active');
-            loginForm.classList.remove('active');
-        });
+        function setupEventListeners() {
+            // Next button
+            nextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Next button clicked, current step:', currentStep);
+                
+                if (validateCurrentStep()) {
+                    if (currentStep < totalSteps) {
+                        nextStep();
+                    } else {
+                        submitForm();
+                    }
+                } else {
+                    console.log('Validation failed for step', currentStep);
+                }
+            });
+            
+            // Previous button
+            prevBtn.addEventListener('click', function() {
+                if (currentStep > 1) {
+                    prevStep();
+                }
+            });
+            
+            // File upload
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('dragleave', handleDragLeave);
+            uploadArea.addEventListener('drop', handleDrop);
+            fileInput.addEventListener('change', handleFileSelect);
+        }
         
-        // Notification system
+        function nextStep() {
+            console.log('Moving to next step from', currentStep);
+            
+            // Hide current section
+            const currentSection = document.getElementById(`section-${currentStep}`);
+            const currentStepEl = document.getElementById(`step-${currentStep}`);
+            
+            if (currentSection && currentStepEl) {
+                currentSection.classList.remove('active');
+                currentStepEl.classList.remove('active');
+                currentStepEl.classList.add('completed');
+            }
+            
+            currentStep++;
+            
+            // Show next section
+            const nextSection = document.getElementById(`section-${currentStep}`);
+            const nextStepEl = document.getElementById(`step-${currentStep}`);
+            
+            if (nextSection && nextStepEl) {
+                nextSection.classList.add('active');
+                nextStepEl.classList.add('active');
+            }
+            
+            updateButtons();
+        }
+        
+        function prevStep() {
+            // Hide current section
+            document.getElementById(`section-${currentStep}`).classList.remove('active');
+            document.getElementById(`step-${currentStep}`).classList.remove('active');
+            
+            currentStep--;
+            
+            // Show previous section
+            document.getElementById(`section-${currentStep}`).classList.add('active');
+            document.getElementById(`step-${currentStep}`).classList.remove('completed');
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            
+            updateButtons();
+        }
+        
+        function updateButtons() {
+            prevBtn.disabled = currentStep === 1;
+            nextBtn.textContent = currentStep === totalSteps ? 'Complete Profile' : 'Next';
+        }
+        
+        function updateStepIndicator() {
+            for (let i = 1; i <= totalSteps; i++) {
+                const step = document.getElementById(`step-${i}`);
+                if (i === currentStep) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else if (i < currentStep) {
+                    step.classList.remove('active');
+                    step.classList.add('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            }
+        }
+        
+        function validateCurrentStep() {
+            console.log('Validating step', currentStep);
+            const currentSection = document.getElementById(`section-${currentStep}`);
+            
+            if (!currentSection) {
+                console.error('Current section not found');
+                return false;
+            }
+            
+            const requiredFields = currentSection.querySelectorAll('[required]');
+            console.log('Found required fields:', requiredFields.length);
+            
+            for (let field of requiredFields) {
+                if (!field.value || !field.value.trim()) {
+                    console.log('Empty field found:', field.name || field.id);
+                    field.focus();
+                    showNotification('Please fill in all required fields', 'error');
+                    return false;
+                }
+            }
+            
+            // Special validation for step 2 (file upload)
+            if (currentStep === 2) {
+                const fileInput = document.getElementById('certificate-upload');
+                if (!fileInput.files || fileInput.files.length === 0) {
+                    showNotification('Please upload your certificate', 'error');
+                    return false;
+                }
+            }
+            
+            console.log('Step validation passed');
+            return true;
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        }
+        
+        function handleDragLeave(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        }
+        
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        }
+        
+        function handleFile(file) {
+            // Validate file
+            if (file.size > 10 * 1024 * 1024) {
+                showNotification('File size must be less than 10MB', 'error');
+                return;
+            }
+            
+            if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
+                showNotification('Please upload an image or PDF file', 'error');
+                return;
+            }
+            
+            // Show preview
+            fileName.textContent = file.name;
+            
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.style.display = 'none';
+            }
+            
+            previewContainer.style.display = 'block';
+            showNotification('File uploaded successfully!');
+        }
+        
+        function submitForm() {
+            const formData = new FormData(form);
+            
+            // Create education profile object
+            const educationProfile = {
+                fullName: formData.get('fullName'),
+                educationLevel: formData.get('educationLevel'),
+                certificate: fileInput.files[0]?.name || null,
+                subjects: []
+            };
+            
+            // Collect subjects and grades
+            for (let i = 1; i <= 6; i++) {
+                const subject = formData.get(`subject${i}`);
+                const grade = formData.get(`grade${i}`);
+                if (subject && grade) {
+                    educationProfile.subjects.push({
+                        subject: subject.trim(),
+                        grade: grade
+                    });
+                }
+            }
+            
+            // Show success message and redirect
+            showNotification('Profile completed successfully! 🎉');
+            
+            // Redirect to universities page after 1.5 seconds
+            setTimeout(() => {
+                // Change this URL to match your universities page filename
+                window.location.href = 'university.html';
+            }, 1500);
+        }
+        
         function showNotification(message, type = 'success') {
+            // Remove existing notifications
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             notification.textContent = message;
+            
             document.body.appendChild(notification);
             
-            setTimeout(() => notification.classList.add('show'), 100);
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Hide notification after 3 seconds
             setTimeout(() => {
                 notification.classList.remove('show');
-                setTimeout(() => document.body.removeChild(notification), 300);
-            }, 4000);
-        }
-        
-        // Email validation
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-        
-        // Password validation
-        function isValidPassword(password) {
-            return password.length >= 6;
-        }
-        
-        // Clear error
-        function clearError(inputId) {
-            const input = document.getElementById(inputId);
-            const errorMsg = document.getElementById(inputId + '-error');
-            input.classList.remove('error');
-            errorMsg.style.display = 'none';
-        }
-        
-        // Show error
-        function showError(inputId, message) {
-            const input = document.getElementById(inputId);
-            const errorMsg = document.getElementById(inputId + '-error');
-            input.classList.add('error');
-            errorMsg.textContent = message;
-            errorMsg.style.display = 'block';
-        }
-        
-        // Simulate email sending
-        async function sendEmail(to, subject, body) {
-            // Simulate API call delay
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            console.log('Email sent to:', to);
-            console.log('Subject:', subject);
-            console.log('Body:', body);
-            
-            // Simulate success
-            return { success: true };
-        }
-        
-        // Handle signup
-        signupForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('signup-name').value.trim();
-            const email = document.getElementById('signup-email').value.trim();
-            const password = document.getElementById('signup-password').value;
-            const confirmPassword = document.getElementById('signup-confirm').value;
-            const submitBtn = document.getElementById('signup-btn');
-            
-            // Clear previous errors
-            ['signup-name', 'signup-email', 'signup-password', 'signup-confirm'].forEach(clearError);
-            
-            let hasErrors = false;
-            
-            // Validate name
-            if (!name) {
-                showError('signup-name', 'Full name is required');
-                hasErrors = true;
-            }
-            
-            // Validate email
-            if (!email) {
-                showError('signup-email', 'Email is required');
-                hasErrors = true;
-            } else if (!isValidEmail(email)) {
-                showError('signup-email', 'Please enter a valid email address');
-                hasErrors = true;
-            } else if (users.find(u => u.email === email)) {
-                showError('signup-email', 'This email is already registered');
-                hasErrors = true;
-            }
-            
-            // Validate password
-            if (!password) {
-                showError('signup-password', 'Password is required');
-                hasErrors = true;
-            } else if (!isValidPassword(password)) {
-                showError('signup-password', 'Password must be at least 6 characters long');
-                hasErrors = true;
-            }
-            
-            // Validate confirm password
-            if (!confirmPassword) {
-                showError('signup-confirm', 'Please confirm your password');
-                hasErrors = true;
-            } else if (password !== confirmPassword) {
-                showError('signup-confirm', 'Passwords do not match');
-                hasErrors = true;
-            }
-            
-            if (hasErrors) return;
-            
-            // Disable button and show loading
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<div class="loading"></div>Creating Account...';
-            
-            try {
-                // Send welcome email
-                await sendEmail(
-                    email,
-                    'Welcome to UniMatch!',
-                    `Hi ${name},\n\nWelcome to UniMatch! Your account has been successfully created.\n\nYou can now log in and start exploring universities that match your academic goals.\n\nBest regards,\nThe UniMatch Team`
-                );
-                
-                // Save user
-                const newUser = {
-                    id: Date.now(),
-                    name,
-                    email,
-                    password, // In a real app, this would be hashed
-                    createdAt: new Date().toISOString()
-                };
-                
-                users.push(newUser);
-                if (window.localStorage) {
-                    localStorage.setItem('unimatch_users', JSON.stringify(users));
-                    localStorage.setItem('unimatch_current_user', JSON.stringify(newUser));
-                }
-                
-                showNotification('Account created successfully! Welcome email sent to ' + email);
-                
-                // Clear form
-                signupForm.reset();
-                
-                // Redirect to universities page after signup
                 setTimeout(() => {
-                    showNotification('Redirecting to explore universities...', 'success');
-                    window.location.href = 'https://cse23-086.github.io/University-form/Profile.html';
-                }, 1500);
-                
-            } catch (error) {
-                showNotification('Error creating account. Please try again.', 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Create Account';
-            }
-        });
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
         
-        // Handle login - UPDATED TO REDIRECT TO UNIVERSITIES PAGE
-        loginForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('login-email').value.trim();
-            const password = document.getElementById('login-password').value;
-            const submitBtn = document.getElementById('login-btn');
-            
-            // Clear previous errors
-            ['login-email', 'login-password'].forEach(clearError);
-            
-            let hasErrors = false;
-            
-            // Validate email
-            if (!email) {
-                showError('login-email', 'Email is required');
-                hasErrors = true;
-            } else if (!isValidEmail(email)) {
-                showError('login-email', 'Please enter a valid email address');
-                hasErrors = true;
-            }
-            
-            // Validate password
-            if (!password) {
-                showError('login-password', 'Password is required');
-                hasErrors = true;
-            }
-            
-            if (hasErrors) return;
-            
-            // Disable button and show loading
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<div class="loading"></div>Logging in...';
-            
-            try {
-                // Find user
-                const user = users.find(u => u.email === email && u.password === password);
-                
-                if (!user) {
-                    showError('login-email', 'Invalid email or password');
-                    showError('login-password', 'Invalid email or password');
-                    return;
-                }
-                
-                // Send login notification email
-                await sendEmail(
-                    email,
-                    'Login Notification - UniMatch',
-                    `Hi ${user.name},\n\nYou have successfully logged into your UniMatch account.\n\nIf this wasn't you, please contact our support team immediately.\n\nBest regards,\nThe UniMatch Team`
-                );
-                
-                showNotification('Login successful! Welcome back, ' + user.name);
-                
-                // Store current user session
-                if (window.localStorage) {
-                    localStorage.setItem('unimatch_current_user', JSON.stringify(user));
-                }
-                
-                // Clear form
-                loginForm.reset();
-                
-                // Redirect directly to universities page after successful login
-                setTimeout(() => {
-                    showNotification('Redirecting to explore universities...', 'success');
-                    window.location.href = 'https://cse23-086.github.io/University-form/University.html';
-                }, 1500);
-                
-            } catch (error) {
-                showNotification('Error logging in. Please try again.', 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Login';
-            }
-        });
-        
-        // Handle forgot password
-        document.getElementById('forgot-password-link').addEventListener('click', async function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('login-email').value.trim();
-            
-            if (!email) {
-                showError('login-email', 'Please enter your email address first');
-                return;
-            }
-            
-            if (!isValidEmail(email)) {
-                showError('login-email', 'Please enter a valid email address');
-                return;
-            }
-            
-            const user = users.find(u => u.email === email);
-            
-            if (!user) {
-                showError('login-email', 'No account found with this email address');
-                return;
-            }
-            
-            try {
-                // Send password reset email
-                await sendEmail(
-                    email,
-                    'Password Reset - UniMatch',
-                    `Hi ${user.name},\n\nYou requested to reset your password for your UniMatch account.\n\nClick the link below to reset your password:\n[Reset Password Link - This would be a real link in production]\n\nIf you didn't request this, please ignore this email.\n\nBest regards,\nThe UniMatch Team`
-                );
-                
-                showNotification('Password reset instructions sent to ' + email);
-                clearError('login-email');
-                
-            } catch (error) {
-                showNotification('Error sending reset email. Please try again.', 'error');
-            }
-        });
-        
-        // Mobile navigation toggle
-        const hamburger = document.querySelector('.hamburger');
-        const nav = document.querySelector('.nav');
-        
-        hamburger.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
-        
-        // Real-time input validation
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('blur', function() {
-                if (this.hasAttribute('required') && !this.value.trim()) {
-                    showError(this.id, 'This field is required');
-                } else {
-                    clearError(this.id);
-                }
-            });
-        });
+        // Initialize buttons
+        updateButtons();
     </script>
 </body>
 </html>
