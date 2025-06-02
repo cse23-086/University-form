@@ -428,6 +428,7 @@
             <a href="#">Home</a>
             <a href="#">Universities</a>
             <a href="#">Compare</a>
+            <a href="#">Programs</a>
             <a href="#">Resources</a>
             <a href="#">About Us</a>
         </nav>
@@ -444,6 +445,51 @@
     </section>
     
     <main class="main-content">
+        <section class="programs-section content-section">
+            <h2 class="section-title">Our Programs</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-title">Bachelor of Laws (LLB)</div>
+                    <p class="program-description">
+                        Comprehensive legal education covering constitutional law, criminal law, contract law, 
+                        and more. Prepares students for the legal profession and further studies.
+                    </p>
+                    <div class="program-duration">Duration: 4 years</div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Learn More</a>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-title">Diploma in Paralegal Studies</div>
+                    <p class="program-description">
+                        Practical training for paralegal professionals covering legal research, 
+                        document preparation, and client relations.
+                    </p>
+                    <div class="program-duration">Duration: 2 years</div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Learn More</a>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-title">Certificate in Legal Administration</div>
+                    <p class="program-description">
+                        Essential skills for legal office management, court procedures, 
+                        and administrative support in legal environments.
+                    </p>
+                    <div class="program-duration">Duration: 1 year</div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Learn More</a>
+                </div>
+                
+                <div class="program-card">
+                    <div class="program-title">Diploma in Criminology</div>
+                    <p class="program-description">
+                        Study of criminal behavior, criminal justice systems, and crime prevention 
+                        strategies in contemporary society.
+                    </p>
+                    <div class="program-duration">Duration: 2 years</div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Learn More</a>
+                </div>
+            </div>
+        </section>
+        
         <div class="content-grid">
             <div class="content-section">
                 <h2 class="section-title">About GULPS</h2>
@@ -469,45 +515,6 @@
                     <div class="stat-card">
                         <span class="stat-value">15:1</span>
                         <div class="stat-label">Student-Faculty Ratio</div>
-                    </div>
-                </div>
-                
-                <h3 class="section-title">Academic Programs</h3>
-                <div class="programs-grid">
-                    <div class="program-card">
-                        <div class="program-title">Bachelor of Laws (LLB)</div>
-                        <p class="program-description">
-                            Comprehensive legal education covering constitutional law, criminal law, contract law, 
-                            and more. Prepares students for the legal profession and further studies.
-                        </p>
-                        <div class="program-duration">Duration: 4 years</div>
-                    </div>
-                    
-                    <div class="program-card">
-                        <div class="program-title">Diploma in Paralegal Studies</div>
-                        <p class="program-description">
-                            Practical training for paralegal professionals covering legal research, 
-                            document preparation, and client relations.
-                        </p>
-                        <div class="program-duration">Duration: 2 years</div>
-                    </div>
-                    
-                    <div class="program-card">
-                        <div class="program-title">Certificate in Legal Administration</div>
-                        <p class="program-description">
-                            Essential skills for legal office management, court procedures, 
-                            and administrative support in legal environments.
-                        </p>
-                        <div class="program-duration">Duration: 1 year</div>
-                    </div>
-                    
-                    <div class="program-card">
-                        <div class="program-title">Diploma in Criminology</div>
-                        <p class="program-description">
-                            Study of criminal behavior, criminal justice systems, and crime prevention 
-                            strategies in contemporary society.
-                        </p>
-                        <div class="program-duration">Duration: 2 years</div>
                     </div>
                 </div>
             </div>
@@ -663,6 +670,8 @@
                         alert('Scheduling campus visit - you would be redirected to the booking system.');
                     } else if (buttonText.includes('Brochure')) {
                         alert('Downloading GULPS program brochure...');
+                    } else if (buttonText.includes('Learn More')) {
+                        alert('Loading program details...');
                     }
                 }
             });
